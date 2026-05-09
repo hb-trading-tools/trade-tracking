@@ -1,0 +1,2751 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FTMO Performance Tracker</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+:root{
+  --bg:#0e0f11;--bg2:#161719;--bg3:#1e2023;
+  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);
+  --text:#e8e6e0;--text2:#888780;--text3:#555450;
+  --blue:#378ADD;--green:#4a9e4a;--orange:#D85A30;
+  --amber:#EF9F27;--red:#c04040;--teal:#1D9E75;--purple:#7F77DD;
+  --radius:10px;--radius-sm:6px;
+  --sidebar-w:268px;--sidebar-w-collapsed:48px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,'SF Pro Display','Segoe UI',system-ui,sans-serif;font-size:14px;line-height:1.5;min-height:100vh;}
+.app{display:flex;height:100vh;overflow:hidden;}
+
+.sidebar{
+  width:var(--sidebar-w);flex-shrink:0;background:var(--bg2);
+  border-right:1px solid var(--border);
+  display:flex;flex-direction:column;
+  overflow:hidden;position:relative;
+  transition:width .25s cubic-bezier(.4,0,.2,1);
+}
+.sidebar.collapsed{width:var(--sidebar-w-collapsed);}
+.sidebar-inner{
+  flex:1;overflow-y:auto;overflow-x:hidden;
+  padding:20px 16px 80px 16px;
+  display:flex;flex-direction:column;gap:22px;
+  width:var(--sidebar-w);
+}
+.sidebar.collapsed .sidebar-inner{opacity:0;pointer-events:none;transition:opacity .15s;}
+
+.collapse-btn{
+  position:absolute;top:14px;right:8px;
+  width:28px;height:28px;
+  background:var(--bg3);border:1px solid var(--border2);
+  border-radius:var(--radius-sm);
+  cursor:pointer;color:var(--text2);
+  display:flex;align-items:center;justify-content:center;
+  transition:all .15s;z-index:10;font-size:14px;line-height:1;
+}
+.collapse-btn:hover{background:var(--blue);color:#fff;border-color:var(--blue);}
+.sidebar.collapsed .collapse-btn{right:50%;transform:translateX(50%);}
+.collapse-icon{transition:transform .25s;}
+.sidebar.collapsed .collapse-icon{transform:rotate(180deg);}
+
+.sidebar-collapsed-strip{
+  display:none;position:absolute;top:60px;left:0;right:0;
+  flex-direction:column;align-items:center;gap:18px;padding:0 8px;
+}
+.sidebar.collapsed .sidebar-collapsed-strip{display:flex;}
+.collapsed-icon{
+  width:28px;height:28px;display:flex;align-items:center;justify-content:center;
+  font-size:13px;color:var(--text2);cursor:pointer;border-radius:var(--radius-sm);
+  transition:all .15s;
+}
+.collapsed-icon:hover{background:var(--bg3);color:var(--text);}
+.collapsed-divider{width:24px;height:1px;background:var(--border);}
+
+.sidebar-sticky{
+  position:absolute;bottom:0;left:0;right:0;
+  background:linear-gradient(to top,var(--bg2) 70%,transparent);
+  padding:16px;border-top:1px solid var(--border);
+}
+.sidebar.collapsed .sidebar-sticky{display:none;}
+
+.main{flex:1;overflow-y:auto;padding:24px 28px;display:flex;flex-direction:column;gap:20px;min-width:0;}
+.logo{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text2);padding-bottom:16px;padding-right:36px;border-bottom:1px solid var(--border);}
+.logo span{color:var(--blue);}
+
+.sb-section{display:flex;flex-direction:column;gap:6px;}
+.sb-label{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:4px;display:flex;align-items:center;justify-content:space-between;}
+.sb-label .hint{color:var(--text3);font-weight:400;letter-spacing:0;text-transform:none;font-size:10px;}
+kbd{background:var(--bg3);border:1px solid var(--border2);border-radius:3px;padding:1px 5px;font-size:9px;font-family:monospace;color:var(--text2);}
+.form-group{display:flex;flex-direction:column;gap:4px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.form-group label{font-size:11px;color:var(--text2);}
+.form-group input,.form-group select{background:var(--bg3);border:1px solid var(--border2);border-radius:var(--radius-sm);color:var(--text);font-size:13px;padding:7px 10px;outline:none;width:100%;transition:border-color .15s;}
+.form-group input:focus,.form-group select:focus{border-color:var(--blue);}
+.form-group select option{background:var(--bg3);}
+.btn{border-radius:var(--radius-sm);font-size:13px;font-weight:500;padding:8px 14px;cursor:pointer;border:none;transition:opacity .15s,transform .1s;width:100%;text-align:center;display:flex;align-items:center;justify-content:center;gap:6px;}
+.btn:active{transform:scale(.97);}
+.btn-primary{background:var(--blue);color:#fff;}
+.btn-primary:hover{opacity:.88;}
+.btn-ghost{background:transparent;border:1px solid var(--border2);color:var(--text2);}
+.btn-ghost:hover{border-color:var(--text2);color:var(--text);}
+.btn-danger{background:transparent;border:1px solid rgba(192,64,64,.4);color:#c07070;}
+.btn-danger:hover{border-color:var(--red);color:var(--red);}
+
+.topbar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.topbar-title{font-size:20px;font-weight:600;}
+.topbar-date{font-size:12px;color:var(--text2);}
+.topbar-right{display:flex;align-items:center;gap:14px;font-size:12px;color:var(--text2);}
+.save-indicator{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text3);}
+.save-dot{width:6px;height:6px;border-radius:50%;background:var(--green);}
+.save-dot.saving{background:var(--amber);animation:savePulse 1s infinite;}
+@keyframes savePulse{0%,100%{opacity:.4;}50%{opacity:1;}}
+
+.quick-stats{
+  background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);
+  padding:14px 18px;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px;
+  font-size:12px;
+}
+.qs-item{display:flex;flex-direction:column;gap:2px;}
+.qs-label{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;}
+.qs-val{font-size:14px;font-weight:500;color:var(--text);}
+.qs-val.warn{color:var(--amber);}
+.qs-val.danger{color:var(--red);}
+.qs-val.ok{color:var(--green);}
+
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:12px;}
+.metric{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;}
+.metric-label{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;}
+.metric-val{font-size:22px;font-weight:600;}
+.metric-sub{font-size:11px;color:var(--text2);margin-top:3px;}
+.metric-delta{font-size:11px;margin-top:3px;}
+.pos{color:#4a9e4a;}.neg{color:var(--red);}.neu{color:var(--text2);}
+.metric-tabs{display:flex;gap:2px;margin-top:8px;flex-wrap:wrap;}
+.metric-tab{font-size:9px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:2px 7px;border-radius:4px;cursor:pointer;border:1px solid transparent;color:var(--text3);background:transparent;transition:all .12s;}
+.metric-tab.active{background:var(--bg3);color:var(--text);border-color:var(--border2);}
+.metric-tab:hover:not(.active){color:var(--text2);}
+
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;}
+.card-title{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:14px;}
+.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px;}
+.card-header .card-title{margin-bottom:0;}
+
+.chart-wrap{position:relative;width:100%;height:340px;}
+.chart-range{display:flex;gap:4px;align-items:center;}
+.range-btn{font-size:10px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:4px 10px;border-radius:var(--radius-sm);cursor:pointer;border:1px solid transparent;color:var(--text3);background:transparent;transition:all .15s;}
+.range-btn.active{background:var(--bg3);border-color:var(--border2);color:var(--text);}
+.range-btn:hover:not(.active){color:var(--text2);}
+
+.custom-range-popup{
+  position:absolute;background:var(--bg2);border:1px solid var(--border2);
+  border-radius:var(--radius);padding:14px 16px;
+  display:none;flex-direction:column;gap:10px;z-index:100;
+  box-shadow:0 8px 24px rgba(0,0,0,.5);min-width:240px;
+  margin-top:6px;
+}
+.custom-range-popup.open{display:flex;}
+.custom-range-popup label{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;}
+.custom-range-popup input{
+  background:var(--bg3);border:1px solid var(--border2);
+  border-radius:var(--radius-sm);color:var(--text);font-size:13px;
+  padding:6px 10px;outline:none;width:100%;
+}
+.custom-range-popup input:focus{border-color:var(--blue);}
+.custom-range-popup .row{display:flex;gap:8px;}
+.custom-range-popup .row > div{flex:1;display:flex;flex-direction:column;gap:4px;}
+.custom-range-popup .actions{display:flex;gap:8px;margin-top:4px;}
+.custom-range-popup .actions button{
+  flex:1;font-size:11px;font-weight:500;padding:6px 10px;
+  border-radius:var(--radius-sm);cursor:pointer;border:none;
+}
+.custom-range-popup .actions .apply{background:var(--blue);color:#fff;}
+.custom-range-popup .actions .cancel{background:transparent;border:1px solid var(--border2);color:var(--text2);}
+.custom-range-popup .actions button:hover{opacity:.85;}
+.custom-range-wrap{position:relative;}
+
+.legend{display:flex;flex-wrap:wrap;gap:16px;margin-top:12px;padding-top:12px;border-top:1px solid var(--border);font-size:11px;color:var(--text2);}
+.legend-item{display:flex;align-items:center;gap:6px;}
+.legend-line{width:20px;height:2px;border-radius:2px;display:inline-block;}
+
+.accounts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;}
+.acc-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;}
+.acc-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.acc-name{font-size:13px;font-weight:500;}
+.badge{font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;text-transform:uppercase;letter-spacing:.05em;}
+.badge-pending{background:rgba(136,135,128,.15);color:var(--text2);}
+.badge-challenge{background:rgba(55,138,221,.15);color:var(--blue);}
+.badge-verification{background:rgba(239,159,39,.18);color:var(--amber);}
+.badge-live{background:rgba(74,158,74,.15);color:var(--green);}
+.badge-terminated{background:rgba(192,64,64,.15);color:var(--red);}
+.acc-equity{font-size:20px;font-weight:600;}
+.acc-meta{font-size:11px;color:var(--text2);margin-top:3px;}
+.bar-bg{height:3px;background:var(--bg);border-radius:2px;margin-top:10px;}
+.bar-fill{height:100%;border-radius:2px;transition:width .4s;}
+
+.phase-strip{margin-top:10px;}
+.phase-strip-label{font-size:10px;color:var(--text3);margin-bottom:5px;display:flex;justify-content:space-between;}
+.phase-steps{display:flex;gap:4px;}
+.phase-step{flex:1;border-radius:3px;height:6px;position:relative;}
+.phase-step-done{opacity:1;}
+.phase-step-active{opacity:1;animation:pulse 2s infinite;}
+.phase-step-pending{opacity:.25;}
+@keyframes pulse{0%,100%{opacity:.3;}50%{opacity:.7;}}
+
+.acc-forecast{margin-top:8px;padding-top:8px;border-top:1px solid var(--border);font-size:11px;color:var(--text2);}
+.forecast-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px;}
+.forecast-row span{color:var(--text);font-weight:500;}
+.forecast-row .of-target{color:var(--text3);font-size:10px;font-weight:400;}
+.forecast-eta{color:var(--blue);font-size:11px;font-weight:500;}
+.forecast-eta.warn{color:var(--amber);}
+.forecast-eta.danger{color:var(--red);}
+.forecast-eta.never{color:var(--red);}
+
+/* Min trading days indicator */
+.min-days{font-size:10px;color:var(--text3);margin-top:6px;display:flex;align-items:center;gap:6px;}
+.min-days .check{color:var(--green);}
+.min-days .pending{color:var(--amber);}
+
+.ea-table{width:100%;border-collapse:collapse;}
+.ea-table th{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);text-align:left;padding:0 12px 8px 0;border-bottom:1px solid var(--border);}
+.ea-table td{font-size:13px;padding:9px 12px 9px 0;border-bottom:1px solid var(--border);color:var(--text);}
+.ea-table tr:last-child td{border-bottom:none;}
+.ea-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:7px;vertical-align:middle;}
+
+.alarms{display:flex;flex-direction:column;gap:8px;}
+.alarm{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-radius:var(--radius-sm);font-size:12px;line-height:1.5;}
+.alarm-ok{background:rgba(74,158,74,.1);border:1px solid rgba(74,158,74,.25);color:#6bbf6b;}
+.alarm-warn{background:rgba(239,159,39,.1);border:1px solid rgba(239,159,39,.3);color:var(--amber);}
+.alarm-danger{background:rgba(192,64,64,.1);border:1px solid rgba(192,64,64,.3);color:#e07070;}
+.alarm-icon{font-size:13px;flex-shrink:0;}
+
+.log-table{width:100%;border-collapse:collapse;font-size:12px;}
+.log-table th{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);text-align:left;padding:0 10px 8px 0;border-bottom:1px solid var(--border);}
+.log-table td{padding:7px 10px 7px 0;border-bottom:1px solid var(--border);color:var(--text2);}
+.log-table tr:last-child td{border-bottom:none;}
+.pnl-pos{color:var(--green);}.pnl-neg{color:var(--red);}
+.log-empty{color:var(--text3);font-size:12px;padding:16px 0;text-align:center;}
+.log-delete-btn{
+  background:transparent;border:1px solid var(--border2);
+  color:var(--text2);cursor:pointer;
+  font-size:12px;line-height:1;
+  width:24px;height:24px;border-radius:var(--radius-sm);
+  display:flex;align-items:center;justify-content:center;
+  transition:all .15s;padding:0;
+}
+.log-delete-btn:hover{
+  background:rgba(192,64,64,0.15);
+  border-color:var(--red);
+  color:var(--red);
+}
+.log-edit-btn{
+  background:transparent;border:1px solid var(--border2);
+  color:var(--text2);cursor:pointer;
+  font-size:12px;line-height:1;
+  width:24px;height:24px;border-radius:var(--radius-sm);
+  display:flex;align-items:center;justify-content:center;
+  transition:all .15s;padding:0;
+}
+.log-edit-btn:hover{
+  background:rgba(55,138,221,0.15);
+  border-color:var(--blue);
+  color:var(--blue);
+}
+
+/* Edit-mode banner in sidebar */
+.edit-mode-banner{
+  background:rgba(55,138,221,0.15);
+  border:1px solid var(--blue);
+  border-radius:var(--radius-sm);
+  padding:8px 12px;
+  font-size:11px;
+  color:var(--blue);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:8px;
+}
+.edit-mode-banner button{
+  background:transparent;border:none;color:var(--blue);
+  cursor:pointer;font-size:11px;text-decoration:underline;padding:0;
+}
+
+::-webkit-scrollbar{width:6px;height:6px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px;}
+::-webkit-scrollbar-thumb:hover{background:var(--text3);}
+
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+@media(max-width:900px){.two-col{grid-template-columns:1fr;}}
+
+.tab-bar{display:flex;gap:4px;margin-bottom:14px;flex-wrap:wrap;}
+.tab-btn{font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:5px 12px;border-radius:var(--radius-sm);cursor:pointer;border:1px solid transparent;color:var(--text3);background:transparent;transition:all .15s;}
+.tab-btn.active{background:var(--bg3);border-color:var(--border2);color:var(--text);}
+.tab-btn:hover:not(.active){color:var(--text2);}
+
+.chart-phase-legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px;font-size:10px;color:var(--text3);}
+.chart-phase-legend span{display:flex;align-items:center;gap:5px;}
+.chart-phase-legend i{width:10px;height:10px;border-radius:2px;display:inline-block;}
+
+.empty-state{
+  background:var(--bg2);border:1px dashed var(--border2);border-radius:var(--radius);
+  padding:24px;text-align:center;
+}
+.empty-state h3{font-size:14px;font-weight:600;margin-bottom:6px;color:var(--text);}
+.empty-state p{font-size:12px;color:var(--text2);line-height:1.6;}
+
+@media(max-width:768px){
+  .sidebar{position:absolute;height:100vh;z-index:100;box-shadow:0 0 30px rgba(0,0,0,.5);}
+  .sidebar.collapsed{transform:translateX(0);}
+  .main{padding:18px 16px;}
+  .accounts-grid{grid-template-columns:1fr;}
+  .quick-stats{grid-template-columns:1fr 1fr;}
+}
+
+.confirm-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,0.6);
+  display:flex;align-items:center;justify-content:center;
+  z-index:2000;opacity:0;pointer-events:none;
+  transition:opacity .15s;
+}
+.confirm-overlay.open{opacity:1;pointer-events:auto;}
+.confirm-modal{
+  background:var(--bg2);border:1px solid var(--border2);
+  border-radius:var(--radius);padding:24px;
+  max-width:420px;width:90%;
+  box-shadow:0 12px 40px rgba(0,0,0,0.6);
+  transform:scale(0.95);transition:transform .15s;
+}
+.confirm-overlay.open .confirm-modal{transform:scale(1);}
+.confirm-title{font-size:15px;font-weight:600;margin-bottom:8px;color:var(--text);}
+.confirm-desc{font-size:12px;color:var(--text2);margin-bottom:18px;line-height:1.5;}
+.confirm-actions{display:flex;gap:8px;justify-content:flex-end;}
+.confirm-actions button{
+  font-size:13px;font-weight:500;padding:8px 16px;
+  border-radius:var(--radius-sm);cursor:pointer;border:none;
+}
+.confirm-cancel{background:transparent;border:1px solid var(--border2);color:var(--text2);}
+.confirm-cancel:hover{border-color:var(--text2);color:var(--text);}
+.confirm-ok{background:var(--red);color:#fff;}
+.confirm-ok:hover{opacity:0.85;}
+.toast{
+  position:fixed;bottom:20px;right:20px;
+  background:var(--bg3);border:1px solid var(--border2);
+  border-radius:var(--radius);padding:12px 18px;
+  font-size:13px;color:var(--text);
+  box-shadow:0 4px 20px rgba(0,0,0,.4);
+  opacity:0;transform:translateY(10px);
+  transition:all .25s;pointer-events:none;z-index:1000;
+}
+.toast.show{opacity:1;transform:translateY(0);}
+.toast.success{border-color:rgba(74,158,74,.5);}
+.toast.error{border-color:rgba(192,64,64,.5);}
+</style>
+</head>
+<body>
+<div class="app">
+
+<aside class="sidebar" id="sidebar">
+  <button class="collapse-btn" onclick="toggleSidebar()" title="Toggle sidebar (Ctrl+B)">
+    <span class="collapse-icon">‹</span>
+  </button>
+
+  <div class="sidebar-collapsed-strip">
+    <div class="collapsed-icon" onclick="toggleSidebar()" title="Expand">≡</div>
+    <div class="collapsed-divider"></div>
+    <div class="collapsed-icon" onclick="toggleSidebar();setTimeout(()=>document.getElementById('inp-pnl').focus(),300)" title="Log entry">+</div>
+    <div class="collapsed-icon" onclick="exportData()" title="Export">↓</div>
+  </div>
+
+  <div class="sidebar-inner">
+    <div class="logo">FTMO <span>Tracker</span></div>
+
+    <div class="sb-section">
+      <div class="sb-label">
+        <span>Daily log</span>
+        <span class="hint"><kbd>Ctrl+Enter</kbd></span>
+      </div>
+      <div class="edit-mode-banner" id="edit-mode-banner" style="display:none;">
+        <span>Editing entry <span id="edit-mode-info"></span></span>
+        <button onclick="cancelEdit()">Cancel edit</button>
+      </div>
+      <div class="form-group"><label>Date</label><input type="date" id="inp-date"></div>
+      <div class="form-row">
+        <div class="form-group"><label>Strategy</label>
+          <select id="inp-ea">
+            <option value="EURUSD_Sweep">EURUSD Sweep</option>
+            <option value="NQ_ORB">NQ_ORB</option>
+            <option value="Manual">Manual</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Account</label>
+          <select id="inp-acc"></select>
+        </div>
+      </div>
+      <div class="form-group"><label>P&amp;L ($) <span style="color:var(--text3);font-size:10px;">gross, before split</span></label><input type="number" id="inp-pnl" placeholder="320 or -180" step="1"></div>
+      <div class="form-row">
+        <div class="form-group"><label>Wins</label><input type="number" id="inp-wins" placeholder="0" min="0" step="1"></div>
+        <div class="form-group"><label>Losses</label><input type="number" id="inp-losses" placeholder="0" min="0" step="1"></div>
+      </div>
+      <div class="form-group"><label>Equity after ($)</label><input type="number" id="inp-equity" placeholder="100000" step="1"></div>
+      <div class="form-group"><label>Daily DD % (0–5)</label><input type="number" id="inp-dd" placeholder="0.0" step="0.1" min="0" max="5"></div>
+      <div class="form-group"><label>Phase event (optional)</label>
+        <select id="inp-phase-event">
+          <option value="">— none —</option>
+          <option value="challenge_pass">Challenge passed ✓</option>
+          <option value="verification_pass">Verification passed ✓</option>
+          <option value="account_live">Account went LIVE ✓</option>
+          <option value="account_fail">Account terminated ✗</option>
+        </select>
+      </div>
+      <div class="form-group"><label>TV match?</label>
+        <select id="inp-match">
+          <option value="">—</option>
+          <option value="yes">Yes — matched</option>
+          <option value="no">No — diverged</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="sb-section">
+      <div class="sb-label">Account override</div>
+      <div class="form-row">
+        <div class="form-group"><label>Account</label>
+          <select id="ov-acc"></select>
+        </div>
+        <div class="form-group"><label>Status</label>
+          <select id="ov-status">
+            <option value="auto">Auto</option>
+            <option value="challenge">Challenge</option>
+            <option value="verification">Verification</option>
+            <option value="live">Live</option>
+            <option value="terminated">Terminated</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Challenge start date <span style="color:var(--text3);font-size:10px;" id="ov-start-current">— current: 2026-05-04</span></label>
+        <input type="date" id="ov-start-date">
+      </div>
+      <div class="form-group"><label>Phase 1 passed (actual)</label><input type="date" id="ov-p1-date"></div>
+      <div class="form-group"><label>Phase 2 passed (actual)</label><input type="date" id="ov-p2-date"></div>
+      <div class="form-group"><label>Reset peak DD% to</label><input type="number" id="ov-dd-reset" placeholder="leave blank to keep" step="0.1" min="0" max="10"></div>
+      <button class="btn btn-ghost" onclick="setAccountStatus()">Apply override</button>
+      <button class="btn btn-ghost" style="margin-top:6px;font-size:11px;" onclick="resetAccountDates()">Reset this account to plan defaults</button>
+    </div>
+
+    <div class="sb-section">
+      <div class="sb-label">Data</div>
+      <button class="btn btn-ghost" onclick="exportData()">Export JSON</button>
+      <button class="btn btn-ghost" style="margin-top:6px" onclick="importData()">Import JSON</button>
+      <button class="btn btn-danger" style="margin-top:6px" onclick="clearAll()">Reset all data</button>
+    </div>
+
+    <div style="font-size:10px;color:var(--text3);line-height:1.8;">
+      <div><kbd>Ctrl+B</kbd> toggle sidebar</div>
+      <div><kbd>Ctrl+Enter</kbd> submit log</div>
+      <div style="margin-top:6px;">FTMO challenges have <strong style="color:var(--text2);">no time limit</strong> — only profit targets &amp; risk rules.</div>
+      <div style="margin-top:6px;">P&amp;L stored as <strong style="color:var(--text2);">gross</strong>. Net profit applies <strong style="color:var(--text2);">80/20 split</strong> to live accounts only.</div>
+    </div>
+  </div>
+
+  <div class="sidebar-sticky">
+    <button class="btn btn-primary" onclick="addUpdate()">Log entry</button>
+  </div>
+</aside>
+
+<main class="main">
+
+  <div class="topbar">
+    <div>
+      <div class="topbar-title">Performance Dashboard</div>
+      <div class="topbar-date" id="now-date">—</div>
+    </div>
+    <div class="topbar-right">
+      <div id="alarm-badge"></div>
+      <div class="save-indicator">
+        <span class="save-dot" id="save-dot"></span>
+        <span id="save-text">saved</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="empty-state" class="empty-state" style="display:none;">
+    <h3>Plan starts 04.05.2026 — runs through 31.12.2030</h3>
+    <p>The 2026 portion contains the full challenge → verification → live ramp-up.<br>
+    From 2027 onward the plan continues at your steady-state live rate (~$172k/year, no compounding).<br>
+    Plan scenarios will recompute live as your data comes in.</p>
+  </div>
+
+  <div class="quick-stats" id="quick-stats"></div>
+
+  <div class="metrics">
+    <div class="metric"><div class="metric-label" id="m-profit-label">Total profit</div><div class="metric-val" id="m-profit">$0</div><div class="metric-delta neu" id="m-profit-delta">vs expected: —</div>
+      <div class="metric-tabs">
+        <button class="metric-tab" data-period="day" onclick="setProfitPeriod('day')">Day</button>
+        <button class="metric-tab" data-period="week" onclick="setProfitPeriod('week')">Week</button>
+        <button class="metric-tab" data-period="month" onclick="setProfitPeriod('month')">Month</button>
+        <button class="metric-tab" data-period="year" onclick="setProfitPeriod('year')">Year</button>
+        <button class="metric-tab active" data-period="all" onclick="setProfitPeriod('all')">All</button>
+      </div>
+    </div>
+    <div class="metric"><div class="metric-label">Funded capital</div><div class="metric-val" id="m-funded">$0</div><div class="metric-sub" id="m-funded-sub">0 of 4 live</div></div>
+    <div class="metric" title="Net profit after FTMO 80/20 split — only applied to live-account profits"><div class="metric-label" id="m-net-label">Net profit (after split)</div><div class="metric-val" id="m-net">$0</div><div class="metric-sub" id="m-net-sub">80/20 on live only</div></div>
+    <div class="metric" title="Plan-end forecast (Dec 31, 2030) based on your current trading rate"><div class="metric-label">Plan-end forecast (2030)</div><div class="metric-val" id="m-forecast">—</div><div class="metric-delta neu" id="m-forecast-delta">2026 plan: $200k</div></div>
+    <div class="metric"><div class="metric-label">Win rate</div><div class="metric-val" id="m-wr">—</div><div class="metric-sub">target ≥50%</div></div>
+    <div class="metric"><div class="metric-label">Profit factor</div><div class="metric-val" id="m-pf">—</div><div class="metric-sub" id="m-pf-sub">target ≥1.5</div></div>
+    <div class="metric"><div class="metric-label">TV match rate</div><div class="metric-val" id="m-match">—</div><div class="metric-sub">target ≥90%</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title" id="chart-title">Cumulative profit — plan scenarios vs your actual performance</div>
+      <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;">
+        <div class="chart-range" title="Profit source">
+          <button class="range-btn active" id="m-all" onclick="setChartMode('all')">All</button>
+          <button class="range-btn" id="m-live" onclick="setChartMode('live')">Live only</button>
+          <button class="range-btn" id="m-challenge" onclick="setChartMode('challenge')">Challenge phases</button>
+        </div>
+        <div style="width:1px;height:18px;background:var(--border2);"></div>
+        <div class="chart-range" title="Time range">
+          <button class="range-btn" id="r-30" onclick="setChartRange('30d')">30D</button>
+          <button class="range-btn" id="r-90" onclick="setChartRange('90d')">90D</button>
+          <button class="range-btn" id="r-ytd" onclick="setChartRange('ytd')">YTD</button>
+          <button class="range-btn active" id="r-all" onclick="setChartRange('all')">All</button>
+          <div class="custom-range-wrap">
+            <button class="range-btn" id="r-custom" onclick="toggleCustomRange()" title="Custom date range">Custom</button>
+            <div class="custom-range-popup" id="custom-range-popup">
+              <label>Custom date range</label>
+              <div class="row">
+                <div><label>From</label><input type="date" id="custom-range-from" min="2026-05-04" max="2030-12-31"></div>
+                <div><label>To</label><input type="date" id="custom-range-to" min="2026-05-04" max="2030-12-31"></div>
+              </div>
+              <div class="actions">
+                <button class="cancel" onclick="closeCustomRange()">Cancel</button>
+                <button class="apply" onclick="applyCustomRange()">Apply</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chart-wrap">
+      <canvas id="mainChart" role="img" aria-label="Cumulative profit chart">Chart</canvas>
+    </div>
+    <div class="chart-phase-legend" id="phase-legend"></div>
+    <div class="legend">
+      <span class="legend-item"><span class="legend-line" style="background:rgba(55,138,221,.45);"></span>Pessimistic case ($2.05M)</span>
+      <span class="legend-item"><span class="legend-line" style="background:#378ADD;"></span>Expected ($4.1M by 2030)</span>
+      <span class="legend-item"><span class="legend-line" style="background:rgba(159,225,203,.7);"></span>Optimistic case ($6.75M)</span>
+      <span class="legend-item"><span class="legend-line" style="background:#D85A30;"></span>Your actual</span>
+      <span class="legend-item"><span class="legend-line" style="background:rgba(216,90,48,.4);border-top:2px dashed rgba(216,90,48,.7);height:0;"></span>Your forecast (live)</span>
+    </div>
+  </div>
+
+  <div>
+    <div class="card-title" style="margin-bottom:12px;">Accounts — challenge &amp; verification tracking</div>
+    <div class="accounts-grid" id="accounts-grid"></div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">EA / strategy breakdown</div>
+      <table class="ea-table">
+        <thead><tr><th>Strategy</th><th>Trades</th><th>WR%</th><th>PF</th><th>P&amp;L</th></tr></thead>
+        <tbody id="ea-tbody"></tbody>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-title">Alarms</div>
+      <div class="alarms" id="alarms-box"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">Trade log</div>
+      <div class="tab-bar">
+        <button class="tab-btn active" id="tab-all" onclick="setLogFilter('all')">All</button>
+        <button class="tab-btn" id="tab-eurusd" onclick="setLogFilter('EURUSD_Sweep')">EURUSD</button>
+        <button class="tab-btn" id="tab-nq" onclick="setLogFilter('NQ_ORB')">NQ_ORB</button>
+        <button class="tab-btn" id="tab-manual" onclick="setLogFilter('Manual')">Manual</button>
+      </div>
+    </div>
+    <div style="overflow-x:auto;">
+      <table class="log-table">
+        <thead><tr><th>Date</th><th>EA</th><th>Account</th><th>Phase event</th><th>W</th><th>L</th><th>P&amp;L</th><th>DD%</th><th>TV</th><th></th></tr></thead>
+        <tbody id="log-tbody"></tbody>
+      </table>
+      <div id="log-empty" class="log-empty" style="display:none;">No entries yet — log your first trade day.</div>
+    </div>
+  </div>
+
+</main>
+</div>
+
+<div class="toast" id="toast"></div>
+<div class="confirm-overlay" id="confirm-overlay" onclick="if(event.target===this)closeConfirm()">
+  <div class="confirm-modal">
+    <div class="confirm-title" id="confirm-title">Bestätigen?</div>
+    <div class="confirm-desc" id="confirm-desc"></div>
+    <div class="confirm-actions">
+      <button class="confirm-cancel" onclick="closeConfirm()">Cancel</button>
+      <button class="confirm-ok" id="confirm-ok-btn">Delete</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Constants ──
+const PLAN_START = new Date('2026-05-04');
+const PLAN_END   = new Date('2030-12-31');
+const TOTAL_DAYS = daysBetween(PLAN_START, PLAN_END);
+// Plan totals: 10 accounts ramping to $1M funded by Q4 2026, then steady-state
+const MEDIAN=4108929, P10=2050000, P90=6750000;
+const MEDIAN_2026=285000, P10_2026=120000, P90_2026=500000;
+const DAYS_END_2026=241;
+
+// FTMO targets
+const CHALLENGE_TARGET = 10000; // 10% of 100k
+const VERIFY_TARGET = 5000;     // 5% of 100k
+const MIN_TRADING_DAYS = 4;     // per phase
+const PROFIT_SPLIT_TRADER = 0.80; // FTMO 80/20 split — trader gets 80% on live accounts only
+
+// Backtest-derived expected per-TRADING-DAY P&L per account at 1.3% risk (Challenge phase)
+// Per Briefing: EURUSD ~12 trades/mo at 50% WR/1.85R = $6,630/mo
+//               NQ_ORB ~8.5 trades/mo at 65% WR/0.95R = $2,956/mo
+// Combined: $9,586/mo / ~21 trading days/mo = $456/trading-day
+// (Weekends = $0, only Mon-Fri counts)
+const BACKTEST_TRADING_DAY_RATE = 456; // per Mon-Fri trading day at 1.3% risk
+// Helper: is given Date a trading day (Mon-Fri)?
+function isTradingDay(date){
+  const dow=date.getDay(); // 0=Sun, 6=Sat
+  return dow>=1 && dow<=5;
+}
+// Convert a starting date+value forward by N calendar days, only adding rate on trading days
+function projectForward(startDate,startVal,calendarDays,ratePerTradingDay,cap){
+  const result=[];
+  let val=startVal;
+  let d=new Date(startDate);
+  result.push(val);
+  for(let i=0;i<calendarDays;i++){
+    d.setDate(d.getDate()+1);
+    if(isTradingDay(d)){
+      val=Math.min(cap===undefined?Infinity:cap,val+ratePerTradingDay);
+    }
+    result.push(val);
+  }
+  return result;
+}
+
+// Median/expected start dates (NOT deadlines — just initial forecast anchors)
+const ACCOUNTS_DEF = [
+  // Wave 1: FTMO (started May/June 2026)
+  {id:0,name:'Acc 1 · FTMO',start:'2026-05-04',funded:100000,wave:1,provider:'FTMO'},
+  {id:1,name:'Acc 2 · FTMO',start:'2026-05-11',funded:100000,wave:1,provider:'FTMO'},
+  {id:2,name:'Acc 3 · FTMO',start:'2026-06-01',funded:100000,wave:1,provider:'FTMO'},
+  {id:3,name:'Acc 4 · FTMO',start:'2026-06-08',funded:100000,wave:1,provider:'FTMO'},
+  // Wave 2: 4× $100k from another provider (5%ers / FundingPips / etc.)
+  // Starts triggered by Wave 1 fully live, then 1-week stagger
+  // Default dates assume ~26.07 Wave 1 done; actual dates computed dynamically
+  {id:4,name:'Acc 5 · Provider B',start:'2026-07-29',funded:100000,wave:2,provider:'Provider B'},
+  {id:5,name:'Acc 6 · Provider B',start:'2026-08-05',funded:100000,wave:2,provider:'Provider B'},
+  {id:6,name:'Acc 7 · Provider B',start:'2026-08-12',funded:100000,wave:2,provider:'Provider B'},
+  {id:7,name:'Acc 8 · Provider B',start:'2026-08-19',funded:100000,wave:2,provider:'Provider B'},
+  // Wave 3: 2× $100k to reach $1M total funded
+  // Triggered by Wave 2 fully live (default ~05.10)
+  {id:8,name:'Acc 9 · Provider C',start:'2026-10-08',funded:100000,wave:3,provider:'Provider C'},
+  {id:9,name:'Acc 10 · Provider C',start:'2026-10-15',funded:100000,wave:3,provider:'Provider C'},
+];
+
+// Dynamically recompute Wave 2 + Wave 3 start dates based on actual live progress.
+// Trigger conditions:
+//   Wave 2 starts: 3 days after ALL Wave 1 accounts are live
+//   Wave 3 starts: 3 days after ALL Wave 2 accounts are live
+// Within each wave, accounts stagger by 7 days.
+function recomputeWaveStartDates(){
+  if(!state.accounts||state.accounts.length<10)return;
+  const wave1=state.accounts.filter(a=>a.wave===1);
+  const wave2=state.accounts.filter(a=>a.wave===2);
+  const wave3=state.accounts.filter(a=>a.wave===3);
+
+  // Don't override if user has manually customized start dates
+  // (compare to ACCOUNTS_DEF defaults; if changed, leave alone)
+  const wave2Customized=wave2.some(a=>a.start!==ACCOUNTS_DEF[a.id].start && a.start!=='__pending__');
+  const wave3Customized=wave3.some(a=>a.start!==ACCOUNTS_DEF[a.id].start && a.start!=='__pending__');
+
+  // Compute Wave 2 trigger: latest live date of Wave 1, or fallback to forecast
+  if(!wave2Customized){
+    const wave1LiveDates=wave1.map(a=>{
+      if(a.actualLiveDate)return new Date(a.actualLiveDate);
+      // Forecast: account start + ~47 calendar days
+      const forecast=new Date(a.start);
+      forecast.setDate(forecast.getDate()+47);
+      return forecast;
+    });
+    const trigger=new Date(Math.max(...wave1LiveDates));
+    trigger.setDate(trigger.getDate()+3); // setup buffer
+    wave2.forEach((a,i)=>{
+      const d=new Date(trigger);
+      d.setDate(d.getDate()+7*i);
+      a.start=d.toISOString().slice(0,10);
+    });
+  }
+
+  // Wave 3 trigger: latest live date of Wave 2
+  if(!wave3Customized){
+    const wave2LiveDates=wave2.map(a=>{
+      if(a.actualLiveDate)return new Date(a.actualLiveDate);
+      const forecast=new Date(a.start);
+      forecast.setDate(forecast.getDate()+47);
+      return forecast;
+    });
+    const trigger=new Date(Math.max(...wave2LiveDates));
+    trigger.setDate(trigger.getDate()+3);
+    wave3.forEach((a,i)=>{
+      const d=new Date(trigger);
+      d.setDate(d.getDate()+7*i);
+      a.start=d.toISOString().slice(0,10);
+    });
+  }
+}
+
+// Initial median expectation: ~22 trading days for challenge (10%), ~11 for verification (5%)
+// = ~30 calendar days for challenge, ~15 for verification
+const PLAN_CHALLENGE_DAYS = 30;
+const PLAN_VERIFY_DAYS = 15;
+
+const ACC_PHASE_COLORS = [
+  // Wave 1 (FTMO) — original colors
+  {challenge:'rgba(55,138,221,0.08)',verification:'rgba(239,159,39,0.09)',live:'rgba(74,158,74,0.07)'},
+  {challenge:'rgba(127,119,221,0.08)',verification:'rgba(239,159,39,0.09)',live:'rgba(74,158,74,0.07)'},
+  {challenge:'rgba(29,158,117,0.08)',verification:'rgba(239,159,39,0.09)',live:'rgba(74,158,74,0.07)'},
+  {challenge:'rgba(216,90,48,0.07)',verification:'rgba(239,159,39,0.09)',live:'rgba(74,158,74,0.07)'},
+  // Wave 2 — secondary palette (slightly desaturated)
+  {challenge:'rgba(96,168,229,0.07)',verification:'rgba(239,159,39,0.07)',live:'rgba(74,158,74,0.05)'},
+  {challenge:'rgba(159,150,229,0.07)',verification:'rgba(239,159,39,0.07)',live:'rgba(74,158,74,0.05)'},
+  {challenge:'rgba(78,178,143,0.07)',verification:'rgba(239,159,39,0.07)',live:'rgba(74,158,74,0.05)'},
+  {challenge:'rgba(227,127,89,0.06)',verification:'rgba(239,159,39,0.07)',live:'rgba(74,158,74,0.05)'},
+  // Wave 3 — tertiary palette
+  {challenge:'rgba(140,180,221,0.06)',verification:'rgba(239,159,39,0.06)',live:'rgba(74,158,74,0.04)'},
+  {challenge:'rgba(180,170,221,0.06)',verification:'rgba(239,159,39,0.06)',live:'rgba(74,158,74,0.04)'},
+];
+
+const EA_COLORS={EURUSD_Sweep:'#378ADD',NQ_ORB:'#1D9E75',Manual:'#7F77DD'};
+const ACC_COLORS=[
+  '#378ADD','#7F77DD','#1D9E75','#D85A30', // Wave 1
+  '#60A8E5','#9F96E5','#4EB28F','#E37F59', // Wave 2 (lighter)
+  '#8CB4DD','#B4AADD',                      // Wave 3 (lightest)
+];
+
+function daysBetween(a,b){return Math.round((new Date(b)-new Date(a))/86400000);}
+function addDays(date,days){const d=new Date(date);d.setDate(d.getDate()+days);return d.toISOString().slice(0,10);}
+
+// Realistic milestone-based plan curve aligned with the actual rollout phases:
+// — Mai/Juni: only challenge profits (small)
+// — Juni-Juli: first accounts go live, plus more challenges
+// — Juli-Okt: 4 live accounts compounding
+// — Q4: scaling + income optimisation
+// Each milestone = (dayIndex, fractionOfTotalTarget)
+const PLAN_MILESTONES=[
+  [   0, 0.0000],
+  [  22, 0.0030],
+  [  40, 0.0073],
+  [  60, 0.0134],
+  [  78, 0.0186],
+  [  95, 0.0239],
+  [ 120, 0.0370],
+  [ 133, 0.0446],
+  [ 154, 0.0561],
+  [ 180, 0.0725],
+  [ 211, 0.0932],
+  [ 241, 0.1122],
+  [ 606, 0.3438],
+  [ 971, 0.5754],
+  [1336, 0.8070],
+  [1702, 1.0393],
+];
+
+// Mode-specific baseline milestones (target = peak of curve)
+// Challenge: cumulative profit during challenge+verification phases (resets/plateaus when account goes live)
+// Live: cumulative profit from live trades only — starts at ~Day 48 when first acc goes live
+// Challenge baseline: cumulative gross during challenge+verification phases
+// $15k pass target × 4 accs = $60k peak (once all 4 have passed)
+// Ramp based on staggered account starts (May 4, 11, Jun 1, 8) and ~47-day pass time at $320/day
+// 10 accs (W1: 4 + W2: 4 + W3: 2) × $15k pass target = $150k peak
+const CHALLENGE_BASELINE_TARGET = 150000;
+// 10-account challenge buildup across 3 waves
+// W1 (4 accs): days 0-83 → $60k peak  
+// W2 (4 accs): days 85-153 → +$60k = $120k cumulative  
+// W3 (2 accs): days 153-207 → +$30k = $150k cumulative (final plateau)
+const CHALLENGE_BASELINE_MILESTONES = [
+  [0,    0.000],
+  [22,   0.080], // W1: Acc 1 mid-challenge (~$12k)
+  [35,   0.200], // W1: Accs 1-2 mid (~$30k)
+  [48,   0.300], // W1: Acc 1 done, others ramping (~$45k)
+  [60,   0.350], // W1: 2-3 done (~$52k)
+  [76,   0.387], // W1: nearly all done (~$58k)
+  [83,   0.400], // W1 complete = $60k
+  [90,   0.430], // W2 starting
+  [105,  0.500], // W2: 2 accs mid (~$75k)
+  [120,  0.580], // W2: 3 done, 1 mid (~$87k)
+  [132,  0.633], // W2: ~3 done (~$95k)
+  [146,  0.733], // W2: nearly all done (~$110k)
+  [153,  0.800], // W2 complete = $120k, W3 starting
+  [175,  0.900], // W3: 2 accs mid (~$135k)
+  [200,  1.000], // W3 complete = $150k
+  [1702, 1.000], // plateau
+];
+
+// Live baseline: scaled for 10 accounts ($1M funded by Q4 2026)
+// Wave 1 (FTMO 4×$100k): live ~Jun-Jul 2026
+// Wave 2 (Provider B 4×$100k): live ~Sep-Oct 2026
+// Wave 3 (Provider C 2×$100k): live ~Nov-Dec 2026
+// All at 1% live risk = ~$246/calendar-day per account
+// Live baseline: 10 FTMO/funded accs total at 1% risk live
+// Wave 1: 4 FTMO accs (live ~Jun-Jul 2026)
+// Wave 2: 4 funded accs (5%ers/FundingPips/etc), starts when Wave 1 fully live, live ~Sep-Oct 2026
+// Wave 3: 2 funded accs, starts when Wave 2 fully live, live ~Nov 2026
+// Linear continuation through 2030 (no compounding)
+const LIVE_BASELINE_TARGET = 3958929;
+const LIVE_BASELINE_MILESTONES = [
+  [   0, 0.0000],
+  [  48, 0.0000], // Acc 1 live
+  [  55, 0.0004], // Acc 2 live
+  [  76, 0.0031], // Acc 3 live
+  [  83, 0.0044], // Acc 4 live (Wave 1 done)
+  [ 130, 0.0168], // Acc 5 live
+  [ 137, 0.0191], // Acc 6 live
+  [ 144, 0.0217], // Acc 7 live
+  [ 151, 0.0248], // Acc 8 live (Wave 2 done)
+  [ 198, 0.0482], // Acc 9 live
+  [ 205, 0.0522], // Acc 10 live (Wave 3 done — full $1M funded)
+  [ 241, 0.0753], // Dec 31 2026 — ~$298k live profit
+  [ 606, 0.3067], // Dec 31 2027 — ~$1.21M
+  [ 971, 0.5371], // Dec 31 2028 — ~$2.13M
+  [1336, 0.7676], // Dec 31 2029 — ~$3.04M
+  [1702, 1.0000], // Dec 31 2030 — ~$3.96M
+];
+
+function buildPlanFromMilestones(milestones,target){
+  const closed=[...milestones];
+  if(closed[closed.length-1][0]<TOTAL_DAYS)closed.push([TOTAL_DAYS,closed[closed.length-1][1]]);
+  // First pass: smooth interpolated curve (treats every day as productive)
+  const smooth=new Array(TOTAL_DAYS+1);
+  for(let d=0;d<=TOTAL_DAYS;d++){
+    let prev=closed[0],next=closed[closed.length-1];
+    for(let i=0;i<closed.length-1;i++){
+      if(closed[i][0]<=d&&d<=closed[i+1][0]){
+        prev=closed[i];next=closed[i+1];break;
+      }
+    }
+    const t=next[0]===prev[0]?0:(d-prev[0])/(next[0]-prev[0]);
+    const smoothT=t*t*(3-2*t);
+    const frac=prev[1]+(next[1]-prev[1])*smoothT;
+    smooth[d]=frac*target;
+  }
+  // Second pass: redistribute weekend gains onto adjacent trading days
+  // Total target stays the same, but Sa+So stay flat (carry over previous Fri value)
+  const result=new Array(TOTAL_DAYS+1);
+  result[0]=Math.round(smooth[0]);
+  for(let d=1;d<=TOTAL_DAYS;d++){
+    const dt=new Date(PLAN_START);dt.setDate(dt.getDate()+d);
+    if(isTradingDay(dt)){
+      // Trading day: catch up to where the smooth curve says we should be
+      result[d]=Math.round(smooth[d]);
+    } else {
+      // Weekend: stay flat at previous day's value
+      result[d]=result[d-1];
+    }
+  }
+  return result;
+}
+
+function buildPlan(target){
+  return buildPlanFromMilestones([...PLAN_MILESTONES,[TOTAL_DAYS,1.0]],target);
+}
+const planMedian=buildPlan(MEDIAN),planP10=buildPlan(P10),planP90=buildPlan(P90);
+
+// Pre-compute mode baseline curves (single instance — they're static)
+const challengeBaselineCurve=buildPlanFromMilestones(CHALLENGE_BASELINE_MILESTONES,CHALLENGE_BASELINE_TARGET);
+const liveBaselineCurve=buildPlanFromMilestones(LIVE_BASELINE_MILESTONES,LIVE_BASELINE_TARGET);
+
+const LABELS=Array.from({length:TOTAL_DAYS+1},(_,d)=>{
+  const dt=new Date(PLAN_START);dt.setDate(dt.getDate()+d);
+  return dt.toISOString().slice(0,10);
+});
+
+// ── State ──
+let state={
+  updates:[],
+  accounts:ACCOUNTS_DEF.map(a=>({
+    ...a,statusOverride:null,
+    actualChallengePassDate:null,actualVerifyPassDate:null,
+    actualLiveDate:null,actualFailDate:null,
+    equity:null,peakDd:0
+  })),
+  ui:{sidebarCollapsed:false,chartRange:'all',profitPeriod:'all',chartMode:'all',editingIdx:null}
+};
+let logFilter='all';
+
+async function loadState(){
+  let loaded=false;
+  // Try localStorage first
+  try{
+    const s=localStorage.getItem('ftmo_v5');
+    if(s){
+      const parsed=JSON.parse(s);
+      state.updates=parsed.updates||[];
+      state.accounts=parsed.accounts||state.accounts;
+      state.ui={...state.ui,...(parsed.ui||{})};
+      loaded=true;
+    } else {
+      // migrate from v4
+      const old=localStorage.getItem('ftmo_v4');
+      if(old){
+        const parsed=JSON.parse(old);
+        state.updates=parsed.updates||[];
+        state.accounts=(parsed.accounts||[]).map(a=>({
+          id:a.id,name:a.name,start:a.start,funded:a.funded,
+          statusOverride:a.statusOverride,
+          actualChallengePassDate:a.actualChallengePassDate,
+          actualVerifyPassDate:a.actualVerifyPassDate,
+          actualLiveDate:a.actualLiveDate,
+          actualFailDate:a.actualFailDate,
+          equity:a.equity,peakDd:a.peakDd||0
+        }));
+        state.ui={...state.ui,...(parsed.ui||{})};
+        loaded=true;
+      }
+    }
+  }catch(e){console.error('localStorage load failed',e);}
+
+  // If localStorage was empty/failed, try IndexedDB backup
+  if(!loaded || (state.updates && state.updates.length===0)){
+    try{
+      const idbData=await idbLoad();
+      if(idbData && idbData.updates && idbData.updates.length>0){
+        // Only restore from IDB if it has MORE data than what's currently loaded
+        if(!loaded || idbData.updates.length>state.updates.length){
+          state.updates=idbData.updates||[];
+          state.accounts=idbData.accounts||state.accounts;
+          state.ui={...state.ui,...(idbData.ui||{})};
+          // Sync back to localStorage
+          try{localStorage.setItem('ftmo_v5',JSON.stringify(state));}catch(e){}
+          if(idbData.updates.length>0){
+            setTimeout(()=>toast(`Recovered ${idbData.updates.length} entries from IndexedDB backup`,'success'),500);
+          }
+        }
+      }
+    }catch(e){console.error('IndexedDB load failed',e);}
+  }
+}
+// IndexedDB helper as a redundant backup — survives more edge cases than localStorage
+const IDB_NAME='ftmo_db', IDB_STORE='state';
+function idbOpen(){
+  return new Promise((resolve,reject)=>{
+    const req=indexedDB.open(IDB_NAME,1);
+    req.onupgradeneeded=()=>req.result.createObjectStore(IDB_STORE);
+    req.onsuccess=()=>resolve(req.result);
+    req.onerror=()=>reject(req.error);
+  });
+}
+async function idbSave(data){
+  try{
+    const db=await idbOpen();
+    const tx=db.transaction(IDB_STORE,'readwrite');
+    tx.objectStore(IDB_STORE).put(data,'state');
+    return new Promise(r=>{tx.oncomplete=()=>r(true);tx.onerror=()=>r(false);});
+  }catch(e){return false;}
+}
+async function idbLoad(){
+  try{
+    const db=await idbOpen();
+    const tx=db.transaction(IDB_STORE,'readonly');
+    const req=tx.objectStore(IDB_STORE).get('state');
+    return new Promise(r=>{req.onsuccess=()=>r(req.result||null);req.onerror=()=>r(null);});
+  }catch(e){return null;}
+}
+
+function saveState(){
+  const dot=document.getElementById('save-dot');
+  const txt=document.getElementById('save-text');
+  if(dot){dot.classList.add('saving');txt.textContent='saving…';}
+  let lsOk=false,idbOk=false;
+  // Write to localStorage
+  try{
+    localStorage.setItem('ftmo_v5',JSON.stringify(state));
+    lsOk=true;
+  }catch(e){console.error('localStorage save failed',e);}
+  // Also write to IndexedDB as backup (async, fire-and-forget)
+  idbSave(state).then(r=>{idbOk=r;});
+  // Show feedback
+  setTimeout(()=>{
+    if(dot){
+      if(lsOk){
+        dot.classList.remove('saving');
+        const entries=state.updates.length;
+        txt.textContent=`saved · ${entries} entries · ${new Date().toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'})}`;
+      } else {
+        dot.style.background='var(--red)';
+        txt.textContent='⚠ save failed — export JSON now!';
+      }
+    }
+  },200);
+  // Reminder: every 25 entries, suggest JSON export
+  if(lsOk && state.updates.length>0 && state.updates.length%25===0 && state.updates.length!==(state._lastReminderAt||0)){
+    state._lastReminderAt=state.updates.length;
+    setTimeout(()=>toast(`💾 ${state.updates.length} Einträge — Backup erstellen? (Sidebar → Export JSON)`,'success'),500);
+  }
+}
+
+function toast(msg,type='success'){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.className='toast '+type+' show';
+  setTimeout(()=>t.className='toast '+type,2500);
+}
+
+let confirmCallback=null;
+function showConfirm(title,desc,onOk){
+  document.getElementById('confirm-title').textContent=title;
+  document.getElementById('confirm-desc').textContent=desc||'';
+  const okBtn=document.getElementById('confirm-ok-btn');
+  okBtn.onclick=()=>{closeConfirm();if(onOk)onOk();};
+  document.getElementById('confirm-overlay').classList.add('open');
+}
+function closeConfirm(){
+  document.getElementById('confirm-overlay').classList.remove('open');
+}
+// ESC closes
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'&&document.getElementById('confirm-overlay').classList.contains('open')){
+    closeConfirm();
+  }
+});
+
+function toggleSidebar(){
+  state.ui.sidebarCollapsed=!state.ui.sidebarCollapsed;
+  applySidebarState();
+  saveState();
+}
+function populateAccountDropdowns(){
+  const inpAcc=document.getElementById('inp-acc');
+  const ovAcc=document.getElementById('ov-acc');
+  if(!inpAcc||!ovAcc)return;
+  const inpVal=inpAcc.value;
+  const ovVal=ovAcc.value;
+  const inpOpts=state.accounts.map((a,i)=>`<option value="${i}">${a.name||('Account '+(i+1))}</option>`).join('');
+  const ovOpts=state.accounts.map((a,i)=>`<option value="${i}">${a.name||('Acc '+(i+1))}</option>`).join('');
+  inpAcc.innerHTML=inpOpts;
+  ovAcc.innerHTML=ovOpts;
+  if(inpVal&&parseInt(inpVal)<state.accounts.length)inpAcc.value=inpVal;
+  if(ovVal&&parseInt(ovVal)<state.accounts.length)ovAcc.value=ovVal;
+}
+
+function applySidebarState(){
+  const sb=document.getElementById('sidebar');
+  if(state.ui.sidebarCollapsed)sb.classList.add('collapsed');
+  else sb.classList.remove('collapsed');
+  setTimeout(()=>{if(chart)chart.resize();},280);
+}
+
+// ── Status determination (NO deadlines, only actual events) ──
+function getStatus(acc,today){
+  today=today||new Date();
+  if(acc.statusOverride)return acc.statusOverride;
+  if(acc.actualFailDate)return'terminated';
+  if(acc.actualLiveDate&&today>=new Date(acc.actualLiveDate))return'live';
+  if(acc.actualVerifyPassDate&&today>=new Date(acc.actualVerifyPassDate))return'live';
+  if(acc.actualChallengePassDate&&today>=new Date(acc.actualChallengePassDate))return'verification';
+  // Date-based fallback ONLY for status detection: if today >= start date, account is in challenge
+  // No automatic phase advancement based on calendar — only on actual logged events
+  const start=new Date(acc.start);
+  if(today<start)return'pending';
+  return'challenge';
+}
+
+// ── Per-account daily rate calculation (used for forecasts) ──
+function getAccountDailyRate(acc,phase){
+  // Compute rate from logged updates for this specific account, optionally for a specific phase
+  const today=new Date();
+  let phaseStart=new Date(acc.start);
+  if(phase==='verification'&&acc.actualChallengePassDate){
+    phaseStart=new Date(acc.actualChallengePassDate);
+  }
+  const relevantUpdates=state.updates
+    .filter(u=>parseInt(u.accIdx)===acc.id)
+    .filter(u=>new Date(u.date)>=phaseStart);
+
+  if(relevantUpdates.length===0)return null;
+
+  const phasePnl=relevantUpdates.reduce((s,u)=>s+(u.pnl||0),0);
+  const daysPassed=Math.max(1,daysBetween(phaseStart,today));
+  return{
+    rate:phasePnl/daysPassed,
+    pnl:phasePnl,
+    days:daysPassed,
+    trades:relevantUpdates.length
+  };
+}
+
+// ── Forecast: when will account complete each phase? ──
+function forecastAccountMilestones(acc){
+  const today=new Date();
+  const status=getStatus(acc,today);
+  const equity=acc.equity??acc.funded;
+
+  const result={
+    challengePassDate:null,
+    challengePassPct:0,
+    challengeETA:null,    // days from now
+    verifyPassDate:null,
+    verifyPassPct:0,
+    verifyETA:null,
+    livePassDate:null,
+    confidence:'low',     // low/medium/high based on data volume
+    isProjected:true,     // false once actually passed
+  };
+
+  // Initial fallback dates (median expectation, used before any data)
+  const initialChallengeEnd=addDays(acc.start,PLAN_CHALLENGE_DAYS);
+  const initialVerifyEnd=addDays(initialChallengeEnd,PLAN_VERIFY_DAYS);
+
+  // Challenge phase
+  if(acc.actualChallengePassDate){
+    result.challengePassDate=acc.actualChallengePassDate;
+    result.challengePassPct=100;
+    result.isProjected=false;
+  } else if(status==='pending'){
+    // Before account starts: pure plan estimate
+    result.challengePassDate=initialChallengeEnd;
+    result.challengeETA=daysBetween(today,new Date(initialChallengeEnd));
+    result.challengePassPct=0;
+  } else {
+    // In challenge phase: use actual data to forecast
+    const phaseData=getAccountDailyRate(acc,'challenge');
+    const challengePnL=equity-acc.funded;
+    result.challengePassPct=Math.min(100,Math.max(0,challengePnL/CHALLENGE_TARGET*100));
+
+    if(challengePnL>=CHALLENGE_TARGET){
+      // Already at target, just need to wait for min trading days
+      result.challengePassDate=today.toISOString().slice(0,10);
+      result.challengeETA=0;
+    } else if(phaseData&&phaseData.rate>0){
+      // Project forward at current rate
+      const dollarsNeeded=CHALLENGE_TARGET-challengePnL;
+      const daysNeeded=Math.ceil(dollarsNeeded/phaseData.rate);
+      result.challengePassDate=addDays(today,daysNeeded);
+      result.challengeETA=daysNeeded;
+      result.confidence=phaseData.trades>=10?'high':phaseData.trades>=4?'medium':'low';
+    } else if(phaseData&&phaseData.rate<=0){
+      // Negative or zero rate: cannot project pass date
+      result.challengePassDate=null;
+      result.challengeETA=null;
+      result.confidence='low';
+    } else {
+      // No data yet, use plan
+      result.challengePassDate=initialChallengeEnd;
+      result.challengeETA=daysBetween(today,new Date(initialChallengeEnd));
+    }
+  }
+
+  // Verification phase
+  if(acc.actualVerifyPassDate){
+    result.verifyPassDate=acc.actualVerifyPassDate;
+    result.verifyPassPct=100;
+  } else if(status==='verification'){
+    const phaseData=getAccountDailyRate(acc,'verification');
+    const verifyPnL=equity-acc.funded; // assumes equity reset at verify start
+    // Note: in reality, equity for verification is tracked from verification start
+    // This is an approximation
+    result.verifyPassPct=Math.min(100,Math.max(0,verifyPnL/VERIFY_TARGET*100));
+
+    if(verifyPnL>=VERIFY_TARGET){
+      result.verifyPassDate=today.toISOString().slice(0,10);
+      result.verifyETA=0;
+    } else if(phaseData&&phaseData.rate>0){
+      const dollarsNeeded=VERIFY_TARGET-verifyPnL;
+      const daysNeeded=Math.ceil(dollarsNeeded/phaseData.rate);
+      result.verifyPassDate=addDays(today,daysNeeded);
+      result.verifyETA=daysNeeded;
+    } else {
+      result.verifyPassDate=null;
+      result.verifyETA=null;
+    }
+  } else if(status==='challenge'){
+    // Add verify estimate after challenge passes
+    if(result.challengePassDate){
+      result.verifyPassDate=addDays(result.challengePassDate,PLAN_VERIFY_DAYS);
+    }
+  } else if(status==='pending'){
+    result.verifyPassDate=initialVerifyEnd;
+  }
+
+  // Live date = verify pass date
+  if(acc.actualLiveDate)result.livePassDate=acc.actualLiveDate;
+  else if(result.verifyPassDate)result.livePassDate=result.verifyPassDate;
+
+  return result;
+}
+
+// Get the projected/actual phase end date (for chart zones)
+function getEffectiveChallengeEnd(acc){
+  if(acc.actualChallengePassDate)return acc.actualChallengePassDate;
+  const f=forecastAccountMilestones(acc);
+  return f.challengePassDate||addDays(acc.start,PLAN_CHALLENGE_DAYS);
+}
+function getEffectiveVerifyEnd(acc){
+  if(acc.actualVerifyPassDate)return acc.actualVerifyPassDate;
+  const f=forecastAccountMilestones(acc);
+  return f.verifyPassDate||addDays(getEffectiveChallengeEnd(acc),PLAN_VERIFY_DAYS);
+}
+function getEffectiveLiveDate(acc){
+  if(acc.actualLiveDate)return acc.actualLiveDate;
+  return getEffectiveVerifyEnd(acc);
+}
+
+// ── Min trading days ──
+// Get period boundary date (start of current day/week/month/year)
+function getPeriodStart(period){
+  const today=new Date();today.setHours(0,0,0,0);
+  if(period==='day')return today;
+  if(period==='week'){
+    const d=new Date(today);
+    const day=d.getDay();
+    const diff=day===0?6:day-1; // Monday as start
+    d.setDate(d.getDate()-diff);
+    return d;
+  }
+  if(period==='month'){
+    return new Date(today.getFullYear(),today.getMonth(),1);
+  }
+  if(period==='year'){
+    return new Date(today.getFullYear(),0,1);
+  }
+  return null; // 'all'
+}
+
+// Compute gross profit for given period
+function computePeriodProfit(period){
+  const since=getPeriodStart(period);
+  return state.updates.reduce((sum,u)=>{
+    if(since && new Date(u.date)<since) return sum;
+    return sum+(u.pnl||0);
+  },0);
+}
+
+// Compute net profit (with 80/20 split on live) for given period
+function computePeriodNet(period){
+  const since=getPeriodStart(period);
+  let net=0;
+  state.updates.forEach(u=>{
+    if(since && new Date(u.date)<since) return;
+    const acc=state.accounts[parseInt(u.accIdx)];
+    if(!acc)return;
+    const tradeDate=new Date(u.date);
+    const liveDate=acc.actualLiveDate?new Date(acc.actualLiveDate):null;
+    const failDate=acc.actualFailDate?new Date(acc.actualFailDate):null;
+    const wasLive = liveDate && tradeDate>=liveDate && (!failDate||tradeDate<failDate);
+    if(wasLive){
+      net += (u.pnl||0)>=0 ? (u.pnl||0)*PROFIT_SPLIT_TRADER : (u.pnl||0);
+    } else {
+      net += (u.pnl||0);
+    }
+  });
+  return net;
+}
+
+const PERIOD_LABELS={day:'Today',week:'This week',month:'This month',year:'This year',all:'Total'};
+
+function getTradingDaysInPhase(acc,phase){
+  let phaseStart=new Date(acc.start);
+  if(phase==='verification'&&acc.actualChallengePassDate){
+    phaseStart=new Date(acc.actualChallengePassDate);
+  }
+  const dates=new Set();
+  state.updates
+    .filter(u=>parseInt(u.accIdx)===acc.id)
+    .filter(u=>new Date(u.date)>=phaseStart)
+    .filter(u=>(u.wins||0)+(u.losses||0)>0) // at least 1 trade
+    .forEach(u=>dates.add(u.date));
+  return dates.size;
+}
+
+// Compute net profit (after FTMO 80/20 split applied to LIVE phase only)
+// Logic: a trade on a given date contributes its full $ to gross.
+// For net: if the account was live on that date, multiply by 0.80, else 1.0.
+function computeNetProfit(){
+  let net=0;
+  state.updates.forEach(u=>{
+    const acc=state.accounts[parseInt(u.accIdx)];
+    if(!acc)return;
+    const tradeDate=new Date(u.date);
+    // Was the account live on this trade date?
+    const liveDate=acc.actualLiveDate?new Date(acc.actualLiveDate):null;
+    const failDate=acc.actualFailDate?new Date(acc.actualFailDate):null;
+    const wasLive = liveDate && tradeDate>=liveDate && (!failDate||tradeDate<failDate);
+    if(wasLive){
+      // Live: 80% to trader (only profits, losses stay 100%)
+      net += (u.pnl||0)>=0 ? (u.pnl||0)*PROFIT_SPLIT_TRADER : (u.pnl||0);
+    } else {
+      // Challenge/Verification: 100% (but not payable until live anyway)
+      net += (u.pnl||0);
+    }
+  });
+  return net;
+}
+
+// Of the total gross profit, how much came from LIVE accounts (the part that gets split)
+function computeLiveGrossProfit(){
+  let live=0,total=0;
+  state.updates.forEach(u=>{
+    const acc=state.accounts[parseInt(u.accIdx)];
+    if(!acc)return;
+    const tradeDate=new Date(u.date);
+    const liveDate=acc.actualLiveDate?new Date(acc.actualLiveDate):null;
+    const failDate=acc.actualFailDate?new Date(acc.actualFailDate):null;
+    total+=u.pnl||0;
+    if(liveDate && tradeDate>=liveDate && (!failDate||tradeDate<failDate)){
+      live+=u.pnl||0;
+    }
+  });
+  return{live,total,nonLive:total-live};
+}
+
+// ── Curves ──
+function computeActualCurve(){
+  const mode=state.ui.chartMode||'all';
+  const byDay={};
+  state.updates.forEach(u=>{
+    if(!tradeMatchesMode(u,mode))return;
+    byDay[u.date]=(byDay[u.date]||0)+(u.pnl||0);
+  });
+  let cum=0;
+  const today=new Date();
+  return LABELS.map((lbl,i)=>{
+    if(byDay[lbl])cum+=byDay[lbl];
+    const dt=new Date(PLAN_START);dt.setDate(dt.getDate()+i);
+    return dt<=today?cum:null;
+  });
+}
+
+// Get baseline curve for current chart mode (used when no/few live data)
+function getBaselineCurveForMode(mode){
+  if(mode==='challenge')return challengeBaselineCurve;
+  if(mode==='live')return liveBaselineCurve;
+  return planMedian; // 'all' mode uses median plan
+}
+
+// Per-account: cumulative gross profit during challenge+verification only
+// Plateaus at the moment the account goes live (challenge phase ended)
+function computeAccountChallengeCurve(accIdx){
+  const acc=state.accounts[accIdx];
+  const today=new Date();
+  const accStart=new Date(acc.start);
+  const accStartIdx=Math.max(0,daysBetween(PLAN_START,accStart));
+  const liveDateRaw=acc.actualLiveDate;
+  const liveIdx=liveDateRaw?Math.min(TOTAL_DAYS,daysBetween(PLAN_START,new Date(liveDateRaw))):null;
+
+  // Sum daily P&L per date for this account, only during challenge/verification phase
+  const byDay={};
+  state.updates.forEach(u=>{
+    if(parseInt(u.accIdx)!==accIdx)return;
+    const tradeDate=new Date(u.date);
+    if(liveDateRaw&&tradeDate>=new Date(liveDateRaw))return; // skip live trades
+    byDay[u.date]=(byDay[u.date]||0)+(u.pnl||0);
+  });
+
+  const result=new Array(TOTAL_DAYS+1).fill(null);
+  let cum=0;
+  for(let i=0;i<=TOTAL_DAYS;i++){
+    if(i<accStartIdx){result[i]=null;continue;}
+    const lbl=LABELS[i];
+    if(byDay[lbl])cum+=byDay[lbl];
+    const dt=new Date(PLAN_START);dt.setDate(dt.getDate()+i);
+    if(dt>today){result[i]=null;continue;} // future = null (forecast handles it)
+    if(liveIdx!==null&&i>=liveIdx){result[i]=null;continue;} // after live = no challenge data
+    result[i]=cum;
+  }
+  return result;
+}
+
+// Per-account challenge forecast (extrapolates daily rate to $15k target)
+// Continues seamlessly from the last actual data point — no gap, no $0 reset.
+function computeAccountChallengeForecast(accIdx){
+  const acc=state.accounts[accIdx];
+  const today=new Date();
+  const accStart=new Date(acc.start);
+  const accStartIdx=Math.max(0,daysBetween(PLAN_START,accStart));
+  const todayIdx=Math.max(0,Math.min(daysBetween(PLAN_START,today),TOTAL_DAYS));
+
+  // If account already passed verification (live), no forecast — challenge is done
+  if(acc.actualLiveDate||acc.actualVerifyPassDate)return new Array(TOTAL_DAYS+1).fill(null);
+  if(acc.actualFailDate)return new Array(TOTAL_DAYS+1).fill(null);
+
+  // Get the actual challenge curve and find its last non-null point
+  const challengeCurve=computeAccountChallengeCurve(accIdx);
+  let lastActualIdx=-1;
+  let lastActualVal=0;
+  for(let i=Math.min(todayIdx,TOTAL_DAYS);i>=0;i--){
+    if(challengeCurve[i]!==null&&challengeCurve[i]!==undefined){
+      lastActualIdx=i;
+      lastActualVal=challengeCurve[i];
+      break;
+    }
+  }
+
+  // Determine empirical rate from this account's actual data
+  const accUpdates=state.updates.filter(u=>parseInt(u.accIdx)===accIdx);
+  const daysActive=Math.max(1,todayIdx-accStartIdx+1);
+  let dailyRate=BACKTEST_TRADING_DAY_RATE;
+  if(accUpdates.length>=3 && daysActive>=3 && lastActualVal>0){
+    // Count actual TRADING days since account start (Mon-Fri only)
+    let tradingDaysActive=0;
+    for(let i=accStartIdx;i<=todayIdx;i++){
+      const dt=new Date(PLAN_START);dt.setDate(dt.getDate()+i);
+      if(isTradingDay(dt))tradingDaysActive++;
+    }
+    tradingDaysActive=Math.max(1,tradingDaysActive);
+    const empiricalRate=lastActualVal/tradingDaysActive;
+    const weight=Math.min(1,accUpdates.length/15);
+    dailyRate=weight*empiricalRate+(1-weight)*BACKTEST_TRADING_DAY_RATE;
+  }
+
+  const result=new Array(TOTAL_DAYS+1).fill(null);
+
+  // Determine the START of the forecast line
+  let forecastStartIdx,forecastStartVal;
+  if(lastActualIdx>=0){
+    // We have actual data — forecast starts at the LAST actual point so the lines connect
+    forecastStartIdx=lastActualIdx;
+    forecastStartVal=lastActualVal;
+  } else if(todayIdx>=accStartIdx){
+    // Account is active but no trades logged yet — start at today, $0
+    forecastStartIdx=todayIdx;
+    forecastStartVal=0;
+  } else {
+    // Account hasn't started yet — start forecast at account-start day with $0
+    forecastStartIdx=accStartIdx;
+    forecastStartVal=0;
+  }
+
+  let val=forecastStartVal;
+  result[forecastStartIdx]=val;
+  for(let i=forecastStartIdx+1;i<=TOTAL_DAYS;i++){
+    const dt=new Date(PLAN_START);dt.setDate(dt.getDate()+i);
+    if(isTradingDay(dt)){
+      val=Math.min(15000,val+dailyRate);
+    }
+    // Weekend: no change, val stays same → flat plateau
+    result[i]=val;
+    if(val>=15000){
+      for(let j=i+1;j<=Math.min(TOTAL_DAYS,i+5);j++)result[j]=15000;
+      break;
+    }
+  }
+  return result;
+}
+
+function computeForecastBand(actualPts){
+  const mode=state.ui.chartMode||'all';
+  const today=new Date();
+  const todayIdx=Math.max(0,Math.min(daysBetween(PLAN_START,today),TOTAL_DAYS));
+  const empty=new Array(TOTAL_DAYS+1).fill(null);
+
+  // Mode-matching daily P&L for blend weighting
+  const matchingTrades=state.updates.filter(u=>tradeMatchesMode(u,mode));
+  const matchingPnls=matchingTrades.map(u=>u.pnl||0);
+
+  // Get baseline projection from backtest expectation (always available)
+  const baseline=getBaselineCurveForMode(mode);
+
+  // Stdev for confidence band
+  let stdev=200;
+  if(matchingPnls.length>3){
+    const mean=matchingPnls.reduce((a,b)=>a+b,0)/matchingPnls.length;
+    const variance=matchingPnls.reduce((s,v)=>s+Math.pow(v-mean,2),0)/matchingPnls.length;
+    stdev=Math.sqrt(variance);
+  } else {
+    // Use baseline-implied stdev: derive from baseline daily increments
+    const incs=[];
+    for(let i=1;i<=Math.min(60,TOTAL_DAYS);i++)incs.push(baseline[i]-baseline[i-1]);
+    if(incs.length>0){
+      const mean=incs.reduce((a,b)=>a+b,0)/incs.length;
+      const variance=incs.reduce((s,v)=>s+Math.pow(v-mean,2),0)/incs.length;
+      stdev=Math.max(150,Math.sqrt(variance)*3); // 3× because real trading is messier than smoothed plan
+    }
+  }
+
+  // Blend factor: how much weight do actual data carry vs baseline?
+  // 0 trades → 100% baseline; ~30+ trades → 90% actual
+  const tradeCount=matchingTrades.length;
+  const blendFactor=Math.min(1,tradeCount/30); // 0..1
+  const lastActual=actualPts[todayIdx]??0;
+
+  // Compute today's "expected" anchor: blend between actual cumulative and baseline value
+  const baselineToday=baseline[todayIdx]??0;
+  const anchorVal=blendFactor*lastActual+(1-blendFactor)*baselineToday;
+
+  // Future rate: blend between empirical rate (from actual) and baseline rate (from baseline curve)
+  const recentStart=Math.max(0,todayIdx-14);
+  const recentVal=actualPts[recentStart]??0;
+  const empiricalRate=tradeCount>0?(lastActual-recentVal)/Math.max(todayIdx-recentStart,1):0;
+
+  const lo=[...empty],mid=[...empty],hi=[...empty];
+  for(let i=todayIdx;i<=TOTAL_DAYS;i++){
+    const stepsAhead=i-todayIdx;
+    // Baseline future increment (smooth from today onward)
+    const baselineDelta=baseline[i]-baselineToday;
+    // Empirical future increment at recent rate
+    const empiricalDelta=empiricalRate*stepsAhead;
+    // Blend
+    const futureDelta=blendFactor*empiricalDelta+(1-blendFactor)*baselineDelta;
+    const center=anchorVal+futureDelta;
+    const widening=stdev*Math.sqrt(stepsAhead);
+    mid[i]=Math.round(center);
+    lo[i]=Math.round(center-widening*1.0);
+    hi[i]=Math.round(center+widening*1.0);
+  }
+  return{lo,mid,hi};
+}
+
+// ── Stats ──
+function computeStats(){
+  const today=new Date();
+  const todayIdx=Math.min(daysBetween(PLAN_START,today),TOTAL_DAYS);
+  const totalPnl=state.updates.reduce((s,u)=>s+(u.pnl||0),0);
+  const wins=state.updates.reduce((s,u)=>s+(u.wins||0),0);
+  const losses=state.updates.reduce((s,u)=>s+(u.losses||0),0);
+  const total=wins+losses;
+  const wr=total>0?(wins/total*100):null;
+  // Profit Factor = Gross Profit ($) / Gross Loss ($)
+  let grossProfit=0, grossLoss=0;
+  state.updates.forEach(u=>{
+    const p=Number(u.pnl)||0;
+    if(p>0)grossProfit+=p;
+    else if(p<0)grossLoss+=Math.abs(p);
+  });
+  const pf=grossLoss>0?(grossProfit/grossLoss):(grossProfit>0?Infinity:null);
+  const matchEntries=state.updates.filter(u=>u.match==='yes'||u.match==='no');
+  const matchRate=matchEntries.length>0?(matchEntries.filter(u=>u.match==='yes').length/matchEntries.length*100):null;
+  const liveAccs=state.accounts.filter(a=>getStatus(a)==='live').length;
+  const fundedCap=liveAccs*100000;
+  const planNow=todayIdx>=0?planMedian[todayIdx]:0;
+  const vsPlan=planNow>0?((totalPnl-planNow)/planNow*100):null;
+
+  const recentStart=Math.max(0,todayIdx-14);
+  const byDay={};
+  state.updates.forEach(u=>{byDay[u.date]=(byDay[u.date]||0)+(u.pnl||0);});
+  let cum=0,cumAt=0;
+  LABELS.forEach((lbl,i)=>{if(byDay[lbl])cum+=byDay[lbl];if(i===recentStart)cumAt=cum;});
+  const recentRate=(totalPnl-cumAt)/Math.max(todayIdx-recentStart,1);
+  const overallRate=totalPnl/Math.max(todayIdx,1);
+  const blendedRate=recentRate*0.6+overallRate*0.4;
+  const daysLeft=daysBetween(today,PLAN_END);
+  const yeForecast=Math.round(totalPnl+blendedRate*Math.max(daysLeft,0));
+
+  const eaStats={};
+  state.updates.forEach(u=>{
+    const ea=u.ea||'Unknown';
+    if(!eaStats[ea])eaStats[ea]={wins:0,losses:0,pnl:0,grossProfit:0,grossLoss:0};
+    eaStats[ea].wins+=u.wins||0;
+    eaStats[ea].losses+=u.losses||0;
+    const p=u.pnl||0;
+    eaStats[ea].pnl+=p;
+    if(p>0)eaStats[ea].grossProfit+=p;
+    else if(p<0)eaStats[ea].grossLoss+=Math.abs(p);
+  });
+  const netProfit=computeNetProfit();
+  const liveGross=computeLiveGrossProfit();
+  return{totalPnl,wins,losses,total,wr,pf,matchRate,liveAccs,fundedCap,vsPlan,yeForecast,planNow,eaStats,netProfit,liveGross};
+}
+
+// ── Chart plugins ──
+const phaseZonePlugin={
+  id:'phaseZones',
+  beforeDraw(chart){
+    const{ctx,chartArea,scales}=chart;
+    if(!chartArea)return;
+    const anns=chart.phaseAnnotations||[];
+    anns.forEach(a=>{
+      if(a.xMax<scales.x.min||a.xMin>scales.x.max)return;
+      const x0=scales.x.getPixelForValue(Math.max(a.xMin,scales.x.min));
+      const x1=scales.x.getPixelForValue(Math.min(a.xMax,scales.x.max));
+      ctx.save();
+      ctx.fillStyle=a.color;
+      ctx.fillRect(x0,chartArea.top,x1-x0,chartArea.bottom-chartArea.top);
+      ctx.restore();
+    });
+  }
+};
+Chart.register(phaseZonePlugin);
+
+const phaseLinePlugin={
+  id:'phaseLines',
+  afterDatasetsDraw(chart){
+    const{ctx,chartArea,scales}=chart;
+    if(!chartArea)return;
+    const lines=chart.phaseLines||[];
+    lines.forEach(l=>{
+      if(l.idx<scales.x.min||l.idx>scales.x.max)return;
+      const x=scales.x.getPixelForValue(l.idx);
+      ctx.save();
+      ctx.strokeStyle=l.color;
+      ctx.lineWidth=1;
+      ctx.setLineDash(l.projected?[2,4]:[3,3]);
+      ctx.globalAlpha=l.projected?0.4:0.7;
+      ctx.beginPath();
+      ctx.moveTo(x,chartArea.top);
+      ctx.lineTo(x,chartArea.bottom);
+      ctx.stroke();
+      ctx.globalAlpha=l.projected?0.6:0.9;
+      ctx.fillStyle=l.color;
+      ctx.font='9px system-ui';
+      ctx.textAlign='center';
+      ctx.setLineDash([]);
+      ctx.fillText(l.label,x,chartArea.top+9);
+      ctx.restore();
+    });
+  }
+};
+Chart.register(phaseLinePlugin);
+
+let chart=null;
+
+function getChartXRange(){
+  const range=state.ui.chartRange||'all';
+  const today=new Date();
+  // Clamp todayIdx to plan boundaries (can be negative if before plan start)
+  const todayIdxRaw=daysBetween(PLAN_START,today);
+  const todayIdx=Math.max(0,Math.min(todayIdxRaw,TOTAL_DAYS));
+
+  if(range==='custom'&&state.ui.customFrom&&state.ui.customTo){
+    const fromIdx=Math.max(0,daysBetween(PLAN_START,new Date(state.ui.customFrom)));
+    const toIdx=Math.min(TOTAL_DAYS,daysBetween(PLAN_START,new Date(state.ui.customTo)));
+    return{min:fromIdx,max:toIdx};
+  }
+
+  // Forward-looking ranges: show next N days from today (or from plan start if not yet started)
+  // Plus a small look-back buffer so the user can see the immediate past context.
+  if(range==='30d'){
+    const lookback=todayIdxRaw<=0?0:7;  // 7 days of history if plan running, else none
+    return{
+      min:Math.max(0,todayIdx-lookback),
+      max:Math.min(TOTAL_DAYS,todayIdx+30)
+    };
+  }
+  if(range==='90d'){
+    const lookback=todayIdxRaw<=0?0:14;
+    return{
+      min:Math.max(0,todayIdx-lookback),
+      max:Math.min(TOTAL_DAYS,todayIdx+90)
+    };
+  }
+  if(range==='ytd'){
+    // YTD = full calendar year of TODAY (Jan 1 → Dec 31).
+    // Map calendar dates to plan-day indices (can be negative or beyond TOTAL_DAYS).
+    const yearStart=new Date(today.getFullYear(),0,1);
+    const yearEnd=new Date(today.getFullYear(),11,31);
+    return{
+      min:Math.max(0,daysBetween(PLAN_START,yearStart)),
+      max:Math.min(TOTAL_DAYS,daysBetween(PLAN_START,yearEnd))
+    };
+  }
+  return{min:0,max:TOTAL_DAYS};
+}
+
+function renderChart(actualPts,fcastBand){
+  const ctx=document.getElementById('mainChart').getContext('2d');
+  if(chart)chart.destroy();
+  const mode=state.ui.chartMode||'all';
+  const emptyArr=new Array(TOTAL_DAYS+1).fill(null);
+
+  // CHALLENGE MODE: render 4 per-account lines instead of single cumulative
+  if(mode==='challenge'){
+    return renderChallengePerAccountChart(ctx);
+  }
+
+  const annotations=[];
+  state.accounts.forEach((acc,ai)=>{
+    const colors=ACC_PHASE_COLORS[ai];
+    const startIdx=Math.max(0,daysBetween(PLAN_START,new Date(acc.start)));
+    const chEndIdx=Math.min(TOTAL_DAYS,daysBetween(PLAN_START,new Date(getEffectiveChallengeEnd(acc))));
+    const vEndIdx=Math.min(TOTAL_DAYS,daysBetween(PLAN_START,new Date(getEffectiveVerifyEnd(acc))));
+    const liveIdx=Math.min(TOTAL_DAYS,daysBetween(PLAN_START,new Date(getEffectiveLiveDate(acc))));
+    if(getStatus(acc)!=='terminated'){
+      if(chEndIdx>startIdx)annotations.push({xMin:startIdx,xMax:chEndIdx,color:colors.challenge});
+      if(vEndIdx>chEndIdx)annotations.push({xMin:chEndIdx,xMax:vEndIdx,color:colors.verification});
+      if(TOTAL_DAYS>liveIdx)annotations.push({xMin:liveIdx,xMax:TOTAL_DAYS,color:colors.live});
+    }
+  });
+
+  const lines=[];
+  state.accounts.forEach((acc,ai)=>{
+    const col=ACC_COLORS[ai];
+    const chDate=getEffectiveChallengeEnd(acc);
+    const vDate=getEffectiveVerifyEnd(acc);
+    const chIdx=Math.max(0,daysBetween(PLAN_START,new Date(chDate)));
+    const vIdx=Math.max(0,daysBetween(PLAN_START,new Date(vDate)));
+    const chProjected=!acc.actualChallengePassDate;
+    const vProjected=!acc.actualVerifyPassDate;
+    if(chIdx>0&&chIdx<=TOTAL_DAYS) lines.push({idx:chIdx,color:col,label:'A'+(ai+1)+(chProjected?' C?':' C✓'),projected:chProjected});
+    if(vIdx>chIdx&&vIdx<=TOTAL_DAYS) lines.push({idx:vIdx,color:col,label:'A'+(ai+1)+(vProjected?' V?':' V✓'),projected:vProjected});
+  });
+  const todayIdx=Math.min(daysBetween(PLAN_START,new Date()),TOTAL_DAYS);
+  if(todayIdx>0) lines.push({idx:todayIdx,color:'rgba(232,230,224,0.55)',label:'today',projected:false});
+
+  const range=getChartXRange();
+
+  // Compute Y-range from VISIBLE data series only (skip hidden plan curves in non-'all' modes)
+  const yRange=(()=>{
+    const series=mode==='all'
+      ? [planP90,planMedian,planP10,actualPts,fcastBand.mid,fcastBand.hi,fcastBand.lo]
+      : [actualPts,fcastBand.mid,fcastBand.hi,fcastBand.lo]; // exclude hidden plan curves
+    let min=Infinity,max=-Infinity;
+    series.forEach(s=>{
+      if(!s)return;
+      for(let i=range.min;i<=range.max;i++){
+        const v=s[i];
+        if(v===null||v===undefined||isNaN(v))continue;
+        if(v<min)min=v;
+        if(v>max)max=v;
+      }
+    });
+    if(min===Infinity){min=0;max=100;} // empty data fallback
+    // Always include $0 baseline for context
+    if(min>0)min=0;
+    if(max<0)max=0;
+    if(min===max){max=min+100;}
+    // Add 12% padding on top, 5% on bottom
+    const span=max-min;
+    const padTop=span*0.12;
+    const padBot=min<0?span*0.05:0;
+    // Round to nice numbers based on magnitude
+    const niceRound=(v,up)=>{
+      const av=Math.abs(v);
+      let step=1000;
+      if(av<100)step=10;
+      else if(av<1000)step=100;
+      else if(av<10000)step=500;
+      else if(av<100000)step=5000;
+      else step=10000;
+      return up?Math.ceil(v/step)*step:Math.floor(v/step)*step;
+    };
+    return{min:niceRound(min-padBot,false),max:niceRound(max+padTop,true)};
+  })();
+
+  chart=new Chart(ctx,{
+    type:'line',
+    data:{
+      labels:LABELS,
+      datasets:[
+        {label:'Optimistic case',data:mode==='all'?planP90:emptyArr,borderColor:'rgba(159,225,203,0.6)',borderWidth:1.5,pointRadius:0,fill:false,tension:0.4,hidden:mode!=='all'},
+        {label:'Expected (plan)',data:mode==='all'?planMedian:emptyArr,borderColor:'#378ADD',borderWidth:2,pointRadius:0,fill:false,tension:0.4,hidden:mode!=='all'},
+        {label:'Pessimistic case',data:mode==='all'?planP10:emptyArr,borderColor:'rgba(55,138,221,0.45)',borderWidth:1.5,pointRadius:0,fill:false,tension:0.4,borderDash:[4,3],hidden:mode!=='all'},
+        {label:'F-Hi',data:fcastBand.hi,borderColor:'rgba(216,90,48,0.25)',borderWidth:1,pointRadius:0,fill:'+1',backgroundColor:'rgba(216,90,48,0.08)',tension:0.2,spanGaps:false,borderDash:[3,3]},
+        {label:'F-Lo',data:fcastBand.lo,borderColor:'rgba(216,90,48,0.25)',borderWidth:1,pointRadius:0,fill:false,tension:0.2,spanGaps:false,borderDash:[3,3]},
+        {label:'Your forecast',data:fcastBand.mid,borderColor:'rgba(216,90,48,0.7)',borderWidth:1.5,pointRadius:0,fill:false,tension:0.2,spanGaps:false,borderDash:[5,4]},
+        {label:'Your actual',data:actualPts,borderColor:'#D85A30',borderWidth:2.5,pointRadius:0,fill:false,tension:0.2,spanGaps:false},
+      ]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        tooltip:{
+          mode:'index',intersect:false,
+          backgroundColor:'rgba(14,15,17,0.95)',
+          borderColor:'rgba(255,255,255,0.08)',borderWidth:1,
+          titleColor:'#888780',bodyColor:'#e8e6e0',
+          filter:item=>['F-Hi','F-Lo'].indexOf(item.dataset.label)===-1,
+          callbacks:{
+            title:items=>items[0].label,
+            label:item=>item.parsed.y===null?null:item.dataset.label+': $'+Math.round(item.parsed.y).toLocaleString('de-DE')
+          }
+        }
+      },
+      scales:{
+        x:{
+          min:range.min,max:range.max,
+          ticks:{maxTicksLimit:8,color:'#555450',font:{size:10},callback:(_,i)=>{
+            const lbl=LABELS[i];if(!lbl)return'';
+            return state.ui.chartRange==='30d'?lbl.slice(8):lbl.slice(5);
+          }},
+          grid:{color:'rgba(255,255,255,0.04)'}
+        },
+        y:{
+          min:yRange.min,
+          max:yRange.max,
+          ticks:{color:'#555450',font:{size:10},callback:v=>{
+            const av=Math.abs(v);
+            if(av>=10000)return '$'+(v/1000).toFixed(0)+'k';
+            if(av>=1000)return '$'+(v/1000).toFixed(1)+'k';
+            return '$'+Math.round(v);
+          }},
+          grid:{color:'rgba(255,255,255,0.04)'}
+        }
+      }
+    }
+  });
+  chart.phaseAnnotations=annotations;
+  chart.phaseLines=lines;
+
+  const legEl=document.getElementById('phase-legend');
+  legEl.innerHTML=state.accounts.map((acc,ai)=>{
+    const f=forecastAccountMilestones(acc);
+    const status=getStatus(acc);
+    const chMarker=acc.actualChallengePassDate?'✓':'~';
+    const vMarker=acc.actualVerifyPassDate?'✓':'~';
+    const chDate=getEffectiveChallengeEnd(acc).slice(5);
+    const vDate=getEffectiveVerifyEnd(acc).slice(5);
+    return `<span><i style="background:${ACC_COLORS[ai]};opacity:.7;"></i>
+      Acc ${ai+1}: C ${chMarker}${chDate} → V ${vMarker}${vDate}</span>`;
+  }).join('');
+}
+
+function renderChallengePerAccountChart(ctx){
+  const range=getChartXRange();
+  // Y-range: always $0 to $16k (slight padding above $15k target)
+  const yRange={min:0,max:16000};
+
+  // Build datasets: 4 actual + 4 forecast + target line
+  const datasets=[];
+  state.accounts.forEach((acc,ai)=>{
+    const col=ACC_COLORS[ai];
+    const actualPts=computeAccountChallengeCurve(ai);
+    const forecastPts=computeAccountChallengeForecast(ai);
+    datasets.push({
+      label:`Acc ${ai+1} actual`,
+      data:actualPts,
+      borderColor:col,borderWidth:2.5,pointRadius:0,
+      fill:false,tension:0.2,spanGaps:false
+    });
+    datasets.push({
+      label:`Acc ${ai+1} forecast`,
+      data:forecastPts,
+      borderColor:col,borderWidth:1.5,pointRadius:0,
+      fill:false,tension:0.2,spanGaps:false,borderDash:[5,4]
+    });
+  });
+
+  // Target line at $15k (horizontal)
+  const targetData=new Array(TOTAL_DAYS+1).fill(15000);
+  datasets.push({
+    label:'$15k Pass target',
+    data:targetData,
+    borderColor:'rgba(74,158,74,0.5)',borderWidth:1,pointRadius:0,
+    fill:false,borderDash:[2,4],
+    order:99
+  });
+
+  // Phase zones (subtle, like in main chart)
+  const annotations=[];
+  state.accounts.forEach((acc,ai)=>{
+    const colors=ACC_PHASE_COLORS[ai];
+    const startIdx=Math.max(0,daysBetween(PLAN_START,new Date(acc.start)));
+    const chEndIdx=Math.min(TOTAL_DAYS,daysBetween(PLAN_START,new Date(getEffectiveChallengeEnd(acc))));
+    const vEndIdx=Math.min(TOTAL_DAYS,daysBetween(PLAN_START,new Date(getEffectiveVerifyEnd(acc))));
+    if(getStatus(acc)!=='terminated'){
+      if(chEndIdx>startIdx)annotations.push({xMin:startIdx,xMax:chEndIdx,color:colors.challenge});
+      if(vEndIdx>chEndIdx)annotations.push({xMin:chEndIdx,xMax:vEndIdx,color:colors.verification});
+    }
+  });
+
+  // Today line
+  const lines=[];
+  const todayIdx=Math.min(daysBetween(PLAN_START,new Date()),TOTAL_DAYS);
+  if(todayIdx>0)lines.push({idx:todayIdx,color:'rgba(232,230,224,0.55)',label:'today',projected:false});
+
+  chart=new Chart(ctx,{
+    type:'line',
+    data:{labels:LABELS,datasets},
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        tooltip:{
+          mode:'index',intersect:false,
+          backgroundColor:'rgba(14,15,17,0.95)',
+          borderColor:'rgba(255,255,255,0.08)',borderWidth:1,
+          titleColor:'#888780',bodyColor:'#e8e6e0',
+          callbacks:{
+            title:items=>items[0].label,
+            label:item=>item.parsed.y===null?null:item.dataset.label+': $'+Math.round(item.parsed.y).toLocaleString('de-DE')
+          }
+        }
+      },
+      scales:{
+        x:{
+          min:range.min,max:range.max,
+          ticks:{maxTicksLimit:8,color:'#555450',font:{size:10},callback:(_,i)=>{
+            const lbl=LABELS[i];if(!lbl)return'';
+            return state.ui.chartRange==='30d'?lbl.slice(8):lbl.slice(5);
+          }},
+          grid:{color:'rgba(255,255,255,0.04)'}
+        },
+        y:{
+          min:yRange.min,max:yRange.max,
+          ticks:{color:'#555450',font:{size:10},callback:v=>{
+            if(v>=1000)return '$'+(v/1000).toFixed(0)+'k';
+            return '$'+v;
+          }},
+          grid:{color:'rgba(255,255,255,0.04)'}
+        }
+      }
+    }
+  });
+  chart.phaseAnnotations=annotations;
+  chart.phaseLines=lines;
+
+  // Update phase legend below chart with per-account challenge status + pass forecast
+  const legEl=document.getElementById('phase-legend');
+  legEl.innerHTML=state.accounts.map((acc,ai)=>{
+    const status=getStatus(acc);
+    const equity=acc.equity??acc.funded;
+    const pnl=equity-acc.funded;
+    let statusText='';
+    if(status==='pending'){
+      const today=new Date();
+      const ds=daysBetween(today,new Date(acc.start));
+      // Forecast: $15k / $456/trading-day = ~33 trading days = ~47 calendar days
+      const tradingDaysNeeded=Math.ceil(15000/BACKTEST_TRADING_DAY_RATE);
+      const passDate=new Date(acc.start);
+      // Walk forward, counting only trading days
+      let td=0;
+      while(td<tradingDaysNeeded){
+        passDate.setDate(passDate.getDate()+1);
+        if(isTradingDay(passDate))td++;
+      }
+      statusText=`starts in ${ds}d · forecast pass ${passDate.toLocaleDateString('de-DE',{day:'2-digit',month:'short'})}`;
+    } else if(status==='challenge'||status==='verification'){
+      // Use the forecast curve to find when it hits 15k
+      const fcast=computeAccountChallengeForecast(ai);
+      let passIdx=null;
+      for(let i=0;i<=TOTAL_DAYS;i++){if(fcast[i]>=15000){passIdx=i;break;}}
+      if(passIdx!==null){
+        const passDate=new Date(PLAN_START);
+        passDate.setDate(passDate.getDate()+passIdx);
+        statusText=`$${Math.round(pnl).toLocaleString('de-DE')}/$15k · ETA ${passDate.toLocaleDateString('de-DE',{day:'2-digit',month:'short'})}`;
+      } else {
+        statusText=`$${Math.round(pnl).toLocaleString('de-DE')}/$15k · negative trend`;
+      }
+    } else if(status==='live'){
+      statusText='✓ passed';
+    } else if(status==='terminated'){
+      statusText='✗ terminated';
+    }
+    return `<span><i style="background:${ACC_COLORS[ai]};opacity:.7;"></i>Acc ${ai+1}: ${statusText}</span>`;
+  }).join('');
+}
+
+function setChartRange(range){
+  state.ui.chartRange=range;
+  ['30d','90d','ytd','all','custom'].forEach(r=>{
+    const el=document.getElementById('r-'+r);
+    if(el)el.classList.toggle('active',r===range);
+  });
+  saveState();
+  render();
+}
+
+function toggleCustomRange(){
+  const pop=document.getElementById('custom-range-popup');
+  // Pre-fill with sensible defaults if empty
+  const fromEl=document.getElementById('custom-range-from');
+  const toEl=document.getElementById('custom-range-to');
+  if(!fromEl.value){
+    fromEl.value=state.ui.customFrom||PLAN_START.toISOString().slice(0,10);
+  }
+  if(!toEl.value){
+    toEl.value=state.ui.customTo||PLAN_END.toISOString().slice(0,10);
+  }
+  pop.classList.toggle('open');
+}
+function closeCustomRange(){
+  document.getElementById('custom-range-popup').classList.remove('open');
+}
+function applyCustomRange(){
+  const from=document.getElementById('custom-range-from').value;
+  const to=document.getElementById('custom-range-to').value;
+  if(!from||!to){toast('Bitte beide Daten eingeben','error');return;}
+  // Catch malformed years like 0027 (browser accepts incomplete year input)
+  const fromYear=new Date(from).getFullYear();
+  const toYear=new Date(to).getFullYear();
+  if(fromYear<2000||toYear<2000){
+    toast('Ungültiges Jahr — bitte vollständig (z.B. 2027)','error');return;
+  }
+  if(fromYear>2100||toYear>2100){
+    toast('Datum außerhalb des Plan-Zeitraums','error');return;
+  }
+  if(new Date(from)>=new Date(to)){toast('„From" muss vor „To" liegen','error');return;}
+  // Clamp to plan boundaries
+  const planMin=new Date('2026-05-04'),planMax=new Date('2030-12-31');
+  if(new Date(from)<planMin||new Date(to)>planMax){
+    toast('Datum außerhalb des Plans (04.05.2026 – 31.12.2030)','error');return;
+  }
+  state.ui.customFrom=from;
+  state.ui.customTo=to;
+  closeCustomRange();
+  setChartRange('custom');
+}
+
+// Close popup when clicking outside
+document.addEventListener('click',e=>{
+  const pop=document.getElementById('custom-range-popup');
+  const btn=document.getElementById('r-custom');
+  if(!pop||!btn)return;
+  if(pop.classList.contains('open')&&!pop.contains(e.target)&&!btn.contains(e.target)){
+    pop.classList.remove('open');
+  }
+});
+
+function setChartMode(mode){
+  state.ui.chartMode=mode;
+  ['all','live','challenge'].forEach(m=>{
+    const el=document.getElementById('m-'+m);
+    if(el)el.classList.toggle('active',m===mode);
+  });
+  saveState();
+  render();
+}
+
+// Filter trade by chart mode (returns true if it should be included)
+function tradeMatchesMode(u,mode){
+  if(mode==='all')return true;
+  const acc=state.accounts[parseInt(u.accIdx)];
+  if(!acc)return false;
+  const tradeDate=new Date(u.date);
+  const liveDate=acc.actualLiveDate?new Date(acc.actualLiveDate):null;
+  const failDate=acc.actualFailDate?new Date(acc.actualFailDate):null;
+  const wasLive = liveDate && tradeDate>=liveDate && (!failDate||tradeDate<failDate);
+  if(mode==='live')return wasLive;
+  if(mode==='challenge')return !wasLive;
+  return true;
+}
+
+function setProfitPeriod(period){
+  state.ui.profitPeriod=period;
+  document.querySelectorAll('.metric-tab[data-period]').forEach(b=>{
+    b.classList.toggle('active',b.dataset.period===period);
+  });
+  saveState();
+  // Only re-render metrics, not full chart redraw
+  const s=computeStats();
+  renderMetrics(s);
+}
+
+// ── Quick stats ──
+function renderQuickStats(){
+  const today=new Date();
+  const container=document.getElementById('quick-stats');
+  const items=[];
+
+  const daysIn=Math.max(0,daysBetween(PLAN_START,today));
+  const daysToEnd=daysBetween(today,PLAN_END);
+  if(today<PLAN_START){
+    items.push({label:'Plan starts in',val:daysBetween(today,PLAN_START)+' days',cls:''});
+  } else {
+    items.push({label:'Days into plan',val:daysIn+' / '+TOTAL_DAYS,cls:''});
+    // Year-end-of-2026 milestone (primary $200k target date)
+    const ye2026=new Date('2026-12-31');
+    const daysToYE2026=daysBetween(today,ye2026);
+    if(daysToYE2026>=0){
+      items.push({label:'Days until 31.12.2026',val:daysToYE2026+' days',cls:''});
+    } else {
+      items.push({label:'Days until plan end',val:daysToEnd+' days · 31.12.2030',cls:''});
+    }
+  }
+
+  state.accounts.forEach((acc,ai)=>{
+    const status=getStatus(acc,today);
+    const f=forecastAccountMilestones(acc);
+    const equity=acc.equity??acc.funded;
+    const pnl=equity-acc.funded;
+
+    if(status==='challenge'){
+      const minDays=getTradingDaysInPhase(acc,'challenge');
+      const minDaysOk=minDays>=MIN_TRADING_DAYS;
+      const targetReached=pnl>=CHALLENGE_TARGET;
+      let val='',cls='';
+      if(targetReached&&minDaysOk){
+        val='✓ Ready to pass!';cls='ok';
+      } else if(targetReached){
+        val=`✓ $10k hit · ${MIN_TRADING_DAYS-minDays} more days needed`;cls='warn';
+      } else if(f.challengeETA===null){
+        val=`$${Math.round(pnl).toLocaleString('de-DE')}/$10k · negative trend`;cls='danger';
+      } else {
+        val=`$${Math.round(pnl).toLocaleString('de-DE')}/$10k · ETA ~${f.challengeETA}d`;
+        cls=f.challengeETA>120?'warn':'';
+      }
+      items.push({label:`Acc ${ai+1} — Challenge`,val,cls});
+    } else if(status==='verification'){
+      const minDays=getTradingDaysInPhase(acc,'verification');
+      const minDaysOk=minDays>=MIN_TRADING_DAYS;
+      const targetReached=pnl>=VERIFY_TARGET;
+      let val='',cls='';
+      if(targetReached&&minDaysOk){
+        val='✓ Ready to pass!';cls='ok';
+      } else if(targetReached){
+        val=`✓ $5k hit · ${MIN_TRADING_DAYS-minDays} more days needed`;cls='warn';
+      } else if(f.verifyETA===null){
+        val=`$${Math.round(pnl).toLocaleString('de-DE')}/$5k · negative trend`;cls='danger';
+      } else {
+        val=`$${Math.round(pnl).toLocaleString('de-DE')}/$5k · ETA ~${f.verifyETA}d`;
+        cls=f.verifyETA>60?'warn':'';
+      }
+      items.push({label:`Acc ${ai+1} — Verification`,val,cls});
+    } else if(status==='live'){
+      items.push({label:`Acc ${ai+1} — Live`,val:`+$${Math.round(pnl).toLocaleString('de-DE')}`,cls:'ok'});
+    } else if(status==='terminated'){
+      items.push({label:`Acc ${ai+1}`,val:'Terminated ✗',cls:'danger'});
+    } else if(status==='pending'){
+      const ds=daysBetween(today,new Date(acc.start));
+      if(ds>0&&ds<14)items.push({label:`Acc ${ai+1} — Starts in`,val:`${ds} days`,cls:''});
+    }
+  });
+
+  container.innerHTML=items.map(i=>`
+    <div class="qs-item">
+      <span class="qs-label">${i.label}</span>
+      <span class="qs-val ${i.cls}">${i.val}</span>
+    </div>
+  `).join('');
+
+  document.getElementById('empty-state').style.display=
+    (today<PLAN_START&&state.updates.length===0)?'block':'none';
+}
+
+function renderMetrics(s){
+  const period=state.ui.profitPeriod||'all';
+  const periodGross=period==='all'?s.totalPnl:computePeriodProfit(period);
+  const periodNet=period==='all'?s.netProfit:computePeriodNet(period);
+
+  document.getElementById('m-profit-label').textContent = period==='all'?'Total profit':PERIOD_LABELS[period]+' profit';
+  document.getElementById('m-profit').textContent='$'+Math.round(periodGross).toLocaleString('de-DE');
+
+  document.getElementById('m-funded').textContent='$'+s.fundedCap.toLocaleString('de-DE');
+  document.getElementById('m-funded-sub').textContent=s.liveAccs+' of 4 live';
+
+  // Net profit (after split) — same period as gross
+  const netVal=document.getElementById('m-net');
+  const netSub=document.getElementById('m-net-sub');
+  document.getElementById('m-net-label').textContent = period==='all'?'Net profit (after split)':PERIOD_LABELS[period]+' net';
+  netVal.textContent='$'+Math.round(periodNet).toLocaleString('de-DE');
+  if(s.liveGross.live!==0){
+    const splitAmount=s.liveGross.live*0.20;
+    netSub.textContent=period==='all'?('FTMO takes $'+Math.round(splitAmount).toLocaleString('de-DE')):'80/20 on live profits';
+  } else if(s.liveAccs>0){
+    netSub.textContent='80/20 on live profits';
+  } else {
+    netSub.textContent='no live accounts yet';
+  }
+
+  document.getElementById('m-forecast').textContent='$'+Math.round(s.yeForecast/1000)+'k';
+  document.getElementById('m-wr').textContent=s.wr!==null?s.wr.toFixed(1)+'%':'—';
+  document.getElementById('m-pf').textContent=s.pf===null?'—':(s.pf===Infinity?'n/a':s.pf.toFixed(2));
+  const pfSub=document.getElementById('m-pf-sub');
+  if(pfSub){
+    if(s.pf===null)pfSub.textContent='no trades yet';
+    else if(s.pf===Infinity)pfSub.textContent='no losses yet — needs ≥1 loss';
+    else pfSub.textContent='target ≥1.5';
+  }
+  document.getElementById('m-match').textContent=s.matchRate!==null?s.matchRate.toFixed(0)+'%':'—';
+  const vpEl=document.getElementById('m-profit-delta');
+  if(s.vsPlan!==null){vpEl.textContent='vs expected: '+(s.vsPlan>=0?'+':'')+s.vsPlan.toFixed(1)+'%';vpEl.className='metric-delta '+(s.vsPlan>=0?'pos':'neg');}
+  else{vpEl.textContent='vs expected: —';vpEl.className='metric-delta neu';}
+  const fDelta=s.yeForecast-MEDIAN;
+  const fEl=document.getElementById('m-forecast-delta');
+  if(s.total>5){
+    // Estimate net YE forecast: assume all profits FROM NOW will be from live accounts (80%)
+    // Plus the gross profits already recorded, with split applied per-trade
+    const additionalGross=s.yeForecast-s.totalPnl; // future projected gross
+    const additionalNet=additionalGross*PROFIT_SPLIT_TRADER; // assumes future trading is on live accounts
+    const netForecast=s.netProfit+additionalNet;
+    fEl.textContent='gross · net ~$'+Math.round(netForecast/1000)+'k';
+    fEl.className='metric-delta neu';
+  }
+  else{fEl.textContent='expected case (gross, insufficient data yet)';fEl.className='metric-delta neu';}
+}
+
+function renderAccounts(){
+  const today=new Date();
+  const grid=document.getElementById('accounts-grid');
+  grid.innerHTML='';
+
+  state.accounts.forEach((acc,ai)=>{
+    const status=getStatus(acc,today);
+    const equity=acc.equity??acc.funded;
+    const pnl=equity-acc.funded;
+    const pnlPct=(pnl/acc.funded*100);
+    const col=ACC_COLORS[ai];
+    const f=forecastAccountMilestones(acc);
+    const badgeLabels={pending:'Pending',challenge:'Challenge',verification:'Verification',live:'Live',terminated:'Terminated'};
+
+    const phases=[
+      {label:'Challenge',color:col,
+       done:!!acc.actualChallengePassDate||status==='verification'||status==='live',
+       active:status==='challenge',
+       date:getEffectiveChallengeEnd(acc),
+       projected:!acc.actualChallengePassDate},
+      {label:'Verification',color:'#EF9F27',
+       done:!!acc.actualVerifyPassDate||status==='live',
+       active:status==='verification',
+       date:getEffectiveVerifyEnd(acc),
+       projected:!acc.actualVerifyPassDate},
+      {label:'Live',color:'#4a9e4a',
+       done:status==='live',
+       active:false,
+       date:getEffectiveLiveDate(acc),
+       projected:!acc.actualLiveDate},
+    ];
+
+    let progressPct=0,progressColor=col,progressLabel='';
+    if(status==='challenge'){
+      progressPct=Math.min(100,Math.max(0,pnl/CHALLENGE_TARGET*100));
+      progressColor=pnl>=CHALLENGE_TARGET?'#4a9e4a':col;
+      progressLabel=`Challenge target $10k: ${progressPct.toFixed(0)}%`;
+    } else if(status==='verification'){
+      progressPct=Math.min(100,Math.max(0,pnl/VERIFY_TARGET*100));
+      progressColor=pnl>=VERIFY_TARGET?'#4a9e4a':'#EF9F27';
+      progressLabel=`Verification target $5k: ${progressPct.toFixed(0)}%`;
+    } else if(status==='live'){
+      progressPct=100;progressColor='#4a9e4a';progressLabel='Live — payouts every 14 days';
+    }
+
+    // Min trading days status
+    let minDaysHtml='';
+    if(status==='challenge'||status==='verification'){
+      const phaseKey=status==='challenge'?'challenge':'verification';
+      const tradingDays=getTradingDaysInPhase(acc,phaseKey);
+      const ok=tradingDays>=MIN_TRADING_DAYS;
+      minDaysHtml=`<div class="min-days">
+        <span class="${ok?'check':'pending'}">${ok?'✓':'○'}</span>
+        Min trading days: ${tradingDays}/${MIN_TRADING_DAYS}
+      </div>`;
+    }
+
+    // ETA / forecast text
+    let forecastBlock='';
+    if(status==='challenge'){
+      const targetHit=pnl>=CHALLENGE_TARGET;
+      const minDays=getTradingDaysInPhase(acc,'challenge');
+      const minDaysOk=minDays>=MIN_TRADING_DAYS;
+      let etaText='',etaClass='';
+      if(targetHit&&minDaysOk){
+        etaText='✓ Ready to pass — log "Challenge passed"';
+        etaClass='';
+      } else if(targetHit){
+        etaText=`✓ Target hit · waiting ${MIN_TRADING_DAYS-minDays} more trading day(s)`;
+        etaClass='warn';
+      } else if(f.challengeETA===null){
+        etaText='⚠ Negative trend — no pass projection';
+        etaClass='never';
+      } else {
+        const passDate=new Date(f.challengePassDate).toLocaleDateString('de-DE',{day:'2-digit',month:'short'});
+        etaText=`Forecast pass: ${passDate} (~${f.challengeETA}d)`;
+        etaClass=f.challengeETA>120?'warn':'';
+      }
+      forecastBlock=`
+        <div class="acc-forecast">
+          <div class="forecast-row">
+            <span style="color:var(--text2);">Pace</span>
+            <span>$${Math.round(pnl).toLocaleString('de-DE')}/$10k <span class="of-target">(${progressPct.toFixed(0)}%)</span></span>
+          </div>
+          <div class="forecast-eta ${etaClass}">${etaText}</div>
+        </div>`;
+    } else if(status==='verification'){
+      const targetHit=pnl>=VERIFY_TARGET;
+      const minDays=getTradingDaysInPhase(acc,'verification');
+      const minDaysOk=minDays>=MIN_TRADING_DAYS;
+      let etaText='',etaClass='';
+      if(targetHit&&minDaysOk){
+        etaText='✓ Ready to pass — log "Verification passed"';
+      } else if(targetHit){
+        etaText=`✓ Target hit · waiting ${MIN_TRADING_DAYS-minDays} more day(s)`;
+        etaClass='warn';
+      } else if(f.verifyETA===null){
+        etaText='⚠ Negative trend — no pass projection';
+        etaClass='never';
+      } else {
+        const passDate=new Date(f.verifyPassDate).toLocaleDateString('de-DE',{day:'2-digit',month:'short'});
+        etaText=`Forecast pass: ${passDate} (~${f.verifyETA}d)`;
+      }
+      forecastBlock=`
+        <div class="acc-forecast">
+          <div class="forecast-row">
+            <span style="color:var(--text2);">Pace</span>
+            <span>$${Math.round(pnl).toLocaleString('de-DE')}/$5k <span class="of-target">(${progressPct.toFixed(0)}%)</span></span>
+          </div>
+          <div class="forecast-eta ${etaClass}">${etaText}</div>
+        </div>`;
+    } else if(status==='live'){
+      const phaseData=getAccountDailyRate(acc,'live');
+      const dailyRate=phaseData?phaseData.rate:0;
+      forecastBlock=`
+        <div class="acc-forecast">
+          <div class="forecast-row">
+            <span style="color:var(--text2);">Daily rate</span>
+            <span>$${Math.round(dailyRate).toLocaleString('de-DE')}/day</span>
+          </div>
+          <div class="forecast-eta">Next payout: every 14 days</div>
+        </div>`;
+    } else if(status==='pending'){
+      const ds=daysBetween(today,new Date(acc.start));
+      forecastBlock=`<div class="acc-forecast">
+        <div class="forecast-eta">Starts ${new Date(acc.start).toLocaleDateString('de-DE',{day:'2-digit',month:'short'})} (in ${ds}d)</div>
+      </div>`;
+    }
+
+    const card=document.createElement('div');
+    card.className='acc-card';
+    card.style.borderColor=status==='live'?'rgba(74,158,74,0.35)':status==='terminated'?'rgba(192,64,64,0.3)':'var(--border)';
+
+    card.innerHTML=`
+      <div class="acc-head">
+        <span class="acc-name">${acc.name}</span>
+        <span class="badge badge-${status}">${badgeLabels[status]||status}</span>
+      </div>
+      <div class="acc-equity">$${equity.toLocaleString('de-DE')}</div>
+      <div class="acc-meta">P&amp;L: ${pnl>=0?'+':''}$${Math.round(pnl).toLocaleString('de-DE')} (${pnlPct.toFixed(2)}%) · Peak DD: ${(acc.peakDd||0).toFixed(1)}%</div>
+
+      ${status!=='pending'&&status!=='terminated'?`
+      <div class="bar-bg" style="margin-top:8px;"><div class="bar-fill" style="width:${progressPct.toFixed(1)}%;background:${progressColor};"></div></div>
+      <div style="font-size:10px;color:var(--text3);margin-top:4px;">${progressLabel}</div>
+      `:''}
+
+      ${minDaysHtml}
+
+      <div class="phase-strip">
+        <div class="phase-strip-label"><span>Phase timeline</span><span style="color:var(--text3);font-size:9px;">~ = forecast · ✓ = actual</span></div>
+        <div class="phase-steps">
+          ${phases.map(p=>`<div class="phase-step ${p.done?'phase-step-done':p.active?'phase-step-active':'phase-step-pending'}" style="background:${p.color};" title="${p.label}: ${p.date}${p.projected?' (projected)':' (actual)'}"></div>`).join('')}
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--text3);margin-top:3px;">
+          ${phases.map(p=>`<span>${p.label.slice(0,5)}<br>${p.projected?'~':''}${p.date.slice(5)}</span>`).join('')}
+        </div>
+      </div>
+
+      ${forecastBlock}
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function renderEA(eaStats){
+  const tbody=document.getElementById('ea-tbody');
+  tbody.innerHTML='';
+  let hasData=false;
+  ['EURUSD_Sweep','NQ_ORB','Manual'].forEach(ea=>{
+    const st=eaStats[ea];if(!st)return;
+    hasData=true;
+    const total=st.wins+st.losses;
+    const wr=total>0?(st.wins/total*100).toFixed(1)+'%':'—';
+    const pf=st.grossLoss>0?(st.grossProfit/st.grossLoss).toFixed(2):(st.grossProfit>0?'∞':'—');
+    const label={EURUSD_Sweep:'EURUSD Sweep',NQ_ORB:'NQ_ORB',Manual:'Manual'}[ea];
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td><span class="ea-dot" style="background:${EA_COLORS[ea]||'#888'};"></span>${label}</td><td>${total}</td><td>${wr}</td><td>${pf}</td><td class="${st.pnl>=0?'pnl-pos':'pnl-neg'}">${st.pnl>=0?'+':''}$${Math.round(st.pnl).toLocaleString('de-DE')}</td>`;
+    tbody.appendChild(tr);
+  });
+  if(!hasData){
+    const tr=document.createElement('tr');
+    tr.innerHTML='<td colspan="5" class="log-empty">No EA data yet</td>';
+    tbody.appendChild(tr);
+  }
+}
+
+function renderAlarms(s){
+  const box=document.getElementById('alarms-box');
+  const badge=document.getElementById('alarm-badge');
+  box.innerHTML='';
+  const alarms=[];
+
+  state.updates.forEach(u=>{
+    if((u.dd||0)>3) alarms.push({type:'danger',text:u.date+' — '+(state.accounts[parseInt(u.accIdx)]?.name||'Acc')+': Daily DD '+u.dd.toFixed(1)+'% (>3% — nur 2% Puffer bis Daily-Loss-Fail!)'});
+  });
+  state.accounts.forEach((acc,ai)=>{
+    if((acc.peakDd||0)>5) alarms.push({type:'danger',text:acc.name+': Peak DD '+(acc.peakDd||0).toFixed(1)+'% — Hälfte Max-Loss verbraucht!'});
+    else if((acc.peakDd||0)>3) alarms.push({type:'warn',text:acc.name+': DD '+(acc.peakDd||0).toFixed(1)+'% — nähert sich 5% Schwelle'});
+
+    // Negative trend in challenge/verification
+    const status=getStatus(acc);
+    const f=forecastAccountMilestones(acc);
+    if(status==='challenge'){
+      const phaseData=getAccountDailyRate(acc,'challenge');
+      if(phaseData&&phaseData.days>=5&&phaseData.rate<=0){
+        alarms.push({type:'warn',text:acc.name+': Challenge — negative/flat Trend ($'+Math.round(phaseData.pnl).toLocaleString('de-DE')+' nach '+phaseData.days+' Tagen). Strategie prüfen.'});
+      } else if(f.challengeETA!==null&&f.challengeETA>180){
+        alarms.push({type:'warn',text:acc.name+': Challenge ETA '+f.challengeETA+' Tage — sehr langsam. Risk anpassen?'});
+      }
+    }
+    if(status==='verification'){
+      const phaseData=getAccountDailyRate(acc,'verification');
+      if(phaseData&&phaseData.days>=5&&phaseData.rate<=0){
+        alarms.push({type:'warn',text:acc.name+': Verification — negative Trend. Vorsicht mit Risk.'});
+      }
+    }
+  });
+  const sorted=[...state.updates].sort((a,b)=>a.date.localeCompare(b.date));
+  let streak=0;
+  sorted.forEach(u=>{if((u.losses||0)>0&&(u.wins||0)===0)streak++;else if((u.wins||0)>0)streak=0;});
+  if(streak>=3) alarms.push({type:'warn',text:streak+' Verlusttage in Folge — Logs analysieren'});
+  if(s.wr!==null&&s.wr<40&&s.total>10) alarms.push({type:'warn',text:'Win Rate '+s.wr.toFixed(1)+'% — unter Ziel 50%'});
+  if(s.pf!==null&&s.pf<1.2&&s.total>10) alarms.push({type:'warn',text:'Profit Factor '+s.pf.toFixed(2)+' — unter Ziel 1.5'});
+  if(s.matchRate!==null&&s.matchRate<90) alarms.push({type:'danger',text:'TV Match Rate '+s.matchRate.toFixed(0)+'% — unter 90%! EA-Bug prüfen.'});
+  if(s.vsPlan!==null&&s.vsPlan<-30&&s.totalPnl!==0) alarms.push({type:'danger',text:'Performance '+s.vsPlan.toFixed(1)+'% unter Erwartung — Forecast deutlich reduziert'});
+
+  const dangerCount=alarms.filter(a=>a.type==='danger').length;
+  const warnCount=alarms.filter(a=>a.type==='warn').length;
+  badge.textContent=alarms.length>0?dangerCount+' danger · '+warnCount+' warn':'';
+  badge.style.color=dangerCount>0?'var(--red)':warnCount>0?'var(--amber)':'var(--text2)';
+
+  if(alarms.length===0){box.innerHTML='<div class="alarm alarm-ok"><span class="alarm-icon">✓</span><span>Keine aktiven Alarme — alles im Rahmen</span></div>';return;}
+  alarms.forEach(a=>{
+    const div=document.createElement('div');
+    div.className='alarm alarm-'+(a.type==='danger'?'danger':'warn');
+    div.innerHTML='<span class="alarm-icon">'+(a.type==='danger'?'!':'△')+'</span><span>'+a.text+'</span>';
+    box.appendChild(div);
+  });
+}
+
+function renderLog(){
+  const tbody=document.getElementById('log-tbody');
+  const empty=document.getElementById('log-empty');
+  tbody.innerHTML='';
+  let entries=[...state.updates].sort((a,b)=>b.date.localeCompare(a.date));
+  if(logFilter!=='all')entries=entries.filter(u=>u.ea===logFilter);
+  if(entries.length===0){empty.style.display='block';return;}
+  empty.style.display='none';
+  const eaLabels={EURUSD_Sweep:'EURUSD Sweep',NQ_ORB:'NQ_ORB',Manual:'Manual'};
+  const phaseEventLabels={challenge_pass:'C✓ passed',verification_pass:'V✓ passed',account_live:'→ Live',account_fail:'✗ terminated'};
+  entries.forEach(u=>{
+    const realIdx=state.updates.indexOf(u);
+    const ea=u.ea||'—';
+    const accName=state.accounts[parseInt(u.accIdx)]?.name||'—';
+    const pe=u.phaseEvent||'';
+    const tr=document.createElement('tr');
+    tr.innerHTML=`
+      <td>${u.date}</td>
+      <td><span class="ea-dot" style="background:${EA_COLORS[ea]||'#888'};"></span>${eaLabels[ea]||ea}</td>
+      <td>${accName}</td>
+      <td style="color:${pe?'var(--amber)':'var(--text3)'}">${phaseEventLabels[pe]||'—'}</td>
+      <td style="color:var(--green)">${u.wins||0}</td>
+      <td style="color:var(--red)">${u.losses||0}</td>
+      <td class="${(u.pnl||0)>=0?'pnl-pos':'pnl-neg'}">${(u.pnl||0)>=0?'+':''}$${Math.round(u.pnl||0).toLocaleString('de-DE')}</td>
+      <td>${(u.dd||0).toFixed(1)}%</td>
+      <td>${u.match==='yes'?'✓':u.match==='no'?'✗':'—'}</td>
+      <td style="white-space:nowrap;display:flex;gap:4px;justify-content:flex-end;">
+        <button onclick="editEntry(${realIdx})" class="log-edit-btn" title="Edit entry">✎</button>
+        <button onclick="deleteEntry(${realIdx})" class="log-delete-btn" title="Delete entry">✕</button>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+// Reconcile account.equity with the latest equity-bearing update for each account.
+// Call this at every render to fix any drift caused by older code or backfilled entries.
+function syncAccountEquityFromUpdates(){
+  state.accounts.forEach((acc,idx)=>{
+    const updates=state.updates
+      .filter(u=>parseInt(u.accIdx)===idx&&u.equity!==null&&u.equity!==undefined)
+      .sort((a,b)=>a.date.localeCompare(b.date));
+    if(updates.length>0){
+      acc.equity=updates[updates.length-1].equity;
+    }
+  });
+}
+
+function render(){
+  populateAccountDropdowns();
+  if(typeof recomputeWaveStartDates==='function')recomputeWaveStartDates();
+  syncAccountEquityFromUpdates();
+  recomputeWaveStartDates();
+  const today=new Date();
+  document.getElementById('now-date').textContent=today.toLocaleDateString('de-DE',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  const mode=state.ui.chartMode||'all';
+  const titles={
+    all:'Cumulative profit — all phases (gross)',
+    live:'Cumulative profit — live accounts only (real money)',
+    challenge:'Cumulative profit — challenge & verification only (demo)'
+  };
+  const titleEl=document.getElementById('chart-title');
+  if(titleEl)titleEl.textContent=titles[mode]||titles.all;
+  const actualPts=computeActualCurve();
+  const fcastBand=computeForecastBand(actualPts);
+  renderChart(actualPts,fcastBand);
+  const s=computeStats();
+  renderQuickStats();
+  renderMetrics(s);
+  renderAccounts();
+  renderEA(s.eaStats);
+  renderAlarms(s);
+  renderLog();
+}
+
+// ── Actions ──
+function editEntry(idx){
+  const u=state.updates[idx];
+  if(!u){toast('Entry not found','error');return;}
+  state.ui.editingIdx=idx;
+  // Populate form fields with the entry's values
+  document.getElementById('inp-date').value=u.date||'';
+  document.getElementById('inp-ea').value=u.ea||'EURUSD_Sweep';
+  document.getElementById('inp-acc').value=String(u.accIdx);
+  document.getElementById('inp-pnl').value=u.pnl??'';
+  document.getElementById('inp-wins').value=u.wins||0;
+  document.getElementById('inp-losses').value=u.losses||0;
+  document.getElementById('inp-equity').value=u.equity??'';
+  document.getElementById('inp-dd').value=u.dd||0;
+  document.getElementById('inp-phase-event').value=u.phaseEvent||'';
+  document.getElementById('inp-match').value=u.match||'';
+
+  // Show edit banner
+  const banner=document.getElementById('edit-mode-banner');
+  document.getElementById('edit-mode-info').textContent=`${u.date} · Acc ${parseInt(u.accIdx)+1}`;
+  banner.style.display='flex';
+
+  // Change submit button label
+  const submitBtn=document.querySelector('.sidebar-sticky .btn-primary');
+  if(submitBtn)submitBtn.textContent='Save changes';
+
+  // Open sidebar if collapsed
+  if(state.ui.sidebarCollapsed){toggleSidebar();}
+  // Scroll the form into view
+  setTimeout(()=>document.getElementById('inp-pnl').focus(),200);
+}
+
+function cancelEdit(){
+  state.ui.editingIdx=null;
+  document.getElementById('edit-mode-banner').style.display='none';
+  const submitBtn=document.querySelector('.sidebar-sticky .btn-primary');
+  if(submitBtn)submitBtn.textContent='Log entry';
+  // Clear form
+  ['inp-pnl','inp-wins','inp-losses','inp-equity','inp-dd'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('inp-match').value='';
+  document.getElementById('inp-phase-event').value='';
+  document.getElementById('inp-date').value=new Date().toISOString().slice(0,10);
+}
+
+function addUpdate(){
+  const date=document.getElementById('inp-date').value;
+  const ea=document.getElementById('inp-ea').value;
+  const accIdx=parseInt(document.getElementById('inp-acc').value);
+  const pnl=parseFloat(document.getElementById('inp-pnl').value)||0;
+  const wins=parseInt(document.getElementById('inp-wins').value)||0;
+  const losses=parseInt(document.getElementById('inp-losses').value)||0;
+  const equity=parseFloat(document.getElementById('inp-equity').value)||null;
+  const dd=parseFloat(document.getElementById('inp-dd').value)||0;
+  const phaseEvent=document.getElementById('inp-phase-event').value||'';
+  const match=document.getElementById('inp-match').value||'';
+  if(!date){toast('Datum eingeben!','error');return;}
+  if(pnl===0&&wins===0&&losses===0&&!phaseEvent&&equity===null){
+    if(!confirm('Leerer Eintrag — trotzdem loggen?'))return;
+  }
+
+  // Edit mode? Update existing entry instead of pushing new
+  if(state.ui.editingIdx!==null&&state.updates[state.ui.editingIdx]){
+    state.updates[state.ui.editingIdx]={date,ea,accIdx,pnl,wins,losses,dd,phaseEvent,match,equity};
+    state.ui.editingIdx=null;
+    document.getElementById('edit-mode-banner').style.display='none';
+    const submitBtn=document.querySelector('.sidebar-sticky .btn-primary');
+    if(submitBtn)submitBtn.textContent='Log entry';
+    toast('Entry updated');
+    if(equity!==null){
+      state.accounts[accIdx].peakDd=Math.max(state.accounts[accIdx].peakDd||0,dd);
+    }
+    ['inp-pnl','inp-wins','inp-losses','inp-equity','inp-dd'].forEach(id=>document.getElementById(id).value='');
+    document.getElementById('inp-match').value='';
+    document.getElementById('inp-phase-event').value='';
+    saveState();render();
+    return;
+  }
+
+  state.updates.push({date,ea,accIdx,pnl,wins,losses,dd,phaseEvent,match,equity});
+
+  if(equity!==null){
+    // Peak DD is fine to update on any entry (it's a max, not "current")
+    state.accounts[accIdx].peakDd=Math.max(state.accounts[accIdx].peakDd||0,dd);
+    // account.equity is reconciled in render() via syncAccountEquityFromUpdates()
+  }
+
+  const acc=state.accounts[accIdx];
+  if(phaseEvent==='challenge_pass'){acc.actualChallengePassDate=date;toast('Challenge passed ✓');}
+  if(phaseEvent==='verification_pass'){acc.actualVerifyPassDate=date;toast('Verification passed ✓');}
+  if(phaseEvent==='account_live'){acc.actualLiveDate=date;acc.statusOverride='live';toast('Account is LIVE 🎉');}
+  if(phaseEvent==='account_fail'){acc.actualFailDate=date;acc.statusOverride='terminated';toast('Account terminated','error');}
+  if(!phaseEvent)toast('Entry logged');
+
+  ['inp-pnl','inp-wins','inp-losses','inp-equity','inp-dd'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('inp-match').value='';
+  document.getElementById('inp-phase-event').value='';
+  document.getElementById('inp-pnl').focus();
+
+  saveState();render();
+}
+
+function deleteEntry(idx){
+  const u=state.updates[idx];
+  if(!u){toast('Entry not found','error');return;}
+  const desc=`${u.date} · ${u.ea||'—'} · Acc ${parseInt(u.accIdx)+1} · ${(u.pnl||0)>=0?'+':''}$${u.pnl||0}`;
+  showConfirm('Eintrag löschen?',desc,()=>{
+    const accIdx=parseInt(u.accIdx);
+    state.updates.splice(idx,1);
+    // Recompute account.equity to reflect the latest remaining entry
+    const remaining=state.updates.filter(x=>parseInt(x.accIdx)===accIdx&&x.equity!==null&&x.equity!==undefined);
+    remaining.sort((a,b)=>a.date.localeCompare(b.date));
+    state.accounts[accIdx].equity = remaining.length>0 ? remaining[remaining.length-1].equity : null;
+    saveState();render();
+    toast('Entry deleted');
+  });
+}
+
+function setAccountStatus(){
+  const idx=parseInt(document.getElementById('ov-acc').value);
+  const status=document.getElementById('ov-status').value;
+  const startDate=document.getElementById('ov-start-date').value;
+  const p1=document.getElementById('ov-p1-date').value;
+  const p2=document.getElementById('ov-p2-date').value;
+  const ddReset=document.getElementById('ov-dd-reset').value;
+  const acc=state.accounts[idx];
+
+  // Validation: start date must be before any phase pass dates
+  if(startDate){
+    if(p1 && new Date(p1)<=new Date(startDate)){
+      toast('Phase 1 pass date must be after start date','error');return;
+    }
+    if(acc.actualChallengePassDate && new Date(acc.actualChallengePassDate)<=new Date(startDate)){
+      toast('Existing Phase 1 pass conflicts with new start date — clear it first','error');return;
+    }
+    acc.start=startDate;
+  }
+
+  acc.statusOverride=status==='auto'?null:status;
+  if(p1)acc.actualChallengePassDate=p1;
+  if(p2)acc.actualVerifyPassDate=p2;
+  if(ddReset!==''){acc.peakDd=parseFloat(ddReset);}
+
+  // Clear inputs
+  document.getElementById('ov-dd-reset').value='';
+  document.getElementById('ov-start-date').value='';
+  document.getElementById('ov-p1-date').value='';
+  document.getElementById('ov-p2-date').value='';
+  updateOverrideHint();
+
+  saveState();render();
+  toast('Override applied — forecasts recomputed');
+}
+
+function resetAccountDates(){
+  const idx=parseInt(document.getElementById('ov-acc').value);
+  if(!confirm('Reset Account '+(idx+1)+' to plan defaults? This clears all manual dates and overrides.'))return;
+  const def=ACCOUNTS_DEF[idx];
+  state.accounts[idx]={
+    ...def,
+    statusOverride:null,
+    actualChallengePassDate:null,
+    actualVerifyPassDate:null,
+    actualLiveDate:null,
+    actualFailDate:null,
+    equity:state.accounts[idx].equity,  // keep equity
+    peakDd:state.accounts[idx].peakDd   // keep DD
+  };
+  updateOverrideHint();
+  saveState();render();
+  toast('Account '+(idx+1)+' reset to plan defaults');
+}
+
+// Show current start date hint when user picks an account
+function updateOverrideHint(){
+  const idx=parseInt(document.getElementById('ov-acc').value);
+  const acc=state.accounts[idx];
+  const hint=document.getElementById('ov-start-current');
+  if(hint && acc){
+    const isCustom=acc.start!==ACCOUNTS_DEF[idx].start;
+    hint.textContent=`— current: ${acc.start}${isCustom?' (custom)':''}`;
+    hint.style.color=isCustom?'var(--blue)':'var(--text3)';
+  }
+}
+
+function setLogFilter(f){
+  logFilter=f;
+  const map={all:'all',EURUSD_Sweep:'eurusd',NQ_ORB:'nq',Manual:'manual'};
+  ['all','EURUSD_Sweep','NQ_ORB','Manual'].forEach(k=>{
+    const el=document.getElementById('tab-'+map[k]);
+    if(el)el.className='tab-btn'+(k===f?' active':'');
+  });
+  renderLog();
+}
+
+function exportData(){
+  const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='ftmo_backup_'+new Date().toISOString().slice(0,10)+'.json';
+  a.click();
+  toast('Backup downloaded');
+}
+function importData(){
+  const input=document.createElement('input');input.type='file';input.accept='.json';
+  input.onchange=e=>{
+    const file=e.target.files[0];if(!file)return;
+    const reader=new FileReader();
+    reader.onload=ev=>{
+      try{
+        const imported=JSON.parse(ev.target.result);
+        state.updates=imported.updates||[];
+        state.accounts=imported.accounts||state.accounts;
+        saveState();render();
+        toast('Imported '+state.updates.length+' entries');
+      }catch(err){toast('Import failed: '+err.message,'error');}
+    };
+    reader.readAsText(file);
+  };
+  input.click();
+}
+function clearAll(){
+  showConfirm('Alle Daten wirklich löschen?','Das löscht alle Trade-Einträge und setzt die Accounts zurück. Aktion kann nicht rückgängig gemacht werden.',()=>{
+    state={updates:[],accounts:ACCOUNTS_DEF.map(a=>({...a,statusOverride:null,actualChallengePassDate:null,actualVerifyPassDate:null,actualLiveDate:null,actualFailDate:null,equity:null,peakDd:0})),ui:state.ui};
+    saveState();render();
+    toast('All data cleared');
+  });
+}
+
+document.addEventListener('keydown',e=>{
+  if((e.ctrlKey||e.metaKey)&&e.key==='b'){e.preventDefault();toggleSidebar();}
+  if((e.ctrlKey||e.metaKey)&&e.key==='Enter'){
+    e.preventDefault();
+    const sb=document.getElementById('sidebar');
+    if(sb.classList.contains('collapsed')){toggleSidebar();}
+    addUpdate();
+  }
+});
+
+document.getElementById('inp-date').value=new Date().toISOString().slice(0,10);
+(async()=>{
+  await loadState();
+  applySidebarState();
+// restore profit period button state
+document.querySelectorAll('.metric-tab[data-period]').forEach(b=>{
+  b.classList.toggle('active',b.dataset.period===(state.ui.profitPeriod||'all'));
+});
+// Restore chart mode buttons
+['all','live','challenge'].forEach(m=>{
+  const el=document.getElementById('m-'+m);
+  if(el)el.classList.toggle('active',m===(state.ui.chartMode||'all'));
+});
+// Restore chart range buttons (incl. custom)
+['30d','90d','ytd','all','custom'].forEach(r=>{
+  const el=document.getElementById('r-'+r);
+  if(el)el.classList.toggle('active',r===(state.ui.chartRange||'all'));
+});
+// Wire up account-dropdown to update hint
+  document.getElementById('ov-acc').addEventListener('change',updateOverrideHint);
+  updateOverrideHint();
+  render();
+})();
+
+window.addEventListener('resize',()=>{if(chart)chart.resize();});
+</script>
+</body>
+</html>
