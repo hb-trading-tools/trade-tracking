@@ -1,0 +1,73 @@
+{
+ "generated_utc": "2026-07-02T17:50:39.636377+00:00",
+ "deploy_epoch": "2026-07-02",
+ "equity": 10000.0,
+ "dd": 0.0,
+ "cum_R": 0.0,
+ "curve": [],
+ "sleeves": [
+  {
+   "name": "SPX500_Fri_M15",
+   "week": 0,
+   "total": 0,
+   "cumR": 0,
+   "fwd_rmo": 0.0,
+   "exp_rmo": 1.22,
+   "verdict": "warming up"
+  },
+  {
+   "name": "GER40_Wed_M5",
+   "week": 0,
+   "total": 0,
+   "cumR": 0,
+   "fwd_rmo": 0.0,
+   "exp_rmo": 1.69,
+   "verdict": "warming up"
+  },
+  {
+   "name": "NAS100_Thu_M5",
+   "week": 0,
+   "total": 0,
+   "cumR": 0,
+   "fwd_rmo": 0.0,
+   "exp_rmo": 0.47,
+   "verdict": "warming up"
+  },
+  {
+   "name": "JPN225_Wed_M5",
+   "week": 0,
+   "total": 0,
+   "cumR": 0,
+   "fwd_rmo": 0.0,
+   "exp_rmo": 1.19,
+   "verdict": "warming up"
+  },
+  {
+   "name": "JPN225_Thu_M5",
+   "week": 0,
+   "total": 0,
+   "cumR": 0,
+   "fwd_rmo": 0.0,
+   "exp_rmo": 0.22,
+   "verdict": "warming up"
+  },
+  {
+   "name": "NQ_Friday_M15",
+   "week": 0,
+   "total": 0,
+   "cumR": 0,
+   "fwd_rmo": 0.0,
+   "exp_rmo": 1.2,
+   "verdict": "warming up"
+  },
+  {
+   "name": "EURUSD_v116",
+   "week": 0,
+   "total": 0,
+   "cumR": 0,
+   "fwd_rmo": 0.0,
+   "exp_rmo": 2.36,
+   "verdict": "warming up"
+  }
+ ]
+}
