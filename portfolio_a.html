@@ -17,6 +17,10 @@
   th:first-child,td:first-child{text-align:left}
   th{color:var(--dim);font-weight:500;font-size:12px}
   .inband{color:var(--fwd)}.watch{color:var(--warn)}.offband{color:var(--bad)}.warming{color:var(--dim)}
+  .alert{border-radius:10px;padding:12px 16px;margin-bottom:14px;font-weight:600}
+  .alert.warn{background:#3a2f10;border:1px solid var(--warn);color:var(--warn)}
+  .alert.urgent{background:#3a1414;border:1px solid var(--bad);color:var(--bad)}
+  .alert .detail{display:block;font-weight:400;font-size:12px;margin-top:4px}
   .legend span{margin-right:18px;font-size:12px;color:var(--dim)}
   .legend i{display:inline-block;width:18px;height:3px;vertical-align:middle;margin-right:6px}
   svg{width:100%;height:auto;display:block}
@@ -26,6 +30,8 @@
 <body>
 <h1>Portfolio A — forward run vs IS reference</h1>
 <div class="sub" id="meta">loading…</div>
+
+<div id="alerts"></div>
 
 <div class="card kpis" id="kpis"></div>
 
@@ -58,6 +64,15 @@ function line(pts,xs,ys,color,w){if(pts.length<2)return'';
   const meta=document.getElementById('meta');
   if(!fwd){meta.textContent='forward_data.json not published yet — first weekly job will create it.';}
   else{meta.textContent='deployed '+fwd.deploy_epoch+' · last update '+fwd.generated_utc.slice(0,16).replace('T',' ')+' UTC';}
+  // alert banner (flags from the daily check — detection lives on the box, this makes it VISIBLE)
+  const al=document.getElementById('alerts');
+  if(fwd){
+    let h='';
+    (fwd.urgent||[]).forEach(u=>{h+='<div class="alert urgent">🚨 URGENT<span class="detail">'+u+'</span></div>'});
+    (fwd.flags||[]).forEach(f=>{h+='<div class="alert warn">⚠ FLAG<span class="detail">'+f+'</span></div>'});
+    al.innerHTML=h;
+    if(h) document.title='⚠ Portfolio A — Forward Run';
+  }
   // KPIs
   const k=document.getElementById('kpis');
   if(fwd){k.innerHTML=
