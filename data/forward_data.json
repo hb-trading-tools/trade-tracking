@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-07-04T07:00:00.888012+00:00",
+ "generated_utc": "2026-07-04T13:04:07.548798+00:00",
  "deploy_epoch": "2026-07-02",
  "equity": 9982.89,
  "dd": 17.11,
@@ -74,5 +74,9 @@
    "exp_rmo": 2.36,
    "verdict": "warming up"
   }
- ]
+ ],
+ "flags": [
+  "OVERNIGHT/OPEN position at check time: NQ_Friday_M15 vol=0.18 \u2014 sleeves must force-close EOD"
+ ],
+ "urgent": []
 }
