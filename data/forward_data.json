@@ -1,17 +1,22 @@
 {
- "generated_utc": "2026-07-03T06:10:02.420483+00:00",
+ "generated_utc": "2026-07-04T06:10:02.158726+00:00",
  "deploy_epoch": "2026-07-02",
- "equity": 10000.0,
- "dd": 0.0,
- "cum_R": 0.0,
- "curve": [],
+ "equity": 9982.89,
+ "dd": 17.11,
+ "cum_R": -1.2,
+ "curve": [
+  [
+   "2026-07-03",
+   -16.79
+  ]
+ ],
  "sleeves": [
   {
    "name": "SPX500_Fri_M15",
-   "week": 0,
-   "total": 0,
-   "cumR": 0,
-   "fwd_rmo": 0.0,
+   "week": 1,
+   "total": 1,
+   "cumR": -1.2,
+   "fwd_rmo": -36.51,
    "exp_rmo": 1.22,
    "verdict": "warming up"
   },
