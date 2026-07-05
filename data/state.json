@@ -4,12 +4,10 @@
  "known_positions": [
   63896
  ],
- "last_run_utc": "2026-07-05T06:10:01.988280+00:00",
- "last_equity": 9982.89,
- "last_balance": 9983.21,
- "last_dd": 17.11,
+ "last_run_utc": "2026-07-05T23:15:01.205034+00:00",
+ "last_equity": 9981.05,
+ "last_balance": 9981.05,
+ "last_dd": 18.95,
  "flags": [],
- "urgent": [
-  "OVERNIGHT/OPEN position at check time: NQ_Friday_M15 vol=0.18 (age ~40h) \u2014 sleeves must force-close EOD"
- ]
+ "urgent": []
 }

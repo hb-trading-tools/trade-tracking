@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-07-05T06:10:02.619269+00:00",
+ "generated_utc": "2026-07-05T23:15:01.555160+00:00",
  "deploy_epoch": "2026-07-02",
- "equity": 9982.89,
- "dd": 17.11,
+ "equity": 9981.05,
+ "dd": 18.95,
  "cum_R": -1.2,
  "curve": [
   [
@@ -16,7 +16,7 @@
    "week": 1,
    "total": 1,
    "cumR": -1.2,
-   "fwd_rmo": -18.25,
+   "fwd_rmo": -12.17,
    "exp_rmo": 1.22,
    "verdict": "warming up"
   },
@@ -76,7 +76,5 @@
   }
  ],
  "flags": [],
- "urgent": [
-  "OVERNIGHT/OPEN position at check time: NQ_Friday_M15 vol=0.18 (age ~40h) \u2014 sleeves must force-close EOD"
- ]
+ "urgent": []
 }
