@@ -1,13 +1,17 @@
 {
- "generated_utc": "2026-07-05T23:15:01.555160+00:00",
+ "generated_utc": "2026-07-06T06:10:02.805214+00:00",
  "deploy_epoch": "2026-07-02",
  "equity": 9981.05,
  "dd": 18.95,
- "cum_R": -1.2,
+ "cum_R": -1.35,
  "curve": [
   [
    "2026-07-03",
    -16.79
+  ],
+  [
+   "2026-07-03",
+   -18.95
   ]
  ],
  "sleeves": [
@@ -58,10 +62,10 @@
   },
   {
    "name": "NQ_Friday_M15",
-   "week": 0,
-   "total": 0,
-   "cumR": 0,
-   "fwd_rmo": 0.0,
+   "week": 1,
+   "total": 1,
+   "cumR": -0.15,
+   "fwd_rmo": -1.57,
    "exp_rmo": 1.2,
    "verdict": "warming up"
   },
