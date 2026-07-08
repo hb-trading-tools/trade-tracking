@@ -3,12 +3,13 @@
  "hwm_equity": 10000.0,
  "known_positions": [
   63894,
-  63896
+  63896,
+  87946
  ],
- "last_run_utc": "2026-07-07T06:10:02.654161+00:00",
- "last_equity": 9981.05,
- "last_balance": 9981.05,
- "last_dd": 18.95,
+ "last_run_utc": "2026-07-08T06:10:03.394982+00:00",
+ "last_equity": 9935.31,
+ "last_balance": 9935.31,
+ "last_dd": 64.69,
  "flags": [],
  "urgent": []
 }
