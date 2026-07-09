@@ -4,12 +4,18 @@
  "known_positions": [
   63894,
   63896,
-  87946
+  87946,
+  98262,
+  101098,
+  144315
  ],
- "last_run_utc": "2026-07-08T06:10:03.394982+00:00",
- "last_equity": 9935.31,
- "last_balance": 9935.31,
- "last_dd": 64.69,
- "flags": [],
- "urgent": []
+ "last_run_utc": "2026-07-09T06:10:02.363116+00:00",
+ "last_equity": 9886.44,
+ "last_balance": 9886.44,
+ "last_dd": 113.56,
+ "flags": [
+  "EA REMOVED from chart detected: EE\t0\t20:14:13.096\tExperts\texpert EURUSD_SessionSweep_M15_v116 (EURUSD.gbe,M15) removed"
+ ],
+ "urgent": [],
+ "last_jpn_worst": 73
 }

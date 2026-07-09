@@ -1,9 +1,9 @@
 {
- "generated_utc": "2026-07-08T06:10:03.830029+00:00",
+ "generated_utc": "2026-07-09T06:10:04.228221+00:00",
  "deploy_epoch": "2026-07-02",
- "equity": 9935.31,
- "dd": 64.69,
- "cum_R": -2.33,
+ "equity": 9886.44,
+ "dd": 113.56,
+ "cum_R": -7.78,
  "curve": [
   [
    "2026-07-03",
@@ -16,6 +16,18 @@
   [
    "2026-07-07",
    -32.6
+  ],
+  [
+   "2026-07-08",
+   -63.64
+  ],
+  [
+   "2026-07-08",
+   -78.94
+  ],
+  [
+   "2026-07-09",
+   -111.01
   ]
  ],
  "sleeves": [
@@ -24,7 +36,7 @@
    "week": 1,
    "total": 1,
    "cumR": -1.2,
-   "fwd_rmo": -7.3,
+   "fwd_rmo": -6.08,
    "exp_rmo": 1.22,
    "verdict": "warming up"
   },
@@ -48,41 +60,45 @@
   },
   {
    "name": "JPN225_Wed_M5",
-   "week": 0,
-   "total": 0,
-   "cumR": 0,
-   "fwd_rmo": 0.0,
+   "week": 1,
+   "total": 1,
+   "cumR": -2.22,
+   "fwd_rmo": -11.25,
    "exp_rmo": 1.19,
    "verdict": "warming up"
   },
   {
    "name": "JPN225_Thu_M5",
-   "week": 0,
-   "total": 0,
-   "cumR": 0,
-   "fwd_rmo": 0.0,
+   "week": 1,
+   "total": 1,
+   "cumR": -2.29,
+   "fwd_rmo": -11.62,
    "exp_rmo": 0.22,
    "verdict": "warming up"
   },
   {
    "name": "NQ_Friday_M15",
-   "week": 1,
-   "total": 1,
-   "cumR": -0.15,
-   "fwd_rmo": -0.94,
+   "week": 0,
+   "total": 0,
+   "cumR": 0,
+   "fwd_rmo": 0.0,
    "exp_rmo": 1.2,
    "verdict": "warming up"
   },
   {
    "name": "EURUSD_v116",
-   "week": 1,
-   "total": 1,
-   "cumR": -0.97,
-   "fwd_rmo": -5.94,
+   "week": 2,
+   "total": 2,
+   "cumR": -2.07,
+   "fwd_rmo": -10.49,
    "exp_rmo": 2.36,
    "verdict": "warming up"
   }
  ],
- "flags": [],
+ "p99": 515,
+ "p995": 563,
+ "flags": [
+  "EA REMOVED from chart detected: EE\t0\t20:14:13.096\tExperts\texpert EURUSD_SessionSweep_M15_v116 (EURUSD.gbe,M15) removed"
+ ],
  "urgent": []
 }
