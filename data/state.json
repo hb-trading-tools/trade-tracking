@@ -7,15 +7,15 @@
   87946,
   98262,
   101098,
-  144315
+  144315,
+  146829,
+  152045
  ],
- "last_run_utc": "2026-07-09T06:10:02.363116+00:00",
- "last_equity": 9886.44,
- "last_balance": 9886.44,
- "last_dd": 113.56,
- "flags": [
-  "EA REMOVED from chart detected: EE\t0\t20:14:13.096\tExperts\texpert EURUSD_SessionSweep_M15_v116 (EURUSD.gbe,M15) removed"
- ],
+ "last_run_utc": "2026-07-10T06:10:03.471064+00:00",
+ "last_equity": 9880.2,
+ "last_balance": 9880.2,
+ "last_dd": 119.8,
+ "flags": [],
  "urgent": [],
- "last_jpn_worst": 73
+ "last_jpn_worst": 74
 }
