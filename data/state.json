@@ -9,13 +9,18 @@
   101098,
   144315,
   146829,
-  152045
+  152045,
+  169545,
+  171183,
+  177212
  ],
- "last_run_utc": "2026-07-10T06:10:03.471064+00:00",
- "last_equity": 9880.2,
- "last_balance": 9880.2,
- "last_dd": 119.8,
- "flags": [],
+ "last_run_utc": "2026-07-11T06:10:02.105065+00:00",
+ "last_equity": 9840.36,
+ "last_balance": 9840.36,
+ "last_dd": 159.64,
+ "flags": [
+  "EA REMOVED from chart detected: CL\t0\t03:16:18.801\tExperts\texpert EURUSD_SessionSweep_M15_v116_10k_g5 (EURUSD.gbe,M15) removed"
+ ],
  "urgent": [],
  "last_jpn_worst": 74
 }
