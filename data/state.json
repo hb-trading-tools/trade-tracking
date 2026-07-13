@@ -14,13 +14,11 @@
   171183,
   177212
  ],
- "last_run_utc": "2026-07-12T06:10:02.026685+00:00",
+ "last_run_utc": "2026-07-13T06:10:03.712831+00:00",
  "last_equity": 9840.36,
  "last_balance": 9840.36,
  "last_dd": 159.64,
- "flags": [
-  "EA REMOVED from chart detected: CL\t0\t03:16:18.801\tExperts\texpert EURUSD_SessionSweep_M15_v116_10k_g5 (EURUSD.gbe,M15) removed"
- ],
+ "flags": [],
  "urgent": [],
- "last_jpn_worst": 74
+ "last_jpn_worst": 72
 }
