@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-07-13T06:10:04.164308+00:00",
+ "generated_utc": "2026-07-14T06:10:03.292687+00:00",
  "deploy_epoch": "2026-07-02",
  "equity": 9840.36,
  "dd": 159.64,
@@ -56,7 +56,7 @@
    "week": 1,
    "total": 2,
    "cumR": -2.04,
-   "fwd_rmo": -6.22,
+   "fwd_rmo": -5.65,
    "exp_rmo": 1.22,
    "verdict": "warming up"
   },
@@ -74,7 +74,7 @@
    "week": 1,
    "total": 1,
    "cumR": -0.96,
-   "fwd_rmo": -2.91,
+   "fwd_rmo": -2.65,
    "exp_rmo": 0.47,
    "verdict": "warming up"
   },
@@ -83,7 +83,7 @@
    "week": 1,
    "total": 1,
    "cumR": -2.22,
-   "fwd_rmo": -6.75,
+   "fwd_rmo": -6.14,
    "exp_rmo": 1.19,
    "verdict": "warming up"
   },
@@ -92,7 +92,7 @@
    "week": 1,
    "total": 1,
    "cumR": -2.29,
-   "fwd_rmo": -6.97,
+   "fwd_rmo": -6.34,
    "exp_rmo": 0.22,
    "verdict": "warming up"
   },
@@ -101,7 +101,7 @@
    "week": 1,
    "total": 1,
    "cumR": -0.93,
-   "fwd_rmo": -2.84,
+   "fwd_rmo": -2.58,
    "exp_rmo": 1.2,
    "verdict": "warming up"
   },
@@ -110,7 +110,7 @@
    "week": 4,
    "total": 4,
    "cumR": -2.54,
-   "fwd_rmo": -7.72,
+   "fwd_rmo": -7.02,
    "exp_rmo": 2.36,
    "verdict": "warming up"
   }
