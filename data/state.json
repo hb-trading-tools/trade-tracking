@@ -13,13 +13,18 @@
   169545,
   171183,
   177212,
-  362459
+  362459,
+  375353
  ],
- "last_run_utc": "2026-07-16T06:10:03.105304+00:00",
- "last_equity": 9871.56,
- "last_balance": 9871.56,
- "last_dd": 128.44,
- "flags": [],
+ "last_run_utc": "2026-07-17T06:10:02.389153+00:00",
+ "last_equity": 9899.16,
+ "last_balance": 9899.16,
+ "last_dd": 100.84,
+ "flags": [
+  "EA HEARTBEAT missing: ORB_NAS100_Thu_M5 not in Experts/journal logs for >8d \u2014 verify it is attached+armed",
+  "EA HEARTBEAT missing: ORB_JPN225_Wed_M5 not in Experts/journal logs for >8d \u2014 verify it is attached+armed",
+  "EA HEARTBEAT missing: ORB_JPN225_Thu_M5 not in Experts/journal logs for >8d \u2014 verify it is attached+armed"
+ ],
  "urgent": [],
- "last_jpn_worst": 72
+ "last_jpn_worst": 69
 }

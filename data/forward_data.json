@@ -1,9 +1,9 @@
 {
- "generated_utc": "2026-07-16T06:10:03.605712+00:00",
+ "generated_utc": "2026-07-17T06:10:03.535126+00:00",
  "deploy_epoch": "2026-07-02",
- "equity": 9871.56,
- "dd": 128.44,
- "cum_R": -8.93,
+ "equity": 9899.16,
+ "dd": 100.84,
+ "cum_R": -6.92,
  "curve": [
   [
    "2026-07-03",
@@ -52,6 +52,10 @@
   [
    "2026-07-15",
    -127.23
+  ],
+  [
+   "2026-07-16",
+   -99.03
   ]
  ],
  "sleeves": [
@@ -60,7 +64,7 @@
    "week": 1,
    "total": 2,
    "cumR": -2.04,
-   "fwd_rmo": -4.78,
+   "fwd_rmo": -4.44,
    "exp_rmo": 1.22,
    "verdict": "warming up"
   },
@@ -75,10 +79,10 @@
   },
   {
    "name": "NAS100_Thu_M5",
-   "week": 1,
+   "week": 0,
    "total": 1,
    "cumR": -0.96,
-   "fwd_rmo": -2.24,
+   "fwd_rmo": -2.08,
    "exp_rmo": 0.47,
    "verdict": "warming up"
   },
@@ -87,7 +91,7 @@
    "week": 0,
    "total": 1,
    "cumR": -2.22,
-   "fwd_rmo": -5.19,
+   "fwd_rmo": -4.82,
    "exp_rmo": 1.19,
    "verdict": "warming up"
   },
@@ -96,7 +100,7 @@
    "week": 0,
    "total": 1,
    "cumR": -2.29,
-   "fwd_rmo": -5.36,
+   "fwd_rmo": -4.98,
    "exp_rmo": 0.22,
    "verdict": "warming up"
   },
@@ -105,22 +109,26 @@
    "week": 1,
    "total": 1,
    "cumR": -0.93,
-   "fwd_rmo": -2.18,
+   "fwd_rmo": -2.03,
    "exp_rmo": 1.2,
    "verdict": "warming up"
   },
   {
    "name": "EURUSD_v116",
    "week": 3,
-   "total": 5,
-   "cumR": -0.5,
-   "fwd_rmo": -1.16,
+   "total": 6,
+   "cumR": 1.52,
+   "fwd_rmo": 3.3,
    "exp_rmo": 2.36,
    "verdict": "warming up"
   }
  ],
  "p99": 510,
  "p995": 556,
- "flags": [],
+ "flags": [
+  "EA HEARTBEAT missing: ORB_NAS100_Thu_M5 not in Experts/journal logs for >8d \u2014 verify it is attached+armed",
+  "EA HEARTBEAT missing: ORB_JPN225_Wed_M5 not in Experts/journal logs for >8d \u2014 verify it is attached+armed",
+  "EA HEARTBEAT missing: ORB_JPN225_Thu_M5 not in Experts/journal logs for >8d \u2014 verify it is attached+armed"
+ ],
  "urgent": []
 }
