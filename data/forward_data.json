@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-07-18T07:00:01.120318+00:00",
+ "generated_utc": "2026-07-19T06:10:03.052484+00:00",
  "deploy_epoch": "2026-07-02",
  "equity": 9939.41,
  "dd": 60.59,
@@ -76,7 +76,7 @@
    "week": 1,
    "total": 3,
    "cumR": -1.74,
-   "fwd_rmo": -3.52,
+   "fwd_rmo": -3.3,
    "exp_rmo": 1.22,
    "verdict": "warming up"
   },
@@ -94,7 +94,7 @@
    "week": 0,
    "total": 1,
    "cumR": -0.96,
-   "fwd_rmo": -1.94,
+   "fwd_rmo": -1.82,
    "exp_rmo": 0.47,
    "verdict": "warming up"
   },
@@ -103,7 +103,7 @@
    "week": 0,
    "total": 1,
    "cumR": -2.22,
-   "fwd_rmo": -4.5,
+   "fwd_rmo": -4.22,
    "exp_rmo": 1.19,
    "verdict": "warming up"
   },
@@ -112,7 +112,7 @@
    "week": 0,
    "total": 1,
    "cumR": -2.29,
-   "fwd_rmo": -4.65,
+   "fwd_rmo": -4.36,
    "exp_rmo": 0.22,
    "verdict": "warming up"
   },
@@ -121,7 +121,7 @@
    "week": 1,
    "total": 2,
    "cumR": -0.37,
-   "fwd_rmo": -0.75,
+   "fwd_rmo": -0.7,
    "exp_rmo": 1.2,
    "verdict": "warming up"
   },
@@ -130,7 +130,7 @@
    "week": 3,
    "total": 7,
    "cumR": 3.62,
-   "fwd_rmo": 7.35,
+   "fwd_rmo": 6.89,
    "exp_rmo": 2.36,
    "verdict": "warming up"
   }
@@ -138,9 +138,7 @@
  "p99": 510,
  "p995": 556,
  "flags": [
-  "EA HEARTBEAT missing: ORB_NAS100_Thu_M5 not in Experts/journal logs for >8d \u2014 verify it is attached+armed",
-  "EA HEARTBEAT missing: ORB_JPN225_Wed_M5 not in Experts/journal logs for >8d \u2014 verify it is attached+armed",
-  "EA HEARTBEAT missing: ORB_JPN225_Thu_M5 not in Experts/journal logs for >8d \u2014 verify it is attached+armed"
+  "EA REMOVED from chart detected: GP\t0\t21:18:56.224\tExperts\texpert ORB_GER40_Wed_M5_v113 (GER40.gbe,M5) removed"
  ],
  "urgent": []
 }

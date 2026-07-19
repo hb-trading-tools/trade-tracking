@@ -19,14 +19,12 @@
   395695,
   396187
  ],
- "last_run_utc": "2026-07-18T06:10:02.206343+00:00",
+ "last_run_utc": "2026-07-19T06:10:02.236366+00:00",
  "last_equity": 9939.41,
  "last_balance": 9939.41,
  "last_dd": 60.59,
  "flags": [
-  "EA HEARTBEAT missing: ORB_NAS100_Thu_M5 not in Experts/journal logs for >8d \u2014 verify it is attached+armed",
-  "EA HEARTBEAT missing: ORB_JPN225_Wed_M5 not in Experts/journal logs for >8d \u2014 verify it is attached+armed",
-  "EA HEARTBEAT missing: ORB_JPN225_Thu_M5 not in Experts/journal logs for >8d \u2014 verify it is attached+armed"
+  "EA REMOVED from chart detected: GP\t0\t21:18:56.224\tExperts\texpert ORB_GER40_Wed_M5_v113 (GER40.gbe,M5) removed"
  ],
  "urgent": [],
  "last_jpn_worst": 70
