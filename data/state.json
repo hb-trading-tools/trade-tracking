@@ -19,13 +19,11 @@
   395695,
   396187
  ],
- "last_run_utc": "2026-07-19T06:10:02.236366+00:00",
- "last_equity": 9939.41,
- "last_balance": 9939.41,
- "last_dd": 60.59,
- "flags": [
-  "EA REMOVED from chart detected: GP\t0\t21:18:56.224\tExperts\texpert ORB_GER40_Wed_M5_v113 (GER40.gbe,M5) removed"
- ],
+ "last_run_utc": "2026-07-20T06:10:01.669626+00:00",
+ "last_equity": 9941.45,
+ "last_balance": 9939.26,
+ "last_dd": 58.55,
+ "flags": [],
  "urgent": [],
- "last_jpn_worst": 70
+ "last_jpn_worst": 69
 }
