@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-07-20T06:10:02.051393+00:00",
+ "generated_utc": "2026-07-21T06:10:02.041854+00:00",
  "deploy_epoch": "2026-07-02",
- "equity": 9941.45,
- "dd": 58.55,
+ "equity": 9963.62,
+ "dd": 36.38,
  "cum_R": -3.95,
  "curve": [
   [
@@ -76,7 +76,7 @@
    "week": 1,
    "total": 3,
    "cumR": -1.74,
-   "fwd_rmo": -3.11,
+   "fwd_rmo": -2.94,
    "exp_rmo": 1.22,
    "verdict": "warming up"
   },
@@ -94,7 +94,7 @@
    "week": 0,
    "total": 1,
    "cumR": -0.96,
-   "fwd_rmo": -1.71,
+   "fwd_rmo": -1.62,
    "exp_rmo": 0.47,
    "verdict": "warming up"
   },
@@ -103,7 +103,7 @@
    "week": 0,
    "total": 1,
    "cumR": -2.22,
-   "fwd_rmo": -3.97,
+   "fwd_rmo": -3.75,
    "exp_rmo": 1.19,
    "verdict": "warming up"
   },
@@ -112,7 +112,7 @@
    "week": 0,
    "total": 1,
    "cumR": -2.29,
-   "fwd_rmo": -4.1,
+   "fwd_rmo": -3.87,
    "exp_rmo": 0.22,
    "verdict": "warming up"
   },
@@ -121,7 +121,7 @@
    "week": 1,
    "total": 2,
    "cumR": -0.37,
-   "fwd_rmo": -0.66,
+   "fwd_rmo": -0.62,
    "exp_rmo": 1.2,
    "verdict": "warming up"
   },
@@ -130,7 +130,7 @@
    "week": 3,
    "total": 7,
    "cumR": 3.62,
-   "fwd_rmo": 6.48,
+   "fwd_rmo": 6.12,
    "exp_rmo": 2.36,
    "verdict": "warming up"
   }
