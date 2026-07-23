@@ -18,15 +18,15 @@
   389069,
   395695,
   396187,
-  425414
+  425414,
+  438648,
+  450450
  ],
- "last_run_utc": "2026-07-22T06:10:01.650690+00:00",
- "last_equity": 9948.02,
- "last_balance": 9948.02,
- "last_dd": 51.98,
- "flags": [
-  "EA REMOVED from chart detected: PS\t0\t14:11:14.056\tExperts\texpert ORB_SPX500_Fri_M15_v113 (SPX500.gbe,M15) removed"
- ],
+ "last_run_utc": "2026-07-23T06:10:01.759623+00:00",
+ "last_equity": 9932.61,
+ "last_balance": 9932.61,
+ "last_dd": 67.39,
+ "flags": [],
  "urgent": [],
  "last_jpn_worst": 71
 }

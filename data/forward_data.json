@@ -1,9 +1,9 @@
 {
- "generated_utc": "2026-07-22T06:10:02.671008+00:00",
+ "generated_utc": "2026-07-23T06:10:02.441820+00:00",
  "deploy_epoch": "2026-07-02",
- "equity": 9948.02,
- "dd": 51.98,
- "cum_R": -4.98,
+ "equity": 9932.61,
+ "dd": 67.39,
+ "cum_R": -6.08,
  "curve": [
   [
    "2026-07-03",
@@ -72,6 +72,14 @@
   [
    "2026-07-21",
    -71.83
+  ],
+  [
+   "2026-07-22",
+   -67.18
+  ],
+  [
+   "2026-07-23",
+   -87.24
   ]
  ],
  "sleeves": [
@@ -80,16 +88,16 @@
    "week": 1,
    "total": 3,
    "cumR": -1.74,
-   "fwd_rmo": -2.78,
+   "fwd_rmo": -2.64,
    "exp_rmo": 1.22,
    "verdict": "warming up"
   },
   {
    "name": "GER40_Wed_M5",
-   "week": 0,
-   "total": 0,
-   "cumR": 0,
-   "fwd_rmo": 0.0,
+   "week": 1,
+   "total": 1,
+   "cumR": 0.33,
+   "fwd_rmo": 0.51,
    "exp_rmo": 1.69,
    "verdict": "warming up"
   },
@@ -98,7 +106,7 @@
    "week": 0,
    "total": 1,
    "cumR": -0.96,
-   "fwd_rmo": -1.53,
+   "fwd_rmo": -1.46,
    "exp_rmo": 0.47,
    "verdict": "warming up"
   },
@@ -107,16 +115,16 @@
    "week": 0,
    "total": 1,
    "cumR": -2.22,
-   "fwd_rmo": -3.55,
+   "fwd_rmo": -3.37,
    "exp_rmo": 1.19,
    "verdict": "warming up"
   },
   {
    "name": "JPN225_Thu_M5",
-   "week": 0,
-   "total": 1,
-   "cumR": -2.29,
-   "fwd_rmo": -3.67,
+   "week": 1,
+   "total": 2,
+   "cumR": -3.72,
+   "fwd_rmo": -5.67,
    "exp_rmo": 0.22,
    "verdict": "warming up"
   },
@@ -125,24 +133,22 @@
    "week": 1,
    "total": 2,
    "cumR": -0.37,
-   "fwd_rmo": -0.59,
+   "fwd_rmo": -0.56,
    "exp_rmo": 1.2,
    "verdict": "warming up"
   },
   {
    "name": "EURUSD_v116",
-   "week": 4,
+   "week": 3,
    "total": 8,
    "cumR": 2.59,
-   "fwd_rmo": 4.15,
+   "fwd_rmo": 3.95,
    "exp_rmo": 2.36,
    "verdict": "warming up"
   }
  ],
- "p99": 510,
- "p995": 556,
- "flags": [
-  "EA REMOVED from chart detected: PS\t0\t14:11:14.056\tExperts\texpert ORB_SPX500_Fri_M15_v113 (SPX500.gbe,M15) removed"
- ],
+ "p99": 508,
+ "p995": 549,
+ "flags": [],
  "urgent": []
 }
