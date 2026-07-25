@@ -21,12 +21,15 @@
   425414,
   438648,
   450450,
-  459502
+  459502,
+  470953,
+  477629,
+  477630
  ],
- "last_run_utc": "2026-07-24T06:10:01.905519+00:00",
- "last_equity": 9919.7,
- "last_balance": 9919.7,
- "last_dd": 80.3,
+ "last_run_utc": "2026-07-25T06:10:01.404543+00:00",
+ "last_equity": 9912.45,
+ "last_balance": 9912.45,
+ "last_dd": 87.55,
  "flags": [
   "EA REMOVED from chart detected: CL\t0\t01:02:36.634\tExperts\texpert ORB_JPN225_Wed_M5_v113 (JPN225.gbe,M5) removed"
  ],
