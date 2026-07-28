@@ -24,13 +24,14 @@
   459502,
   470953,
   477629,
-  477630
+  477630,
+  489610
  ],
- "last_run_utc": "2026-07-27T06:10:01.581125+00:00",
- "last_equity": 9912.45,
- "last_balance": 9912.45,
- "last_dd": 87.55,
+ "last_run_utc": "2026-07-28T06:10:01.705084+00:00",
+ "last_equity": 9939.6,
+ "last_balance": 9939.6,
+ "last_dd": 60.4,
  "flags": [],
  "urgent": [],
- "last_jpn_worst": 70
+ "last_jpn_worst": 67
 }
