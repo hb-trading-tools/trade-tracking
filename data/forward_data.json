@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-07-28T06:10:02.186290+00:00",
+ "generated_utc": "2026-07-29T06:10:02.673282+00:00",
  "deploy_epoch": "2026-07-02",
  "equity": 9939.6,
  "dd": 60.4,
@@ -108,7 +108,7 @@
    "week": 1,
    "total": 4,
    "cumR": -2.75,
-   "fwd_rmo": -3.35,
+   "fwd_rmo": -3.22,
    "exp_rmo": 1.22,
    "verdict": "warming up"
   },
@@ -117,7 +117,7 @@
    "week": 1,
    "total": 1,
    "cumR": 0.33,
-   "fwd_rmo": 0.4,
+   "fwd_rmo": 0.39,
    "exp_rmo": 1.69,
    "verdict": "warming up"
   },
@@ -126,7 +126,7 @@
    "week": 1,
    "total": 2,
    "cumR": -1.88,
-   "fwd_rmo": -2.29,
+   "fwd_rmo": -2.2,
    "exp_rmo": 0.47,
    "verdict": "warming up"
   },
@@ -135,7 +135,7 @@
    "week": 0,
    "total": 1,
    "cumR": -2.22,
-   "fwd_rmo": -2.7,
+   "fwd_rmo": -2.6,
    "exp_rmo": 1.19,
    "verdict": "warming up"
   },
@@ -144,7 +144,7 @@
    "week": 1,
    "total": 2,
    "cumR": -3.72,
-   "fwd_rmo": -4.53,
+   "fwd_rmo": -4.36,
    "exp_rmo": 0.22,
    "verdict": "warming up"
   },
@@ -153,16 +153,16 @@
    "week": 1,
    "total": 3,
    "cumR": -1.25,
-   "fwd_rmo": -1.52,
+   "fwd_rmo": -1.46,
    "exp_rmo": 1.2,
    "verdict": "warming up"
   },
   {
    "name": "EURUSD_v116",
-   "week": 3,
+   "week": 2,
    "total": 10,
    "cumR": 6.0,
-   "fwd_rmo": 7.3,
+   "fwd_rmo": 7.02,
    "exp_rmo": 2.36,
    "verdict": "warming up"
   }
