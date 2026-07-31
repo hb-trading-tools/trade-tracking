@@ -27,16 +27,15 @@
   477630,
   489610,
   529607,
-  549693
+  549693,
+  553318,
+  560346
  ],
- "last_run_utc": "2026-07-30T06:10:01.872191+00:00",
- "last_equity": 9943.74,
- "last_balance": 9943.74,
- "last_dd": 56.26,
- "flags": [
-  "OVERSIZED loss: JPN225_Thu_M5 -37.5$ (< -35.0$; JPN min-lot floor ~-30$ is OK) \u2014 check sizing",
-  "EA REMOVED from chart detected: EQ\t0\t22:01:30.503\tExperts\texpert ORB_JPN225_Thu_M5_v113 (JPN225.gbe,M5) removed"
- ],
+ "last_run_utc": "2026-07-31T06:10:02.631595+00:00",
+ "last_equity": 9997.13,
+ "last_balance": 9997.13,
+ "last_dd": 2.87,
+ "flags": [],
  "urgent": [],
- "last_jpn_worst": 66
+ "last_jpn_worst": 69
 }
