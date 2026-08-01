@@ -29,13 +29,15 @@
   529607,
   549693,
   553318,
-  560346
+  560346,
+  594863,
+  594864
  ],
- "last_run_utc": "2026-07-31T06:10:02.631595+00:00",
- "last_equity": 9997.13,
- "last_balance": 9997.13,
- "last_dd": 2.87,
+ "last_run_utc": "2026-08-01T06:10:01.691766+00:00",
+ "last_equity": 9981.13,
+ "last_balance": 9981.13,
+ "last_dd": 18.87,
  "flags": [],
  "urgent": [],
- "last_jpn_worst": 69
+ "last_jpn_worst": 67
 }

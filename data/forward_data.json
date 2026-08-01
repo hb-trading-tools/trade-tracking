@@ -1,9 +1,9 @@
 {
- "generated_utc": "2026-07-31T06:10:03.717086+00:00",
+ "generated_utc": "2026-08-01T06:10:02.054785+00:00",
  "deploy_epoch": "2026-07-02",
- "equity": 9997.13,
- "dd": 2.87,
- "cum_R": -1.33,
+ "equity": 9981.13,
+ "dd": 18.87,
+ "cum_R": -2.48,
  "curve": [
   [
    "2026-07-03",
@@ -116,15 +116,23 @@
   [
    "2026-07-30",
    -20.82
+  ],
+  [
+   "2026-07-31",
+   -23.32
+  ],
+  [
+   "2026-07-31",
+   -36.82
   ]
  ],
  "sleeves": [
   {
    "name": "SPX500_Fri_M15",
    "week": 1,
-   "total": 4,
-   "cumR": -2.75,
-   "fwd_rmo": -2.99,
+   "total": 5,
+   "cumR": -3.72,
+   "fwd_rmo": -3.9,
    "exp_rmo": 1.22,
    "verdict": "watch"
   },
@@ -133,7 +141,7 @@
    "week": 1,
    "total": 2,
    "cumR": 3.31,
-   "fwd_rmo": 3.59,
+   "fwd_rmo": 3.47,
    "exp_rmo": 1.69,
    "verdict": "warming up"
   },
@@ -151,7 +159,7 @@
    "week": 0,
    "total": 1,
    "cumR": -2.22,
-   "fwd_rmo": -2.41,
+   "fwd_rmo": -2.33,
    "exp_rmo": 1.19,
    "verdict": "warming up"
   },
@@ -160,25 +168,25 @@
    "week": 1,
    "total": 3,
    "cumR": -6.4,
-   "fwd_rmo": -6.96,
+   "fwd_rmo": -6.72,
    "exp_rmo": 0.22,
    "verdict": "warming up"
   },
   {
    "name": "NQ_Friday_M15",
    "week": 1,
-   "total": 3,
-   "cumR": -1.25,
-   "fwd_rmo": -1.35,
+   "total": 4,
+   "cumR": -1.42,
+   "fwd_rmo": -1.49,
    "exp_rmo": 1.2,
-   "verdict": "warming up"
+   "verdict": "watch"
   },
   {
    "name": "EURUSD_v116",
-   "week": 3,
+   "week": 2,
    "total": 11,
    "cumR": 8.0,
-   "fwd_rmo": 8.7,
+   "fwd_rmo": 8.4,
    "exp_rmo": 2.36,
    "verdict": "in-band"
   }
