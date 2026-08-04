@@ -33,11 +33,13 @@
   594863,
   594864
  ],
- "last_run_utc": "2026-08-03T06:10:02.054624+00:00",
- "last_equity": 9959.38,
- "last_balance": 9954.07,
- "last_dd": 40.62,
- "flags": [],
+ "last_run_utc": "2026-08-04T06:10:03.058084+00:00",
+ "last_equity": 9925.27,
+ "last_balance": 9925.27,
+ "last_dd": 74.73,
+ "flags": [
+  "EA REMOVED from chart detected: NO\t0\t09:36:52.714\tExperts\texpert ORB_JPN225_Thu_M5_v113 (JPN225.gbe,M5) removed"
+ ],
  "urgent": [],
- "last_jpn_worst": 68
+ "last_jpn_worst": 69
 }
