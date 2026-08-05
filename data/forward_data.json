@@ -1,9 +1,9 @@
 {
- "generated_utc": "2026-08-04T06:10:04.520365+00:00",
+ "generated_utc": "2026-08-05T06:10:03.467041+00:00",
  "deploy_epoch": "2026-07-02",
- "equity": 9925.27,
- "dd": 74.73,
- "cum_R": -2.48,
+ "equity": 9914.37,
+ "dd": 85.63,
+ "cum_R": -3.5,
  "curve": [
   [
    "2026-07-03",
@@ -124,6 +124,10 @@
   [
    "2026-07-31",
    -36.82
+  ],
+  [
+   "2026-08-04",
+   -51.22
   ]
  ],
  "sleeves": [
@@ -132,7 +136,7 @@
    "week": 1,
    "total": 5,
    "cumR": -3.72,
-   "fwd_rmo": -3.53,
+   "fwd_rmo": -3.43,
    "exp_rmo": 1.22,
    "verdict": "watch"
   },
@@ -141,7 +145,7 @@
    "week": 1,
    "total": 2,
    "cumR": 3.31,
-   "fwd_rmo": 3.15,
+   "fwd_rmo": 3.05,
    "exp_rmo": 1.69,
    "verdict": "warming up"
   },
@@ -159,7 +163,7 @@
    "week": 0,
    "total": 1,
    "cumR": -2.22,
-   "fwd_rmo": -2.11,
+   "fwd_rmo": -2.05,
    "exp_rmo": 1.19,
    "verdict": "warming up"
   },
@@ -168,7 +172,7 @@
    "week": 1,
    "total": 3,
    "cumR": -6.4,
-   "fwd_rmo": -6.09,
+   "fwd_rmo": -5.91,
    "exp_rmo": 0.22,
    "verdict": "warming up"
   },
@@ -177,24 +181,22 @@
    "week": 1,
    "total": 4,
    "cumR": -1.42,
-   "fwd_rmo": -1.35,
+   "fwd_rmo": -1.31,
    "exp_rmo": 1.2,
    "verdict": "watch"
   },
   {
    "name": "EURUSD_v116",
-   "week": 1,
-   "total": 11,
-   "cumR": 8.0,
-   "fwd_rmo": 7.61,
+   "week": 2,
+   "total": 12,
+   "cumR": 6.98,
+   "fwd_rmo": 6.44,
    "exp_rmo": 2.36,
    "verdict": "in-band"
   }
  ],
  "p99": 507,
  "p995": 548,
- "flags": [
-  "EA REMOVED from chart detected: NO\t0\t09:36:52.714\tExperts\texpert ORB_JPN225_Thu_M5_v113 (JPN225.gbe,M5) removed"
- ],
+ "flags": [],
  "urgent": []
 }
