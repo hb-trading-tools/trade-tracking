@@ -1,9 +1,9 @@
 {
- "generated_utc": "2026-08-05T06:10:03.467041+00:00",
+ "generated_utc": "2026-08-06T06:10:03.137734+00:00",
  "deploy_epoch": "2026-07-02",
- "equity": 9914.37,
- "dd": 85.63,
- "cum_R": -3.5,
+ "equity": 9881.83,
+ "dd": 118.17,
+ "cum_R": -5.16,
  "curve": [
   [
    "2026-07-03",
@@ -128,6 +128,18 @@
   [
    "2026-08-04",
    -51.22
+  ],
+  [
+   "2026-08-05",
+   -46.72
+  ],
+  [
+   "2026-08-05",
+   -60.26
+  ],
+  [
+   "2026-08-05",
+   -74.34
   ]
  ],
  "sleeves": [
@@ -136,16 +148,16 @@
    "week": 1,
    "total": 5,
    "cumR": -3.72,
-   "fwd_rmo": -3.43,
+   "fwd_rmo": -3.33,
    "exp_rmo": 1.22,
    "verdict": "watch"
   },
   {
    "name": "GER40_Wed_M5",
    "week": 1,
-   "total": 2,
-   "cumR": 3.31,
-   "fwd_rmo": 3.05,
+   "total": 3,
+   "cumR": 2.34,
+   "fwd_rmo": 2.09,
    "exp_rmo": 1.69,
    "verdict": "warming up"
   },
@@ -154,25 +166,25 @@
    "week": 1,
    "total": 3,
    "cumR": -0.03,
-   "fwd_rmo": -0.03,
+   "fwd_rmo": -0.02,
    "exp_rmo": 0.47,
    "verdict": "warming up"
   },
   {
    "name": "JPN225_Wed_M5",
-   "week": 0,
-   "total": 1,
-   "cumR": -2.22,
-   "fwd_rmo": -2.05,
+   "week": 1,
+   "total": 2,
+   "cumR": -1.9,
+   "fwd_rmo": -1.7,
    "exp_rmo": 1.19,
    "verdict": "warming up"
   },
   {
    "name": "JPN225_Thu_M5",
-   "week": 1,
+   "week": 0,
    "total": 3,
    "cumR": -6.4,
-   "fwd_rmo": -5.91,
+   "fwd_rmo": -5.73,
    "exp_rmo": 0.22,
    "verdict": "warming up"
   },
@@ -181,22 +193,24 @@
    "week": 1,
    "total": 4,
    "cumR": -1.42,
-   "fwd_rmo": -1.31,
+   "fwd_rmo": -1.28,
    "exp_rmo": 1.2,
    "verdict": "watch"
   },
   {
    "name": "EURUSD_v116",
-   "week": 2,
-   "total": 12,
-   "cumR": 6.98,
-   "fwd_rmo": 6.44,
+   "week": 3,
+   "total": 13,
+   "cumR": 5.97,
+   "fwd_rmo": 5.35,
    "exp_rmo": 2.36,
    "verdict": "in-band"
   }
  ],
- "p99": 507,
- "p995": 548,
- "flags": [],
+ "p99": 552,
+ "p995": 598,
+ "flags": [
+  "EA REMOVED from chart detected: DJ\t0\t11:46:45.607\tExperts\texpert ORB_GER40_Wed_M5_v113 (GER40.gbe,M5) removed"
+ ],
  "urgent": []
 }

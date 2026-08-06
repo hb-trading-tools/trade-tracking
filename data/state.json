@@ -32,13 +32,18 @@
   560346,
   594863,
   594864,
-  651531
+  651531,
+  669141,
+  673572,
+  674563
  ],
- "last_run_utc": "2026-08-05T06:10:02.129736+00:00",
- "last_equity": 9914.37,
- "last_balance": 9914.37,
- "last_dd": 85.63,
- "flags": [],
+ "last_run_utc": "2026-08-06T06:10:01.967500+00:00",
+ "last_equity": 9881.83,
+ "last_balance": 9881.83,
+ "last_dd": 118.17,
+ "flags": [
+  "EA REMOVED from chart detected: DJ\t0\t11:46:45.607\tExperts\texpert ORB_GER40_Wed_M5_v113 (GER40.gbe,M5) removed"
+ ],
  "urgent": [],
- "last_jpn_worst": 71
+ "last_jpn_worst": 70
 }
