@@ -1,9 +1,9 @@
 {
- "generated_utc": "2026-08-06T06:10:03.137734+00:00",
+ "generated_utc": "2026-08-07T06:10:25.360294+00:00",
  "deploy_epoch": "2026-07-02",
- "equity": 9881.83,
- "dd": 118.17,
- "cum_R": -5.16,
+ "equity": 9926.35,
+ "dd": 73.65,
+ "cum_R": -3.96,
  "curve": [
   [
    "2026-07-03",
@@ -140,6 +140,14 @@
   [
    "2026-08-05",
    -74.34
+  ],
+  [
+   "2026-08-06",
+   -78.71
+  ],
+  [
+   "2026-08-06",
+   -57.56
   ]
  ],
  "sleeves": [
@@ -148,7 +156,7 @@
    "week": 1,
    "total": 5,
    "cumR": -3.72,
-   "fwd_rmo": -3.33,
+   "fwd_rmo": -3.23,
    "exp_rmo": 1.22,
    "verdict": "watch"
   },
@@ -157,60 +165,60 @@
    "week": 1,
    "total": 3,
    "cumR": 2.34,
-   "fwd_rmo": 2.09,
+   "fwd_rmo": 2.03,
    "exp_rmo": 1.69,
    "verdict": "warming up"
   },
   {
    "name": "NAS100_Thu_M5",
    "week": 1,
-   "total": 3,
-   "cumR": -0.03,
-   "fwd_rmo": -0.02,
+   "total": 4,
+   "cumR": 1.48,
+   "fwd_rmo": 1.29,
    "exp_rmo": 0.47,
-   "verdict": "warming up"
+   "verdict": "in-band"
   },
   {
    "name": "JPN225_Wed_M5",
    "week": 1,
    "total": 2,
    "cumR": -1.9,
-   "fwd_rmo": -1.7,
+   "fwd_rmo": -1.65,
    "exp_rmo": 1.19,
    "verdict": "warming up"
   },
   {
    "name": "JPN225_Thu_M5",
-   "week": 0,
-   "total": 3,
-   "cumR": -6.4,
-   "fwd_rmo": -5.73,
+   "week": 1,
+   "total": 4,
+   "cumR": -6.71,
+   "fwd_rmo": -5.84,
    "exp_rmo": 0.22,
-   "verdict": "warming up"
+   "verdict": "watch"
   },
   {
    "name": "NQ_Friday_M15",
    "week": 1,
    "total": 4,
    "cumR": -1.42,
-   "fwd_rmo": -1.28,
+   "fwd_rmo": -1.24,
    "exp_rmo": 1.2,
    "verdict": "watch"
   },
   {
    "name": "EURUSD_v116",
-   "week": 3,
+   "week": 2,
    "total": 13,
    "cumR": 5.97,
-   "fwd_rmo": 5.35,
+   "fwd_rmo": 5.19,
    "exp_rmo": 2.36,
    "verdict": "in-band"
   }
  ],
- "p99": 552,
- "p995": 598,
+ "p99": 548,
+ "p995": 602,
  "flags": [
-  "EA REMOVED from chart detected: DJ\t0\t11:46:45.607\tExperts\texpert ORB_GER40_Wed_M5_v113 (GER40.gbe,M5) removed"
+  "EA REMOVED from chart detected: HF\t0\t06:05:23.014\tExperts\texpert ORB_NAS100_Thu_M5_v113 (NAS100.gbe,M5) removed"
  ],
  "urgent": []
 }
