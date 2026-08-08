@@ -37,15 +37,18 @@
   673572,
   674563,
   700987,
-  712216
+  712216,
+  732233,
+  736737,
+  737870
  ],
- "last_run_utc": "2026-08-07T06:10:12.582021+00:00",
- "last_equity": 9926.35,
- "last_balance": 9926.35,
- "last_dd": 73.65,
+ "last_run_utc": "2026-08-08T06:10:01.822048+00:00",
+ "last_equity": 9874.27,
+ "last_balance": 9874.27,
+ "last_dd": 125.73,
  "flags": [
   "EA REMOVED from chart detected: HF\t0\t06:05:23.014\tExperts\texpert ORB_NAS100_Thu_M5_v113 (NAS100.gbe,M5) removed"
  ],
  "urgent": [],
- "last_jpn_worst": 70
+ "last_jpn_worst": 71
 }

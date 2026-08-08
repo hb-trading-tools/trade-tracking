@@ -1,9 +1,9 @@
 {
- "generated_utc": "2026-08-07T06:10:25.360294+00:00",
+ "generated_utc": "2026-08-08T06:10:03.076869+00:00",
  "deploy_epoch": "2026-07-02",
- "equity": 9926.35,
- "dd": 73.65,
- "cum_R": -3.96,
+ "equity": 9874.27,
+ "dd": 125.73,
+ "cum_R": -7.63,
  "curve": [
   [
    "2026-07-03",
@@ -148,15 +148,27 @@
   [
    "2026-08-06",
    -57.56
+  ],
+  [
+   "2026-08-07",
+   -87.8
+  ],
+  [
+   "2026-08-07",
+   -95.02
+  ],
+  [
+   "2026-08-07",
+   -108.94
   ]
  ],
  "sleeves": [
   {
    "name": "SPX500_Fri_M15",
    "week": 1,
-   "total": 5,
-   "cumR": -3.72,
-   "fwd_rmo": -3.23,
+   "total": 6,
+   "cumR": -4.71,
+   "fwd_rmo": -3.98,
    "exp_rmo": 1.22,
    "verdict": "watch"
   },
@@ -165,7 +177,7 @@
    "week": 1,
    "total": 3,
    "cumR": 2.34,
-   "fwd_rmo": 2.03,
+   "fwd_rmo": 1.98,
    "exp_rmo": 1.69,
    "verdict": "warming up"
   },
@@ -174,7 +186,7 @@
    "week": 1,
    "total": 4,
    "cumR": 1.48,
-   "fwd_rmo": 1.29,
+   "fwd_rmo": 1.25,
    "exp_rmo": 0.47,
    "verdict": "in-band"
   },
@@ -183,7 +195,7 @@
    "week": 1,
    "total": 2,
    "cumR": -1.9,
-   "fwd_rmo": -1.65,
+   "fwd_rmo": -1.6,
    "exp_rmo": 1.19,
    "verdict": "warming up"
   },
@@ -192,31 +204,31 @@
    "week": 1,
    "total": 4,
    "cumR": -6.71,
-   "fwd_rmo": -5.84,
+   "fwd_rmo": -5.68,
    "exp_rmo": 0.22,
    "verdict": "watch"
   },
   {
    "name": "NQ_Friday_M15",
    "week": 1,
-   "total": 4,
-   "cumR": -1.42,
-   "fwd_rmo": -1.24,
+   "total": 5,
+   "cumR": -1.94,
+   "fwd_rmo": -1.64,
    "exp_rmo": 1.2,
    "verdict": "watch"
   },
   {
    "name": "EURUSD_v116",
-   "week": 2,
-   "total": 13,
-   "cumR": 5.97,
-   "fwd_rmo": 5.19,
+   "week": 3,
+   "total": 14,
+   "cumR": 3.81,
+   "fwd_rmo": 3.22,
    "exp_rmo": 2.36,
    "verdict": "in-band"
   }
  ],
- "p99": 548,
- "p995": 602,
+ "p99": 553,
+ "p995": 618,
  "flags": [
   "EA REMOVED from chart detected: HF\t0\t06:05:23.014\tExperts\texpert ORB_NAS100_Thu_M5_v113 (NAS100.gbe,M5) removed"
  ],
