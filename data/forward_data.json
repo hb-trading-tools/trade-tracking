@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-08-08T07:00:00.845407+00:00",
+ "generated_utc": "2026-08-09T06:10:02.177022+00:00",
  "deploy_epoch": "2026-07-02",
  "equity": 9874.27,
  "dd": 125.73,
@@ -168,7 +168,7 @@
    "week": 1,
    "total": 6,
    "cumR": -4.71,
-   "fwd_rmo": -3.98,
+   "fwd_rmo": -3.88,
    "exp_rmo": 1.22,
    "verdict": "watch"
   },
@@ -177,7 +177,7 @@
    "week": 1,
    "total": 3,
    "cumR": 2.34,
-   "fwd_rmo": 1.98,
+   "fwd_rmo": 1.92,
    "exp_rmo": 1.69,
    "verdict": "warming up"
   },
@@ -186,7 +186,7 @@
    "week": 1,
    "total": 4,
    "cumR": 1.48,
-   "fwd_rmo": 1.25,
+   "fwd_rmo": 1.22,
    "exp_rmo": 0.47,
    "verdict": "in-band"
   },
@@ -195,7 +195,7 @@
    "week": 1,
    "total": 2,
    "cumR": -1.9,
-   "fwd_rmo": -1.6,
+   "fwd_rmo": -1.56,
    "exp_rmo": 1.19,
    "verdict": "warming up"
   },
@@ -204,7 +204,7 @@
    "week": 1,
    "total": 4,
    "cumR": -6.71,
-   "fwd_rmo": -5.68,
+   "fwd_rmo": -5.52,
    "exp_rmo": 0.22,
    "verdict": "watch"
   },
@@ -213,7 +213,7 @@
    "week": 1,
    "total": 5,
    "cumR": -1.94,
-   "fwd_rmo": -1.64,
+   "fwd_rmo": -1.6,
    "exp_rmo": 1.2,
    "verdict": "watch"
   },
@@ -222,15 +222,13 @@
    "week": 3,
    "total": 14,
    "cumR": 3.81,
-   "fwd_rmo": 3.22,
+   "fwd_rmo": 3.13,
    "exp_rmo": 2.36,
    "verdict": "in-band"
   }
  ],
  "p99": 553,
  "p995": 618,
- "flags": [
-  "EA REMOVED from chart detected: HF\t0\t06:05:23.014\tExperts\texpert ORB_NAS100_Thu_M5_v113 (NAS100.gbe,M5) removed"
- ],
+ "flags": [],
  "urgent": []
 }

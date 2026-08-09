@@ -42,13 +42,11 @@
   736737,
   737870
  ],
- "last_run_utc": "2026-08-08T06:10:01.822048+00:00",
+ "last_run_utc": "2026-08-09T06:10:01.785343+00:00",
  "last_equity": 9874.27,
  "last_balance": 9874.27,
  "last_dd": 125.73,
- "flags": [
-  "EA REMOVED from chart detected: HF\t0\t06:05:23.014\tExperts\texpert ORB_NAS100_Thu_M5_v113 (NAS100.gbe,M5) removed"
- ],
+ "flags": [],
  "urgent": [],
  "last_jpn_worst": 71
 }
