@@ -42,11 +42,13 @@
   736737,
   737870
  ],
- "last_run_utc": "2026-08-09T06:10:01.785343+00:00",
+ "last_run_utc": "2026-08-10T06:10:02.959379+00:00",
  "last_equity": 9874.27,
  "last_balance": 9874.27,
  "last_dd": 125.73,
- "flags": [],
+ "flags": [
+  "EA REMOVED from chart detected: OD\t0\t20:29:36.192\tExperts\texpert ORB_SPX500_Fri_M15_v113 (SPX500.gbe,M15) removed"
+ ],
  "urgent": [],
- "last_jpn_worst": 71
+ "last_jpn_worst": 72
 }
