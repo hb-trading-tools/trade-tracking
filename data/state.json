@@ -40,14 +40,15 @@
   712216,
   732233,
   736737,
-  737870
+  737870,
+  764003
  ],
- "last_run_utc": "2026-08-10T06:10:02.959379+00:00",
- "last_equity": 9874.27,
- "last_balance": 9874.27,
- "last_dd": 125.73,
+ "last_run_utc": "2026-08-11T06:10:07.092134+00:00",
+ "last_equity": 9876.25,
+ "last_balance": 9876.25,
+ "last_dd": 123.75,
  "flags": [
-  "EA REMOVED from chart detected: OD\t0\t20:29:36.192\tExperts\texpert ORB_SPX500_Fri_M15_v113 (SPX500.gbe,M15) removed"
+  "EA REMOVED from chart detected: HD\t0\t15:57:08.866\tExperts\texpert ORB_GER40_Wed_M5_v113 (GER40.gbe,M5) removed"
  ],
  "urgent": [],
  "last_jpn_worst": 72
