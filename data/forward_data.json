@@ -1,9 +1,9 @@
 {
- "generated_utc": "2026-08-11T06:10:11.774365+00:00",
+ "generated_utc": "2026-08-12T06:10:02.744464+00:00",
  "deploy_epoch": "2026-07-02",
- "equity": 9876.25,
- "dd": 123.75,
- "cum_R": -8.71,
+ "equity": 9874.57,
+ "dd": 125.43,
+ "cum_R": -9.75,
  "curve": [
   [
    "2026-07-03",
@@ -164,6 +164,10 @@
   [
    "2026-08-10",
    -124.12
+  ],
+  [
+   "2026-08-11",
+   -138.68
   ]
  ],
  "sleeves": [
@@ -172,7 +176,7 @@
    "week": 1,
    "total": 6,
    "cumR": -4.71,
-   "fwd_rmo": -3.68,
+   "fwd_rmo": -3.58,
    "exp_rmo": 1.22,
    "verdict": "watch"
   },
@@ -181,7 +185,7 @@
    "week": 1,
    "total": 3,
    "cumR": 2.34,
-   "fwd_rmo": 1.83,
+   "fwd_rmo": 1.78,
    "exp_rmo": 1.69,
    "verdict": "warming up"
   },
@@ -190,7 +194,7 @@
    "week": 1,
    "total": 4,
    "cumR": 1.48,
-   "fwd_rmo": 1.16,
+   "fwd_rmo": 1.13,
    "exp_rmo": 0.47,
    "verdict": "in-band"
   },
@@ -199,7 +203,7 @@
    "week": 1,
    "total": 2,
    "cumR": -1.9,
-   "fwd_rmo": -1.48,
+   "fwd_rmo": -1.44,
    "exp_rmo": 1.19,
    "verdict": "warming up"
   },
@@ -208,7 +212,7 @@
    "week": 1,
    "total": 4,
    "cumR": -6.71,
-   "fwd_rmo": -5.24,
+   "fwd_rmo": -5.11,
    "exp_rmo": 0.22,
    "verdict": "watch"
   },
@@ -217,24 +221,22 @@
    "week": 1,
    "total": 5,
    "cumR": -1.94,
-   "fwd_rmo": -1.51,
+   "fwd_rmo": -1.48,
    "exp_rmo": 1.2,
    "verdict": "watch"
   },
   {
    "name": "EURUSD_v116",
    "week": 4,
-   "total": 15,
-   "cumR": 2.73,
-   "fwd_rmo": 2.13,
+   "total": 16,
+   "cumR": 1.69,
+   "fwd_rmo": 1.28,
    "exp_rmo": 2.36,
    "verdict": "in-band"
   }
  ],
  "p99": 553,
  "p995": 618,
- "flags": [
-  "EA REMOVED from chart detected: HD\t0\t15:57:08.866\tExperts\texpert ORB_GER40_Wed_M5_v113 (GER40.gbe,M5) removed"
- ],
+ "flags": [],
  "urgent": []
 }
