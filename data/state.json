@@ -44,15 +44,14 @@
   764003,
   780388,
   800542,
-  802304
+  802304,
+  838143
  ],
- "last_run_utc": "2026-08-13T06:10:03.241544+00:00",
- "last_equity": 9907.11,
- "last_balance": 9907.11,
- "last_dd": 92.89,
- "flags": [
-  "EA REMOVED from chart detected: JP\t0\t12:10:21.951\tExperts\texpert ORB_GER40_Wed_M5_v113 (GER40.gbe,M5) removed"
- ],
+ "last_run_utc": "2026-08-14T06:10:02.408892+00:00",
+ "last_equity": 9913.09,
+ "last_balance": 9913.09,
+ "last_dd": 86.91,
+ "flags": [],
  "urgent": [],
- "last_jpn_worst": 73
+ "last_jpn_worst": 74
 }
