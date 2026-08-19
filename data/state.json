@@ -48,13 +48,14 @@
   838143,
   853866,
   867122,
-  867123
+  867123,
+  932412
  ],
- "last_run_utc": "2026-08-18T06:10:03.956271+00:00",
- "last_equity": 9923.91,
- "last_balance": 9923.91,
- "last_dd": 76.09,
+ "last_run_utc": "2026-08-19T06:10:04.255987+00:00",
+ "last_equity": 9896.18,
+ "last_balance": 9901.42,
+ "last_dd": 103.82,
  "flags": [],
  "urgent": [],
- "last_jpn_worst": 72
+ "last_jpn_worst": 70
 }
