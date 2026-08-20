@@ -49,13 +49,15 @@
   853866,
   867122,
   867123,
-  932412
+  932412,
+  934934,
+  959871
  ],
- "last_run_utc": "2026-08-19T06:10:04.255987+00:00",
- "last_equity": 9896.18,
- "last_balance": 9901.42,
- "last_dd": 103.82,
+ "last_run_utc": "2026-08-20T06:10:02.305035+00:00",
+ "last_equity": 9862.55,
+ "last_balance": 9862.55,
+ "last_dd": 137.45,
  "flags": [],
  "urgent": [],
- "last_jpn_worst": 70
+ "last_jpn_worst": 71
 }

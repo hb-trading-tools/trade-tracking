@@ -1,9 +1,9 @@
 {
- "generated_utc": "2026-08-19T06:10:05.248857+00:00",
+ "generated_utc": "2026-08-20T06:10:02.976586+00:00",
  "deploy_epoch": "2026-07-02",
- "equity": 9896.18,
- "dd": 103.82,
- "cum_R": -6.69,
+ "equity": 9862.55,
+ "dd": 137.45,
+ "cum_R": -9.26,
  "curve": [
   [
    "2026-07-03",
@@ -196,6 +196,14 @@
   [
    "2026-08-19",
    -95.8
+  ],
+  [
+   "2026-08-19",
+   -108.61
+  ],
+  [
+   "2026-08-20",
+   -131.79
   ]
  ],
  "sleeves": [
@@ -204,16 +212,16 @@
    "week": 1,
    "total": 7,
    "cumR": -3.43,
-   "fwd_rmo": -2.22,
+   "fwd_rmo": -2.17,
    "exp_rmo": 1.22,
    "verdict": "watch"
   },
   {
    "name": "GER40_Wed_M5",
    "week": 1,
-   "total": 4,
-   "cumR": 4.66,
-   "fwd_rmo": 3.02,
+   "total": 5,
+   "cumR": 3.75,
+   "fwd_rmo": 2.38,
    "exp_rmo": 1.69,
    "verdict": "in-band"
   },
@@ -222,7 +230,7 @@
    "week": 1,
    "total": 5,
    "cumR": 1.91,
-   "fwd_rmo": 1.24,
+   "fwd_rmo": 1.21,
    "exp_rmo": 0.47,
    "verdict": "in-band"
   },
@@ -231,16 +239,16 @@
    "week": 1,
    "total": 4,
    "cumR": -2.48,
-   "fwd_rmo": -1.61,
+   "fwd_rmo": -1.57,
    "exp_rmo": 1.19,
    "verdict": "watch"
   },
   {
    "name": "JPN225_Thu_M5",
-   "week": 0,
-   "total": 4,
-   "cumR": -6.71,
-   "fwd_rmo": -4.35,
+   "week": 1,
+   "total": 5,
+   "cumR": -8.37,
+   "fwd_rmo": -5.31,
    "exp_rmo": 0.22,
    "verdict": "watch"
   },
@@ -249,7 +257,7 @@
    "week": 1,
    "total": 6,
    "cumR": -1.25,
-   "fwd_rmo": -0.81,
+   "fwd_rmo": -0.79,
    "exp_rmo": 1.2,
    "verdict": "watch"
   },
@@ -258,13 +266,13 @@
    "week": 1,
    "total": 17,
    "cumR": 0.61,
-   "fwd_rmo": 0.4,
+   "fwd_rmo": 0.39,
    "exp_rmo": 2.36,
    "verdict": "watch"
   }
  ],
- "p99": 552,
- "p995": 603,
+ "p99": 553,
+ "p995": 608,
  "flags": [],
  "urgent": []
 }
