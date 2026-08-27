@@ -56,13 +56,17 @@
   975165,
   1000618,
   1101149,
-  1136033
+  1136033,
+  1140905,
+  1141609
  ],
- "last_run_utc": "2026-08-26T06:10:02.996276+00:00",
- "last_equity": 9849.55,
- "last_balance": 9849.55,
- "last_dd": 150.45,
- "flags": [],
+ "last_run_utc": "2026-08-27T06:10:02.374741+00:00",
+ "last_equity": 9815.84,
+ "last_balance": 9815.84,
+ "last_dd": 184.16,
+ "flags": [
+  "EA REMOVED from chart detected: DK\t0\t11:19:29.050\tExperts\texpert ORB_JPN225_Wed_M5_v113 (JPN225.gbe,M5) removed"
+ ],
  "urgent": [],
  "last_jpn_worst": 71
 }
