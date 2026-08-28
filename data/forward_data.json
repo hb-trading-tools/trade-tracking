@@ -1,9 +1,9 @@
 {
- "generated_utc": "2026-08-27T06:10:03.617715+00:00",
+ "generated_utc": "2026-08-28T06:10:03.394405+00:00",
  "deploy_epoch": "2026-07-02",
- "equity": 9815.84,
- "dd": 184.16,
- "cum_R": -9.83,
+ "equity": 9819.06,
+ "dd": 180.94,
+ "cum_R": -9.6,
  "curve": [
   [
    "2026-07-03",
@@ -232,6 +232,10 @@
   [
    "2026-08-26",
    -139.77
+  ],
+  [
+   "2026-08-27",
+   -136.55
   ]
  ],
  "sleeves": [
@@ -240,7 +244,7 @@
    "week": 0,
    "total": 7,
    "cumR": -3.43,
-   "fwd_rmo": -1.9,
+   "fwd_rmo": -1.86,
    "exp_rmo": 1.22,
    "verdict": "watch"
   },
@@ -249,16 +253,16 @@
    "week": 1,
    "total": 6,
    "cumR": 2.57,
-   "fwd_rmo": 1.42,
+   "fwd_rmo": 1.4,
    "exp_rmo": 1.69,
    "verdict": "in-band"
   },
   {
    "name": "NAS100_Thu_M5",
    "week": 1,
-   "total": 6,
-   "cumR": 0.9,
-   "fwd_rmo": 0.5,
+   "total": 7,
+   "cumR": 1.13,
+   "fwd_rmo": 0.62,
    "exp_rmo": 0.47,
    "verdict": "in-band"
   },
@@ -276,7 +280,7 @@
    "week": 0,
    "total": 5,
    "cumR": -8.37,
-   "fwd_rmo": -4.63,
+   "fwd_rmo": -4.55,
    "exp_rmo": 0.22,
    "verdict": "watch"
   },
@@ -285,13 +289,13 @@
    "week": 1,
    "total": 7,
    "cumR": -2.18,
-   "fwd_rmo": -1.2,
+   "fwd_rmo": -1.18,
    "exp_rmo": 1.2,
    "verdict": "watch"
   },
   {
    "name": "EURUSD_v116",
-   "week": 3,
+   "week": 2,
    "total": 20,
    "cumR": 0.44,
    "fwd_rmo": 0.24,
@@ -301,8 +305,6 @@
  ],
  "p99": 552,
  "p995": 605,
- "flags": [
-  "EA REMOVED from chart detected: DK\t0\t11:19:29.050\tExperts\texpert ORB_JPN225_Wed_M5_v113 (JPN225.gbe,M5) removed"
- ],
+ "flags": [],
  "urgent": []
 }
