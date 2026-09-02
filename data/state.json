@@ -62,13 +62,14 @@
   1199303,
   1219211,
   1233705,
-  1233709
+  1233709,
+  1280196
  ],
- "last_run_utc": "2026-09-01T06:10:02.864991+00:00",
- "last_equity": 9774.35,
- "last_balance": 9774.35,
- "last_dd": 225.65,
+ "last_run_utc": "2026-09-02T06:10:05.680078+00:00",
+ "last_equity": 9757.19,
+ "last_balance": 9757.19,
+ "last_dd": 242.81,
  "flags": [],
  "urgent": [],
- "last_jpn_worst": 71
+ "last_jpn_worst": 69
 }
