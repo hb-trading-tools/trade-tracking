@@ -1,9 +1,9 @@
 {
- "generated_utc": "2026-09-02T06:10:07.023317+00:00",
+ "generated_utc": "2026-09-03T06:10:04.730185+00:00",
  "deploy_epoch": "2026-07-02",
- "equity": 9757.19,
- "dd": 242.81,
- "cum_R": -13.79,
+ "equity": 9772.51,
+ "dd": 227.49,
+ "cum_R": -12.64,
  "curve": [
   [
    "2026-07-03",
@@ -252,6 +252,14 @@
   [
    "2026-09-01",
    -195.22
+  ],
+  [
+   "2026-09-02",
+   -207.95
+  ],
+  [
+   "2026-09-02",
+   -179.15
   ]
  ],
  "sleeves": [
@@ -260,16 +268,16 @@
    "week": 1,
    "total": 8,
    "cumR": -4.47,
-   "fwd_rmo": -2.23,
+   "fwd_rmo": -2.19,
    "exp_rmo": 1.22,
    "verdict": "watch"
   },
   {
    "name": "GER40_Wed_M5",
    "week": 1,
-   "total": 6,
-   "cumR": 2.57,
-   "fwd_rmo": 1.28,
+   "total": 7,
+   "cumR": 1.66,
+   "fwd_rmo": 0.82,
    "exp_rmo": 1.69,
    "verdict": "in-band"
   },
@@ -296,7 +304,7 @@
    "week": 0,
    "total": 5,
    "cumR": -8.37,
-   "fwd_rmo": -4.18,
+   "fwd_rmo": -4.11,
    "exp_rmo": 0.22,
    "verdict": "watch"
   },
@@ -305,16 +313,16 @@
    "week": 1,
    "total": 8,
    "cumR": -3.16,
-   "fwd_rmo": -1.57,
+   "fwd_rmo": -1.55,
    "exp_rmo": 1.2,
    "verdict": "watch"
   },
   {
    "name": "EURUSD_v116",
    "week": 3,
-   "total": 22,
-   "cumR": -1.73,
-   "fwd_rmo": -0.87,
+   "total": 23,
+   "cumR": 0.32,
+   "fwd_rmo": 0.16,
    "exp_rmo": 2.36,
    "verdict": "watch"
   }
