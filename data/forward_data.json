@@ -1,9 +1,9 @@
 {
- "generated_utc": "2026-09-03T06:10:04.730185+00:00",
+ "generated_utc": "2026-09-04T06:10:04.590123+00:00",
  "deploy_epoch": "2026-07-02",
- "equity": 9772.51,
- "dd": 227.49,
- "cum_R": -12.64,
+ "equity": 9766.4,
+ "dd": 233.6,
+ "cum_R": -13.04,
  "curve": [
   [
    "2026-07-03",
@@ -260,6 +260,14 @@
   [
    "2026-09-02",
    -179.15
+  ],
+  [
+   "2026-09-03",
+   -193.91
+  ],
+  [
+   "2026-09-03",
+   -184.66
   ]
  ],
  "sleeves": [
@@ -268,7 +276,7 @@
    "week": 1,
    "total": 8,
    "cumR": -4.47,
-   "fwd_rmo": -2.19,
+   "fwd_rmo": -2.16,
    "exp_rmo": 1.22,
    "verdict": "watch"
   },
@@ -277,16 +285,16 @@
    "week": 1,
    "total": 7,
    "cumR": 1.66,
-   "fwd_rmo": 0.82,
+   "fwd_rmo": 0.8,
    "exp_rmo": 1.69,
    "verdict": "in-band"
   },
   {
    "name": "NAS100_Thu_M5",
    "week": 1,
-   "total": 7,
-   "cumR": 1.13,
-   "fwd_rmo": 0.56,
+   "total": 8,
+   "cumR": 1.79,
+   "fwd_rmo": 0.87,
    "exp_rmo": 0.47,
    "verdict": "in-band"
   },
@@ -295,7 +303,7 @@
    "week": 0,
    "total": 5,
    "cumR": 0.24,
-   "fwd_rmo": 0.12,
+   "fwd_rmo": 0.11,
    "exp_rmo": 1.19,
    "verdict": "in-band"
   },
@@ -304,7 +312,7 @@
    "week": 0,
    "total": 5,
    "cumR": -8.37,
-   "fwd_rmo": -4.11,
+   "fwd_rmo": -4.04,
    "exp_rmo": 0.22,
    "verdict": "watch"
   },
@@ -313,22 +321,27 @@
    "week": 1,
    "total": 8,
    "cumR": -3.16,
-   "fwd_rmo": -1.55,
+   "fwd_rmo": -1.52,
    "exp_rmo": 1.2,
    "verdict": "watch"
   },
   {
    "name": "EURUSD_v116",
-   "week": 3,
-   "total": 23,
-   "cumR": 0.32,
-   "fwd_rmo": 0.16,
+   "week": 4,
+   "total": 24,
+   "cumR": -0.73,
+   "fwd_rmo": -0.35,
    "exp_rmo": 2.36,
    "verdict": "watch"
   }
  ],
  "p99": 566,
  "p995": 618,
- "flags": [],
+ "flags": [
+  "EA HEARTBEAT missing: ORB_SPX500_Fri_M15 not in Experts/journal logs for >8d \u2014 verify it is attached+armed",
+  "EA HEARTBEAT missing: ORB_GER40_Wed_M5 not in Experts/journal logs for >8d \u2014 verify it is attached+armed",
+  "EA HEARTBEAT missing: ORB_JPN225_Wed_M5 not in Experts/journal logs for >8d \u2014 verify it is attached+armed",
+  "EA HEARTBEAT missing: ORB_JPN225_Thu_M5 not in Experts/journal logs for >8d \u2014 verify it is attached+armed"
+ ],
  "urgent": []
 }

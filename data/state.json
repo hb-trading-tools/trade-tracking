@@ -65,13 +65,20 @@
   1233709,
   1280196,
   1322844,
-  1324053
+  1324053,
+  1345474,
+  1355735
  ],
- "last_run_utc": "2026-09-03T06:10:03.814393+00:00",
- "last_equity": 9772.51,
- "last_balance": 9772.51,
- "last_dd": 227.49,
- "flags": [],
+ "last_run_utc": "2026-09-04T06:10:02.641552+00:00",
+ "last_equity": 9766.4,
+ "last_balance": 9766.4,
+ "last_dd": 233.6,
+ "flags": [
+  "EA HEARTBEAT missing: ORB_SPX500_Fri_M15 not in Experts/journal logs for >8d \u2014 verify it is attached+armed",
+  "EA HEARTBEAT missing: ORB_GER40_Wed_M5 not in Experts/journal logs for >8d \u2014 verify it is attached+armed",
+  "EA HEARTBEAT missing: ORB_JPN225_Wed_M5 not in Experts/journal logs for >8d \u2014 verify it is attached+armed",
+  "EA HEARTBEAT missing: ORB_JPN225_Thu_M5 not in Experts/journal logs for >8d \u2014 verify it is attached+armed"
+ ],
  "urgent": [],
- "last_jpn_worst": 69
+ "last_jpn_worst": 70
 }
