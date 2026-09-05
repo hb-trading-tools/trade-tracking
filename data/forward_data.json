@@ -1,9 +1,9 @@
 {
- "generated_utc": "2026-09-04T06:10:04.590123+00:00",
+ "generated_utc": "2026-09-05T06:10:02.906332+00:00",
  "deploy_epoch": "2026-07-02",
- "equity": 9766.4,
- "dd": 233.6,
- "cum_R": -13.04,
+ "equity": 9754.04,
+ "dd": 245.96,
+ "cum_R": -13.92,
  "curve": [
   [
    "2026-07-03",
@@ -268,15 +268,19 @@
   [
    "2026-09-03",
    -184.66
+  ],
+  [
+   "2026-09-04",
+   -197.02
   ]
  ],
  "sleeves": [
   {
    "name": "SPX500_Fri_M15",
-   "week": 1,
+   "week": 0,
    "total": 8,
    "cumR": -4.47,
-   "fwd_rmo": -2.16,
+   "fwd_rmo": -2.13,
    "exp_rmo": 1.22,
    "verdict": "watch"
   },
@@ -285,7 +289,7 @@
    "week": 1,
    "total": 7,
    "cumR": 1.66,
-   "fwd_rmo": 0.8,
+   "fwd_rmo": 0.79,
    "exp_rmo": 1.69,
    "verdict": "in-band"
   },
@@ -294,7 +298,7 @@
    "week": 1,
    "total": 8,
    "cumR": 1.79,
-   "fwd_rmo": 0.87,
+   "fwd_rmo": 0.85,
    "exp_rmo": 0.47,
    "verdict": "in-band"
   },
@@ -312,22 +316,22 @@
    "week": 0,
    "total": 5,
    "cumR": -8.37,
-   "fwd_rmo": -4.04,
+   "fwd_rmo": -3.98,
    "exp_rmo": 0.22,
    "verdict": "watch"
   },
   {
    "name": "NQ_Friday_M15",
    "week": 1,
-   "total": 8,
-   "cumR": -3.16,
-   "fwd_rmo": -1.52,
+   "total": 9,
+   "cumR": -4.04,
+   "fwd_rmo": -1.92,
    "exp_rmo": 1.2,
    "verdict": "watch"
   },
   {
    "name": "EURUSD_v116",
-   "week": 4,
+   "week": 3,
    "total": 24,
    "cumR": -0.73,
    "fwd_rmo": -0.35,
@@ -340,6 +344,7 @@
  "flags": [
   "EA HEARTBEAT missing: ORB_SPX500_Fri_M15 not in Experts/journal logs for >8d \u2014 verify it is attached+armed",
   "EA HEARTBEAT missing: ORB_GER40_Wed_M5 not in Experts/journal logs for >8d \u2014 verify it is attached+armed",
+  "EA HEARTBEAT missing: ORB_NAS100_Thu_M5 not in Experts/journal logs for >8d \u2014 verify it is attached+armed",
   "EA HEARTBEAT missing: ORB_JPN225_Wed_M5 not in Experts/journal logs for >8d \u2014 verify it is attached+armed",
   "EA HEARTBEAT missing: ORB_JPN225_Thu_M5 not in Experts/journal logs for >8d \u2014 verify it is attached+armed"
  ],
