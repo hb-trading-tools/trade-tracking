@@ -70,10 +70,10 @@
   1355735,
   1383617
  ],
- "last_run_utc": "2026-09-07T06:10:03.022900+00:00",
- "last_equity": 9754.04,
- "last_balance": 9754.04,
- "last_dd": 245.96,
+ "last_run_utc": "2026-09-08T06:10:04.163362+00:00",
+ "last_equity": 9772.48,
+ "last_balance": 9772.48,
+ "last_dd": 227.52,
  "flags": [
   "EA HEARTBEAT missing: ORB_SPX500_Fri_M15 not in Experts/journal logs for >8d \u2014 verify it is attached+armed",
   "EA HEARTBEAT missing: ORB_GER40_Wed_M5 not in Experts/journal logs for >8d \u2014 verify it is attached+armed",
@@ -82,5 +82,5 @@
   "EA HEARTBEAT missing: ORB_JPN225_Thu_M5 not in Experts/journal logs for >8d \u2014 verify it is attached+armed"
  ],
  "urgent": [],
- "last_jpn_worst": 71
+ "last_jpn_worst": 70
 }

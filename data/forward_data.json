@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-09-07T06:10:03.961333+00:00",
+ "generated_utc": "2026-09-08T06:10:05.731574+00:00",
  "deploy_epoch": "2026-07-02",
- "equity": 9754.04,
- "dd": 245.96,
+ "equity": 9772.48,
+ "dd": 227.52,
  "cum_R": -13.92,
  "curve": [
   [
@@ -280,7 +280,7 @@
    "week": 0,
    "total": 8,
    "cumR": -4.47,
-   "fwd_rmo": -2.06,
+   "fwd_rmo": -2.03,
    "exp_rmo": 1.22,
    "verdict": "watch"
   },
@@ -289,7 +289,7 @@
    "week": 1,
    "total": 7,
    "cumR": 1.66,
-   "fwd_rmo": 0.77,
+   "fwd_rmo": 0.75,
    "exp_rmo": 1.69,
    "verdict": "in-band"
   },
@@ -298,7 +298,7 @@
    "week": 1,
    "total": 8,
    "cumR": 1.79,
-   "fwd_rmo": 0.83,
+   "fwd_rmo": 0.81,
    "exp_rmo": 0.47,
    "verdict": "in-band"
   },
@@ -316,7 +316,7 @@
    "week": 0,
    "total": 5,
    "cumR": -8.37,
-   "fwd_rmo": -3.86,
+   "fwd_rmo": -3.8,
    "exp_rmo": 0.22,
    "verdict": "watch"
   },
@@ -325,7 +325,7 @@
    "week": 1,
    "total": 9,
    "cumR": -4.04,
-   "fwd_rmo": -1.86,
+   "fwd_rmo": -1.83,
    "exp_rmo": 1.2,
    "verdict": "watch"
   },
@@ -334,7 +334,7 @@
    "week": 3,
    "total": 24,
    "cumR": -0.73,
-   "fwd_rmo": -0.34,
+   "fwd_rmo": -0.33,
    "exp_rmo": 2.36,
    "verdict": "watch"
   }
