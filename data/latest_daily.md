@@ -1,8 +1,9 @@
-# Portfolio-A daily check — 2026-09-08 06:10 UTC
+# Portfolio-A daily check — 2026-09-09 06:10 UTC
 
-- equity **$9772.48** · balance $9772.48 · DD from peak **$228** (peak $10000.00; tripwire flag 300 / WARN 450 / CRITICAL 525 / limit 600)
+- equity **$9745.55** · balance $9745.55 · DD from peak **$254** (peak $10000.00; tripwire flag 300 / WARN 450 / CRITICAL 525 / limit 600)
 - JPN min-lot tail: est. worst 0.1-lot trade **$70** (warn >$90; baseline $73 @ 68000)
-- new closed trades: **0**
+- new closed trades: **1**
+  - 2026.09.08 09:30 EURUSD_v116 short R=0.0929 PnL=$1.3 (CLOSE)
 
 ## Flags
 - ⚠ EA HEARTBEAT missing: ORB_SPX500_Fri_M15 not in Experts/journal logs for >8d — verify it is attached+armed
