@@ -1,9 +1,9 @@
 {
- "generated_utc": "2026-09-10T06:10:04.029701+00:00",
+ "generated_utc": "2026-09-11T06:10:04.541500+00:00",
  "deploy_epoch": "2026-07-02",
- "equity": 9722.51,
- "dd": 277.49,
- "cum_R": -17.86,
+ "equity": 9786.17,
+ "dd": 213.83,
+ "cum_R": -14.6,
  "curve": [
   [
    "2026-07-03",
@@ -288,6 +288,18 @@
   [
    "2026-09-09",
    -252.24
+  ],
+  [
+   "2026-09-10",
+   -245.34
+  ],
+  [
+   "2026-09-10",
+   -215.59
+  ],
+  [
+   "2026-09-10",
+   -206.59
   ]
  ],
  "sleeves": [
@@ -296,7 +308,7 @@
    "week": 0,
    "total": 8,
    "cumR": -4.47,
-   "fwd_rmo": -1.97,
+   "fwd_rmo": -1.94,
    "exp_rmo": 1.22,
    "verdict": "watch"
   },
@@ -305,16 +317,16 @@
    "week": 1,
    "total": 8,
    "cumR": 0.58,
-   "fwd_rmo": 0.26,
+   "fwd_rmo": 0.25,
    "exp_rmo": 1.69,
    "verdict": "in-band"
   },
   {
    "name": "NAS100_Thu_M5",
    "week": 1,
-   "total": 8,
-   "cumR": 1.79,
-   "fwd_rmo": 0.79,
+   "total": 9,
+   "cumR": 2.44,
+   "fwd_rmo": 1.06,
    "exp_rmo": 0.47,
    "verdict": "in-band"
   },
@@ -323,16 +335,16 @@
    "week": 1,
    "total": 6,
    "cumR": -1.73,
-   "fwd_rmo": -0.77,
+   "fwd_rmo": -0.75,
    "exp_rmo": 1.19,
    "verdict": "watch"
   },
   {
    "name": "JPN225_Thu_M5",
-   "week": 0,
-   "total": 5,
-   "cumR": -8.37,
-   "fwd_rmo": -3.69,
+   "week": 1,
+   "total": 6,
+   "cumR": -7.88,
+   "fwd_rmo": -3.43,
    "exp_rmo": 0.22,
    "verdict": "watch"
   },
@@ -341,22 +353,22 @@
    "week": 1,
    "total": 9,
    "cumR": -4.04,
-   "fwd_rmo": -1.78,
+   "fwd_rmo": -1.76,
    "exp_rmo": 1.2,
    "verdict": "watch"
   },
   {
    "name": "EURUSD_v116",
    "week": 3,
-   "total": 26,
-   "cumR": -1.62,
-   "fwd_rmo": -0.72,
+   "total": 27,
+   "cumR": 0.5,
+   "fwd_rmo": 0.22,
    "exp_rmo": 2.36,
    "verdict": "watch"
   }
  ],
- "p99": 566,
- "p995": 618,
+ "p99": 585,
+ "p995": 636,
  "flags": [
   "EA HEARTBEAT missing: ORB_SPX500_Fri_M15 not in Experts/journal logs for >8d \u2014 verify it is attached+armed",
   "EA HEARTBEAT missing: ORB_GER40_Wed_M5 not in Experts/journal logs for >8d \u2014 verify it is attached+armed",
