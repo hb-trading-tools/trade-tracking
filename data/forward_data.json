@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-09-13T06:10:03.016984+00:00",
+ "generated_utc": "2026-09-14T06:10:04.402944+00:00",
  "deploy_epoch": "2026-07-02",
  "equity": 9780.37,
  "dd": 219.63,
@@ -316,7 +316,7 @@
    "week": 0,
    "total": 8,
    "cumR": -4.47,
-   "fwd_rmo": -1.89,
+   "fwd_rmo": -1.86,
    "exp_rmo": 1.22,
    "verdict": "watch"
   },
@@ -325,7 +325,7 @@
    "week": 1,
    "total": 8,
    "cumR": 0.58,
-   "fwd_rmo": 0.25,
+   "fwd_rmo": 0.24,
    "exp_rmo": 1.69,
    "verdict": "in-band"
   },
@@ -334,7 +334,7 @@
    "week": 1,
    "total": 9,
    "cumR": 2.44,
-   "fwd_rmo": 1.03,
+   "fwd_rmo": 1.02,
    "exp_rmo": 0.47,
    "verdict": "in-band"
   },
@@ -343,7 +343,7 @@
    "week": 1,
    "total": 6,
    "cumR": -1.73,
-   "fwd_rmo": -0.73,
+   "fwd_rmo": -0.72,
    "exp_rmo": 1.19,
    "verdict": "watch"
   },
@@ -352,7 +352,7 @@
    "week": 1,
    "total": 6,
    "cumR": -7.88,
-   "fwd_rmo": -3.33,
+   "fwd_rmo": -3.28,
    "exp_rmo": 0.22,
    "verdict": "watch"
   },
@@ -361,7 +361,7 @@
    "week": 1,
    "total": 10,
    "cumR": -4.2,
-   "fwd_rmo": -1.78,
+   "fwd_rmo": -1.75,
    "exp_rmo": 1.2,
    "verdict": "watch"
   },

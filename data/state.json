@@ -79,7 +79,7 @@
   1492492,
   1494962
  ],
- "last_run_utc": "2026-09-13T06:10:02.225302+00:00",
+ "last_run_utc": "2026-09-14T06:10:03.095254+00:00",
  "last_equity": 9780.37,
  "last_balance": 9780.37,
  "last_dd": 219.63,
@@ -90,5 +90,5 @@
   "EA HEARTBEAT missing: ORB_JPN225_Wed_M5 not in Experts/journal logs for >8d \u2014 verify it is attached+armed"
  ],
  "urgent": [],
- "last_jpn_worst": 69
+ "last_jpn_worst": 68
 }
