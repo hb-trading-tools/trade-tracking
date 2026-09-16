@@ -1,9 +1,9 @@
 {
- "generated_utc": "2026-09-15T06:10:03.883775+00:00",
+ "generated_utc": "2026-09-16T06:10:04.728246+00:00",
  "deploy_epoch": "2026-07-02",
- "equity": 9780.37,
- "dd": 219.63,
- "cum_R": -15.0,
+ "equity": 9778.71,
+ "dd": 221.29,
+ "cum_R": -14.75,
  "curve": [
   [
    "2026-07-03",
@@ -308,6 +308,10 @@
   [
    "2026-09-11",
    -212.19
+  ],
+  [
+   "2026-09-15",
+   -208.59
   ]
  ],
  "sleeves": [
@@ -316,7 +320,7 @@
    "week": 0,
    "total": 8,
    "cumR": -4.47,
-   "fwd_rmo": -1.84,
+   "fwd_rmo": -1.81,
    "exp_rmo": 1.22,
    "verdict": "watch"
   },
@@ -334,16 +338,16 @@
    "week": 1,
    "total": 9,
    "cumR": 2.44,
-   "fwd_rmo": 1.0,
+   "fwd_rmo": 0.99,
    "exp_rmo": 0.47,
    "verdict": "in-band"
   },
   {
    "name": "JPN225_Wed_M5",
-   "week": 1,
+   "week": 0,
    "total": 6,
    "cumR": -1.73,
-   "fwd_rmo": -0.71,
+   "fwd_rmo": -0.7,
    "exp_rmo": 1.19,
    "verdict": "watch"
   },
@@ -352,7 +356,7 @@
    "week": 1,
    "total": 6,
    "cumR": -7.88,
-   "fwd_rmo": -3.24,
+   "fwd_rmo": -3.2,
    "exp_rmo": 0.22,
    "verdict": "watch"
   },
@@ -361,27 +365,22 @@
    "week": 1,
    "total": 10,
    "cumR": -4.2,
-   "fwd_rmo": -1.73,
+   "fwd_rmo": -1.7,
    "exp_rmo": 1.2,
    "verdict": "watch"
   },
   {
    "name": "EURUSD_v116",
    "week": 4,
-   "total": 28,
-   "cumR": 0.26,
-   "fwd_rmo": 0.11,
+   "total": 29,
+   "cumR": 0.52,
+   "fwd_rmo": 0.21,
    "exp_rmo": 2.36,
    "verdict": "watch"
   }
  ],
  "p99": 585,
  "p995": 636,
- "flags": [
-  "EA HEARTBEAT missing: ORB_SPX500_Fri_M15 not in Experts/journal logs for >8d \u2014 verify it is attached+armed",
-  "EA HEARTBEAT missing: ORB_GER40_Wed_M5 not in Experts/journal logs for >8d \u2014 verify it is attached+armed",
-  "EA HEARTBEAT missing: ORB_NAS100_Thu_M5 not in Experts/journal logs for >8d \u2014 verify it is attached+armed",
-  "EA HEARTBEAT missing: ORB_JPN225_Wed_M5 not in Experts/journal logs for >8d \u2014 verify it is attached+armed"
- ],
+ "flags": [],
  "urgent": []
 }

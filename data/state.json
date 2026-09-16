@@ -77,18 +77,14 @@
   1463289,
   1472919,
   1492492,
-  1494962
+  1494962,
+  1531218
  ],
- "last_run_utc": "2026-09-15T06:10:02.839634+00:00",
- "last_equity": 9780.37,
- "last_balance": 9780.37,
- "last_dd": 219.63,
- "flags": [
-  "EA HEARTBEAT missing: ORB_SPX500_Fri_M15 not in Experts/journal logs for >8d \u2014 verify it is attached+armed",
-  "EA HEARTBEAT missing: ORB_GER40_Wed_M5 not in Experts/journal logs for >8d \u2014 verify it is attached+armed",
-  "EA HEARTBEAT missing: ORB_NAS100_Thu_M5 not in Experts/journal logs for >8d \u2014 verify it is attached+armed",
-  "EA HEARTBEAT missing: ORB_JPN225_Wed_M5 not in Experts/journal logs for >8d \u2014 verify it is attached+armed"
- ],
+ "last_run_utc": "2026-09-16T06:10:03.633232+00:00",
+ "last_equity": 9778.71,
+ "last_balance": 9778.71,
+ "last_dd": 221.29,
+ "flags": [],
  "urgent": [],
  "last_jpn_worst": 68
 }
