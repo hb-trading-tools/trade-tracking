@@ -1,9 +1,9 @@
 {
- "generated_utc": "2026-09-16T06:10:04.728246+00:00",
+ "generated_utc": "2026-09-17T06:10:03.406436+00:00",
  "deploy_epoch": "2026-07-02",
- "equity": 9778.71,
- "dd": 221.29,
- "cum_R": -14.75,
+ "equity": 9790.87,
+ "dd": 209.13,
+ "cum_R": -14.14,
  "curve": [
   [
    "2026-07-03",
@@ -312,6 +312,18 @@
   [
    "2026-09-15",
    -208.59
+  ],
+  [
+   "2026-09-16",
+   -213.1
+  ],
+  [
+   "2026-09-16",
+   -230.01
+  ],
+  [
+   "2026-09-16",
+   -200.09
   ]
  ],
  "sleeves": [
@@ -320,34 +332,34 @@
    "week": 0,
    "total": 8,
    "cumR": -4.47,
-   "fwd_rmo": -1.81,
+   "fwd_rmo": -1.79,
    "exp_rmo": 1.22,
    "verdict": "watch"
   },
   {
    "name": "GER40_Wed_M5",
    "week": 1,
-   "total": 8,
-   "cumR": 0.58,
-   "fwd_rmo": 0.24,
+   "total": 9,
+   "cumR": -0.63,
+   "fwd_rmo": -0.25,
    "exp_rmo": 1.69,
-   "verdict": "in-band"
+   "verdict": "watch"
   },
   {
    "name": "NAS100_Thu_M5",
    "week": 1,
    "total": 9,
    "cumR": 2.44,
-   "fwd_rmo": 0.99,
+   "fwd_rmo": 0.98,
    "exp_rmo": 0.47,
    "verdict": "in-band"
   },
   {
    "name": "JPN225_Wed_M5",
-   "week": 0,
-   "total": 6,
-   "cumR": -1.73,
-   "fwd_rmo": -0.7,
+   "week": 1,
+   "total": 7,
+   "cumR": -2.06,
+   "fwd_rmo": -0.82,
    "exp_rmo": 1.19,
    "verdict": "watch"
   },
@@ -356,7 +368,7 @@
    "week": 1,
    "total": 6,
    "cumR": -7.88,
-   "fwd_rmo": -3.2,
+   "fwd_rmo": -3.15,
    "exp_rmo": 0.22,
    "verdict": "watch"
   },
@@ -365,18 +377,18 @@
    "week": 1,
    "total": 10,
    "cumR": -4.2,
-   "fwd_rmo": -1.7,
+   "fwd_rmo": -1.68,
    "exp_rmo": 1.2,
    "verdict": "watch"
   },
   {
    "name": "EURUSD_v116",
    "week": 4,
-   "total": 29,
-   "cumR": 0.52,
-   "fwd_rmo": 0.21,
+   "total": 30,
+   "cumR": 2.66,
+   "fwd_rmo": 1.06,
    "exp_rmo": 2.36,
-   "verdict": "watch"
+   "verdict": "in-band"
   }
  ],
  "p99": 585,
