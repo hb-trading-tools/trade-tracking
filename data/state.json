@@ -81,13 +81,17 @@
   1531218,
   1553934,
   1556332,
-  1557652
+  1557652,
+  1592621,
+  1611799
  ],
- "last_run_utc": "2026-09-17T06:10:02.532645+00:00",
- "last_equity": 9790.87,
- "last_balance": 9790.87,
- "last_dd": 209.13,
- "flags": [],
+ "last_run_utc": "2026-09-18T06:10:04.573858+00:00",
+ "last_equity": 9773.83,
+ "last_balance": 9773.83,
+ "last_dd": 226.17,
+ "flags": [
+  "ORDER REJECTS/ERRORS in journal: 2 line(s) \u2014 first: des\t'10679': failed modify #1611799 buy 0.14 NAS100.gbe sl: 29418.75, tp: 0.00 -> sl: 29423.60, tp: 0.00 [Invalid stops]"
+ ],
  "urgent": [],
- "last_jpn_worst": 69
+ "last_jpn_worst": 70
 }
