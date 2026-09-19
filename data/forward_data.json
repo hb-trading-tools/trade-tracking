@@ -1,9 +1,9 @@
 {
- "generated_utc": "2026-09-18T06:10:06.849744+00:00",
+ "generated_utc": "2026-09-19T06:10:02.587483+00:00",
  "deploy_epoch": "2026-07-02",
- "equity": 9773.83,
- "dd": 226.17,
- "cum_R": -15.27,
+ "equity": 9790.91,
+ "dd": 209.09,
+ "cum_R": -13.99,
  "curve": [
   [
    "2026-07-03",
@@ -332,15 +332,27 @@
   [
    "2026-09-17",
    -215.88
+  ],
+  [
+   "2026-09-18",
+   -186.13
+  ],
+  [
+   "2026-09-18",
+   -201.39
+  ],
+  [
+   "2026-09-18",
+   -197.95
   ]
  ],
  "sleeves": [
   {
    "name": "SPX500_Fri_M15",
-   "week": 0,
-   "total": 8,
-   "cumR": -4.47,
-   "fwd_rmo": -1.77,
+   "week": 1,
+   "total": 9,
+   "cumR": -5.56,
+   "fwd_rmo": -2.17,
    "exp_rmo": 1.22,
    "verdict": "watch"
   },
@@ -358,7 +370,7 @@
    "week": 1,
    "total": 10,
    "cumR": 2.34,
-   "fwd_rmo": 0.93,
+   "fwd_rmo": 0.91,
    "exp_rmo": 0.47,
    "verdict": "in-band"
   },
@@ -367,7 +379,7 @@
    "week": 1,
    "total": 7,
    "cumR": -2.06,
-   "fwd_rmo": -0.81,
+   "fwd_rmo": -0.8,
    "exp_rmo": 1.19,
    "verdict": "watch"
   },
@@ -376,33 +388,31 @@
    "week": 0,
    "total": 6,
    "cumR": -7.88,
-   "fwd_rmo": -3.11,
+   "fwd_rmo": -3.07,
    "exp_rmo": 0.22,
    "verdict": "watch"
   },
   {
    "name": "NQ_Friday_M15",
    "week": 1,
-   "total": 10,
-   "cumR": -4.2,
-   "fwd_rmo": -1.66,
+   "total": 11,
+   "cumR": -3.96,
+   "fwd_rmo": -1.54,
    "exp_rmo": 1.2,
    "verdict": "watch"
   },
   {
    "name": "EURUSD_v116",
    "week": 4,
-   "total": 31,
-   "cumR": 1.62,
-   "fwd_rmo": 0.64,
+   "total": 32,
+   "cumR": 3.75,
+   "fwd_rmo": 1.46,
    "exp_rmo": 2.36,
-   "verdict": "watch"
+   "verdict": "in-band"
   }
  ],
- "p99": 585,
- "p995": 636,
- "flags": [
-  "ORDER REJECTS/ERRORS in journal: 2 line(s) \u2014 first: des\t'10679': failed modify #1611799 buy 0.14 NAS100.gbe sl: 29418.75, tp: 0.00 -> sl: 29423.60, tp: 0.00 [Invalid stops]"
- ],
+ "p99": 592,
+ "p995": 641,
+ "flags": [],
  "urgent": []
 }
