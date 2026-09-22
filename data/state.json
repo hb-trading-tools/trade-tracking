@@ -86,13 +86,16 @@
   1611799,
   1632907,
   1636670,
-  1636671
+  1636671,
+  1674874
  ],
- "last_run_utc": "2026-09-21T06:10:03.373628+00:00",
- "last_equity": 9790.91,
- "last_balance": 9790.91,
- "last_dd": 209.09,
- "flags": [],
+ "last_run_utc": "2026-09-22T06:10:02.884659+00:00",
+ "last_equity": 9772.19,
+ "last_balance": 9772.19,
+ "last_dd": 227.81,
+ "flags": [
+  "EA REMOVED from chart detected: KD\t0\t10:57:04.187\tExperts\texpert ORB_GER40_Wed_M5_v113 (GER40.gbe,M5) removed"
+ ],
  "urgent": [],
- "last_jpn_worst": 70
+ "last_jpn_worst": 71
 }
