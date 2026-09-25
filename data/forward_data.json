@@ -1,9 +1,9 @@
 {
- "generated_utc": "2026-09-24T06:10:07.441118+00:00",
+ "generated_utc": "2026-09-25T06:10:07.467522+00:00",
  "deploy_epoch": "2026-07-02",
- "equity": 9772.19,
- "dd": 227.81,
- "cum_R": -15.18,
+ "equity": 9780.43,
+ "dd": 219.57,
+ "cum_R": -14.59,
  "curve": [
   [
    "2026-07-03",
@@ -348,6 +348,10 @@
   [
    "2026-09-21",
    -214.72
+  ],
+  [
+   "2026-09-24",
+   -206.48
   ]
  ],
  "sleeves": [
@@ -356,7 +360,7 @@
    "week": 1,
    "total": 9,
    "cumR": -5.56,
-   "fwd_rmo": -2.04,
+   "fwd_rmo": -2.01,
    "exp_rmo": 1.22,
    "verdict": "watch"
   },
@@ -372,9 +376,9 @@
   {
    "name": "NAS100_Thu_M5",
    "week": 1,
-   "total": 10,
-   "cumR": 2.34,
-   "fwd_rmo": 0.86,
+   "total": 11,
+   "cumR": 2.93,
+   "fwd_rmo": 1.06,
    "exp_rmo": 0.47,
    "verdict": "in-band"
   },
@@ -392,7 +396,7 @@
    "week": 0,
    "total": 6,
    "cumR": -7.88,
-   "fwd_rmo": -2.89,
+   "fwd_rmo": -2.85,
    "exp_rmo": 0.22,
    "verdict": "watch"
   },
@@ -401,16 +405,16 @@
    "week": 1,
    "total": 11,
    "cumR": -3.96,
-   "fwd_rmo": -1.45,
+   "fwd_rmo": -1.43,
    "exp_rmo": 1.2,
    "verdict": "watch"
   },
   {
    "name": "EURUSD_v116",
-   "week": 3,
+   "week": 2,
    "total": 33,
    "cumR": 2.55,
-   "fwd_rmo": 0.94,
+   "fwd_rmo": 0.92,
    "exp_rmo": 2.36,
    "verdict": "in-band"
   }
@@ -418,7 +422,10 @@
  "p99": 592,
  "p995": 641,
  "flags": [
-  "EA REMOVED from chart detected: KD\t0\t10:57:04.187\tExperts\texpert ORB_GER40_Wed_M5_v113 (GER40.gbe,M5) removed"
+  "LIVE 10374: EA MISSING since last start: ORB_XAUUSD_M3_v102_logfix (XAUUSD.gbe) \u2014 attach by hand, then SAVE THE PROFILE",
+  "LIVE 10374: UNEXPECTED EA loaded: ORB_XAUUSD_M3_v102 (XAUUSD.gbe)",
+  "LIVE 14224: EA MISSING since last start: ORB_XAUUSD_M3_v102_logfix (XAUUSD.gbe) \u2014 attach by hand, then SAVE THE PROFILE",
+  "LIVE 14224: UNEXPECTED EA loaded: ORB_XAUUSD_M3_v102 (XAUUSD.gbe)"
  ],
  "urgent": []
 }
