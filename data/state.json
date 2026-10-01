@@ -91,12 +91,14 @@
   1785330,
   1800316,
   1811389,
-  1812649
+  1812649,
+  1883249,
+  1909618
  ],
- "last_run_utc": "2026-09-30T06:10:02.849294+00:00",
- "last_equity": 9737.18,
- "last_balance": 9737.18,
- "last_dd": 262.82,
+ "last_run_utc": "2026-10-01T06:10:02.200850+00:00",
+ "last_equity": 9807.13,
+ "last_balance": 9807.13,
+ "last_dd": 192.87,
  "flags": [
   "LIVE 10374: EA MISSING since last start: ORB_XAUUSD_M3_v102_logfix (XAUUSD.gbe) \u2014 attach by hand, then SAVE THE PROFILE",
   "LIVE 10374: UNEXPECTED EA loaded: ORB_XAUUSD_M3_v102 (XAUUSD.gbe)",
@@ -104,7 +106,7 @@
   "LIVE 14224: UNEXPECTED EA loaded: ORB_XAUUSD_M3_v102 (XAUUSD.gbe)"
  ],
  "urgent": [],
- "last_jpn_worst": 72,
+ "last_jpn_worst": 74,
  "live_accounts": [
   "10374: running=yes; last start 20260923 10:20:36.382 UTC; loaded: EURUSD_SessionSweep_M15_v116_100k_g5 (EURUSD.gbe), ORB_XAUUSD_M3_v102 (XAUUSD.gbe)",
   "14224: running=yes; last start 20260923 10:21:11.166 UTC; loaded: EURUSD_SessionSweep_M15_v116_100k_g5 (EURUSD.gbe), ORB_XAUUSD_M3_v102 (XAUUSD.gbe)"
