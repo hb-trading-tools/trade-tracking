@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-10-01T06:10:06.468218+00:00",
+ "generated_utc": "2026-10-02T06:10:08.565227+00:00",
  "deploy_epoch": "2026-07-02",
  "equity": 9807.13,
  "dd": 192.87,
@@ -380,7 +380,7 @@
    "week": 1,
    "total": 10,
    "cumR": -6.57,
-   "fwd_rmo": -2.22,
+   "fwd_rmo": -2.2,
    "exp_rmo": 1.22,
    "verdict": "watch"
   },
@@ -395,10 +395,10 @@
   },
   {
    "name": "NAS100_Thu_M5",
-   "week": 1,
+   "week": 0,
    "total": 11,
    "cumR": 2.93,
-   "fwd_rmo": 0.99,
+   "fwd_rmo": 0.98,
    "exp_rmo": 0.47,
    "verdict": "in-band"
   },
@@ -407,7 +407,7 @@
    "week": 1,
    "total": 8,
    "cumR": -0.87,
-   "fwd_rmo": -0.3,
+   "fwd_rmo": -0.29,
    "exp_rmo": 1.19,
    "verdict": "in-band"
   },
@@ -416,7 +416,7 @@
    "week": 1,
    "total": 7,
    "cumR": -5.17,
-   "fwd_rmo": -1.75,
+   "fwd_rmo": -1.73,
    "exp_rmo": 0.22,
    "verdict": "watch"
   },
@@ -425,7 +425,7 @@
    "week": 1,
    "total": 12,
    "cumR": -4.94,
-   "fwd_rmo": -1.67,
+   "fwd_rmo": -1.65,
    "exp_rmo": 1.2,
    "verdict": "watch"
   },
