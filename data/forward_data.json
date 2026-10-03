@@ -1,9 +1,9 @@
 {
- "generated_utc": "2026-10-02T06:10:08.565227+00:00",
+ "generated_utc": "2026-10-03T06:10:04.601543+00:00",
  "deploy_epoch": "2026-07-02",
- "equity": 9807.13,
- "dd": 192.87,
- "cum_R": -13.73,
+ "equity": 9765.19,
+ "dd": 234.81,
+ "cum_R": -16.68,
  "curve": [
   [
    "2026-07-03",
@@ -372,15 +372,27 @@
   [
    "2026-10-01",
    -194.34
+  ],
+  [
+   "2026-10-02",
+   -208.9
+  ],
+  [
+   "2026-10-02",
+   -222.68
+  ],
+  [
+   "2026-10-02",
+   -235.63
   ]
  ],
  "sleeves": [
   {
    "name": "SPX500_Fri_M15",
    "week": 1,
-   "total": 10,
-   "cumR": -6.57,
-   "fwd_rmo": -2.2,
+   "total": 11,
+   "cumR": -7.49,
+   "fwd_rmo": -2.48,
    "exp_rmo": 1.22,
    "verdict": "watch"
   },
@@ -398,7 +410,7 @@
    "week": 0,
    "total": 11,
    "cumR": 2.93,
-   "fwd_rmo": 0.98,
+   "fwd_rmo": 0.97,
    "exp_rmo": 0.47,
    "verdict": "in-band"
   },
@@ -416,36 +428,40 @@
    "week": 1,
    "total": 7,
    "cumR": -5.17,
-   "fwd_rmo": -1.73,
+   "fwd_rmo": -1.71,
    "exp_rmo": 0.22,
    "verdict": "watch"
   },
   {
    "name": "NQ_Friday_M15",
    "week": 1,
-   "total": 12,
-   "cumR": -4.94,
-   "fwd_rmo": -1.65,
+   "total": 13,
+   "cumR": -5.93,
+   "fwd_rmo": -1.96,
    "exp_rmo": 1.2,
    "verdict": "watch"
   },
   {
    "name": "EURUSD_v116",
    "week": 1,
-   "total": 34,
-   "cumR": 1.52,
-   "fwd_rmo": 0.51,
+   "total": 35,
+   "cumR": 0.48,
+   "fwd_rmo": 0.16,
    "exp_rmo": 2.36,
    "verdict": "watch"
   }
  ],
- "p99": 592,
+ "p99": 591,
  "p995": 641,
  "flags": [
   "LIVE 10374: EA MISSING since last start: ORB_XAUUSD_M3_v102_logfix (XAUUSD.gbe) \u2014 attach by hand, then SAVE THE PROFILE",
   "LIVE 10374: UNEXPECTED EA loaded: ORB_XAUUSD_M3_v102 (XAUUSD.gbe)",
   "LIVE 14224: EA MISSING since last start: ORB_XAUUSD_M3_v102_logfix (XAUUSD.gbe) \u2014 attach by hand, then SAVE THE PROFILE",
-  "LIVE 14224: UNEXPECTED EA loaded: ORB_XAUUSD_M3_v102 (XAUUSD.gbe)"
+  "LIVE 14224: UNEXPECTED EA loaded: ORB_XAUUSD_M3_v102 (XAUUSD.gbe)",
+  "EA HEARTBEAT missing: ORB_SPX500_Fri_M15 not in Experts/journal logs for >8d \u2014 verify it is attached+armed",
+  "EA HEARTBEAT missing: ORB_GER40_Wed_M5 not in Experts/journal logs for >8d \u2014 verify it is attached+armed",
+  "EA HEARTBEAT missing: ORB_NAS100_Thu_M5 not in Experts/journal logs for >8d \u2014 verify it is attached+armed",
+  "EA HEARTBEAT missing: ORB_JPN225_Thu_M5 not in Experts/journal logs for >8d \u2014 verify it is attached+armed"
  ],
  "urgent": []
 }
