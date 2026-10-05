@@ -98,10 +98,10 @@
   1976154,
   1977408
  ],
- "last_run_utc": "2026-10-04T06:10:02.108126+00:00",
- "last_equity": 9765.19,
- "last_balance": 9765.19,
- "last_dd": 234.81,
+ "last_run_utc": "2026-10-05T06:10:02.572435+00:00",
+ "last_equity": 9734.26,
+ "last_balance": 9734.26,
+ "last_dd": 265.74,
  "flags": [
   "LIVE 10374: EA MISSING since last start: ORB_XAUUSD_M3_v102_logfix (XAUUSD.gbe) \u2014 attach by hand, then SAVE THE PROFILE",
   "LIVE 10374: UNEXPECTED EA loaded: ORB_XAUUSD_M3_v102 (XAUUSD.gbe)",
