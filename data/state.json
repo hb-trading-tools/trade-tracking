@@ -98,10 +98,10 @@
   1976154,
   1977408
  ],
- "last_run_utc": "2026-10-05T06:10:02.572435+00:00",
- "last_equity": 9734.26,
- "last_balance": 9734.26,
- "last_dd": 265.74,
+ "last_run_utc": "2026-10-06T06:10:02.493508+00:00",
+ "last_equity": 9703.06,
+ "last_balance": 9703.06,
+ "last_dd": 296.94,
  "flags": [
   "LIVE 10374: EA MISSING since last start: ORB_XAUUSD_M3_v102_logfix (XAUUSD.gbe) \u2014 attach by hand, then SAVE THE PROFILE",
   "LIVE 10374: UNEXPECTED EA loaded: ORB_XAUUSD_M3_v102 (XAUUSD.gbe)",
@@ -113,7 +113,7 @@
   "EA HEARTBEAT missing: ORB_JPN225_Thu_M5 not in Experts/journal logs for >8d \u2014 verify it is attached+armed"
  ],
  "urgent": [],
- "last_jpn_worst": 75,
+ "last_jpn_worst": 76,
  "live_accounts": [
   "10374: running=yes; last start 20260923 10:20:36.382 UTC; loaded: EURUSD_SessionSweep_M15_v116_100k_g5 (EURUSD.gbe), ORB_XAUUSD_M3_v102 (XAUUSD.gbe)",
   "14224: running=yes; last start 20260923 10:21:11.166 UTC; loaded: EURUSD_SessionSweep_M15_v116_100k_g5 (EURUSD.gbe), ORB_XAUUSD_M3_v102 (XAUUSD.gbe)"
