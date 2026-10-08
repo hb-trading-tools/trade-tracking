@@ -1,12 +1,13 @@
-# Portfolio-A daily check — 2026-10-07 06:10 UTC
+# Portfolio-A daily check — 2026-10-08 06:10 UTC
 
-- equity **$9686.46** · balance $9686.46 · DD from peak **$314** (peak $10000.00; tripwire flag 300 / WARN 450 / CRITICAL 525 / limit 600)
-- JPN min-lot tail: est. worst 0.1-lot trade **$75** (warn >$90; baseline $73 @ 68000)
+- equity **$9651.96** · balance $9651.96 · DD from peak **$348** (peak $10000.00; tripwire flag 300 / WARN 450 / CRITICAL 525 / limit 600)
+- JPN min-lot tail: est. worst 0.1-lot trade **$74** (warn >$90; baseline $73 @ 68000)
 - 10679 running: **yes** · five book sleeves attached: **yes** — GER40.gbe: ORB_GER40_Wed_M5_v113 (M5); NAS100.gbe: NQ_ORB_Friday_M15_v201 (M15), ORB_NAS100_Thu_M5_v113 (M5); SPX500.gbe: ORB_SPX500_Fri_M15_v113 (M15); XAUUSD.gbe: ORB_XAUUSD_M3_v102 (M3); EURUSD.gbe: EURUSD_SessionSweep_M15_v116_100k_g5 (M15)
 - live 10374: running=yes; last start 20260923 10:20:36.382 UTC; loaded: EURUSD_SessionSweep_M15_v116_100k_g5 (EURUSD.gbe), ORB_XAUUSD_M3_v102 (XAUUSD.gbe)
 - live 14224: running=yes; last start 20260923 10:21:11.166 UTC; loaded: EURUSD_SessionSweep_M15_v116_100k_g5 (EURUSD.gbe), ORB_XAUUSD_M3_v102 (XAUUSD.gbe)
-- new closed trades: **1**
-  - 2026.10.06 10:00 EURUSD_v116 long R=-1.1143 PnL=$-15.6 (SL)
+- new closed trades: **2**
+  - 2026.10.07 10:00 EURUSD_v116 long R=-1.0714 PnL=$-15.0 (SL)
+  - 2026.10.07 11:20 GER40_Wed_M5 long R=-1.3036 PnL=$-18.25 (SL)
 
 ## Flags
 - ⚠ LIVE 10374: EA MISSING since last start: ORB_XAUUSD_M3_v102_logfix (XAUUSD.gbe) — attach by hand, then SAVE THE PROFILE
@@ -17,4 +18,4 @@
 - ⚠ EA HEARTBEAT missing: ORB_GER40_Wed_M5 not in Experts/journal logs for >8d — verify it is attached+armed
 - ⚠ EA HEARTBEAT missing: ORB_NAS100_Thu_M5 not in Experts/journal logs for >8d — verify it is attached+armed
 - ⚠ EA HEARTBEAT missing: ORB_JPN225_Thu_M5 not in Experts/journal logs for >8d — verify it is attached+armed
-- ⚠ DD $314 >= $300 (50% of limit) — heightened watch
+- ⚠ DD $348 >= $300 (50% of limit) — heightened watch

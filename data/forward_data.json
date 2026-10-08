@@ -1,9 +1,9 @@
 {
- "generated_utc": "2026-10-07T06:10:07.672316+00:00",
+ "generated_utc": "2026-10-08T06:10:09.490272+00:00",
  "deploy_epoch": "2026-07-02",
- "equity": 9686.46,
- "dd": 313.54,
- "cum_R": -17.79,
+ "equity": 9651.96,
+ "dd": 348.04,
+ "cum_R": -20.17,
  "curve": [
   [
    "2026-07-03",
@@ -388,6 +388,14 @@
   [
    "2026-10-06",
    -251.23
+  ],
+  [
+   "2026-10-07",
+   -266.23
+  ],
+  [
+   "2026-10-07",
+   -284.48
   ]
  ],
  "sleeves": [
@@ -396,16 +404,16 @@
    "week": 1,
    "total": 11,
    "cumR": -7.49,
-   "fwd_rmo": -2.38,
+   "fwd_rmo": -2.35,
    "exp_rmo": 1.22,
    "verdict": "watch"
   },
   {
    "name": "GER40_Wed_M5",
-   "week": 0,
-   "total": 9,
-   "cumR": -0.63,
-   "fwd_rmo": -0.2,
+   "week": 1,
+   "total": 10,
+   "cumR": -1.93,
+   "fwd_rmo": -0.61,
    "exp_rmo": 1.69,
    "verdict": "watch"
   },
@@ -414,25 +422,25 @@
    "week": 0,
    "total": 11,
    "cumR": 2.93,
-   "fwd_rmo": 0.93,
+   "fwd_rmo": 0.92,
    "exp_rmo": 0.47,
    "verdict": "in-band"
   },
   {
    "name": "JPN225_Wed_M5",
-   "week": 1,
+   "week": 0,
    "total": 8,
    "cumR": -0.87,
-   "fwd_rmo": -0.28,
+   "fwd_rmo": -0.27,
    "exp_rmo": 1.19,
    "verdict": "in-band"
   },
   {
    "name": "JPN225_Thu_M5",
-   "week": 1,
+   "week": 0,
    "total": 7,
    "cumR": -5.17,
-   "fwd_rmo": -1.64,
+   "fwd_rmo": -1.62,
    "exp_rmo": 0.22,
    "verdict": "watch"
   },
@@ -441,22 +449,22 @@
    "week": 1,
    "total": 13,
    "cumR": -5.93,
-   "fwd_rmo": -1.88,
+   "fwd_rmo": -1.86,
    "exp_rmo": 1.2,
    "verdict": "watch"
   },
   {
    "name": "EURUSD_v116",
-   "week": 2,
-   "total": 36,
-   "cumR": -0.64,
-   "fwd_rmo": -0.2,
+   "week": 3,
+   "total": 37,
+   "cumR": -1.71,
+   "fwd_rmo": -0.54,
    "exp_rmo": 2.36,
    "verdict": "watch"
   }
  ],
  "p99": 591,
- "p995": 641,
+ "p995": 642,
  "flags": [
   "LIVE 10374: EA MISSING since last start: ORB_XAUUSD_M3_v102_logfix (XAUUSD.gbe) \u2014 attach by hand, then SAVE THE PROFILE",
   "LIVE 10374: UNEXPECTED EA loaded: ORB_XAUUSD_M3_v102 (XAUUSD.gbe)",
@@ -466,7 +474,7 @@
   "EA HEARTBEAT missing: ORB_GER40_Wed_M5 not in Experts/journal logs for >8d \u2014 verify it is attached+armed",
   "EA HEARTBEAT missing: ORB_NAS100_Thu_M5 not in Experts/journal logs for >8d \u2014 verify it is attached+armed",
   "EA HEARTBEAT missing: ORB_JPN225_Thu_M5 not in Experts/journal logs for >8d \u2014 verify it is attached+armed",
-  "DD $314 >= $300 (50% of limit) \u2014 heightened watch"
+  "DD $348 >= $300 (50% of limit) \u2014 heightened watch"
  ],
  "urgent": []
 }
