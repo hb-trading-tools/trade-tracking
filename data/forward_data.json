@@ -1,9 +1,9 @@
 {
- "generated_utc": "2026-10-08T06:10:09.490272+00:00",
+ "generated_utc": "2026-10-09T06:10:06.904523+00:00",
  "deploy_epoch": "2026-07-02",
- "equity": 9651.96,
- "dd": 348.04,
- "cum_R": -20.17,
+ "equity": 9622.22,
+ "dd": 377.78,
+ "cum_R": -22.23,
  "curve": [
   [
    "2026-07-03",
@@ -396,6 +396,14 @@
   [
    "2026-10-07",
    -284.48
+  ],
+  [
+   "2026-10-08",
+   -299.78
+  ],
+  [
+   "2026-10-08",
+   -313.37
   ]
  ],
  "sleeves": [
@@ -404,7 +412,7 @@
    "week": 1,
    "total": 11,
    "cumR": -7.49,
-   "fwd_rmo": -2.35,
+   "fwd_rmo": -2.33,
    "exp_rmo": 1.22,
    "verdict": "watch"
   },
@@ -413,16 +421,16 @@
    "week": 1,
    "total": 10,
    "cumR": -1.93,
-   "fwd_rmo": -0.61,
+   "fwd_rmo": -0.6,
    "exp_rmo": 1.69,
    "verdict": "watch"
   },
   {
    "name": "NAS100_Thu_M5",
-   "week": 0,
-   "total": 11,
-   "cumR": 2.93,
-   "fwd_rmo": 0.92,
+   "week": 1,
+   "total": 12,
+   "cumR": 1.96,
+   "fwd_rmo": 0.61,
    "exp_rmo": 0.47,
    "verdict": "in-band"
   },
@@ -440,7 +448,7 @@
    "week": 0,
    "total": 7,
    "cumR": -5.17,
-   "fwd_rmo": -1.62,
+   "fwd_rmo": -1.6,
    "exp_rmo": 0.22,
    "verdict": "watch"
   },
@@ -449,22 +457,22 @@
    "week": 1,
    "total": 13,
    "cumR": -5.93,
-   "fwd_rmo": -1.86,
+   "fwd_rmo": -1.84,
    "exp_rmo": 1.2,
    "verdict": "watch"
   },
   {
    "name": "EURUSD_v116",
-   "week": 3,
-   "total": 37,
-   "cumR": -1.71,
-   "fwd_rmo": -0.54,
+   "week": 4,
+   "total": 38,
+   "cumR": -2.8,
+   "fwd_rmo": -0.87,
    "exp_rmo": 2.36,
    "verdict": "watch"
   }
  ],
  "p99": 591,
- "p995": 642,
+ "p995": 638,
  "flags": [
   "LIVE 10374: EA MISSING since last start: ORB_XAUUSD_M3_v102_logfix (XAUUSD.gbe) \u2014 attach by hand, then SAVE THE PROFILE",
   "LIVE 10374: UNEXPECTED EA loaded: ORB_XAUUSD_M3_v102 (XAUUSD.gbe)",
@@ -473,8 +481,9 @@
   "EA HEARTBEAT missing: ORB_SPX500_Fri_M15 not in Experts/journal logs for >8d \u2014 verify it is attached+armed",
   "EA HEARTBEAT missing: ORB_GER40_Wed_M5 not in Experts/journal logs for >8d \u2014 verify it is attached+armed",
   "EA HEARTBEAT missing: ORB_NAS100_Thu_M5 not in Experts/journal logs for >8d \u2014 verify it is attached+armed",
+  "EA HEARTBEAT missing: ORB_JPN225_Wed_M5 not in Experts/journal logs for >8d \u2014 verify it is attached+armed",
   "EA HEARTBEAT missing: ORB_JPN225_Thu_M5 not in Experts/journal logs for >8d \u2014 verify it is attached+armed",
-  "DD $348 >= $300 (50% of limit) \u2014 heightened watch"
+  "DD $378 >= $300 (50% of limit) \u2014 heightened watch"
  ],
  "urgent": []
 }
