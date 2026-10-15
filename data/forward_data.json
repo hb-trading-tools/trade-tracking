@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-10-14T06:10:07.245066+00:00",
+ "generated_utc": "2026-10-15T06:10:09.073768+00:00",
  "deploy_epoch": "2026-07-02",
  "equity": 9613.41,
  "dd": 386.59,
@@ -420,13 +420,13 @@
    "week": 1,
    "total": 12,
    "cumR": -6.93,
-   "fwd_rmo": -2.05,
+   "fwd_rmo": -2.03,
    "exp_rmo": 1.22,
    "verdict": "watch"
   },
   {
    "name": "GER40_Wed_M5",
-   "week": 1,
+   "week": 0,
    "total": 10,
    "cumR": -1.93,
    "fwd_rmo": -0.57,
@@ -438,7 +438,7 @@
    "week": 1,
    "total": 12,
    "cumR": 1.96,
-   "fwd_rmo": 0.58,
+   "fwd_rmo": 0.57,
    "exp_rmo": 0.47,
    "verdict": "in-band"
   },
@@ -456,7 +456,7 @@
    "week": 0,
    "total": 7,
    "cumR": -5.17,
-   "fwd_rmo": -1.53,
+   "fwd_rmo": -1.51,
    "exp_rmo": 0.22,
    "verdict": "watch"
   },
@@ -465,16 +465,16 @@
    "week": 0,
    "total": 13,
    "cumR": -5.93,
-   "fwd_rmo": -1.75,
+   "fwd_rmo": -1.73,
    "exp_rmo": 1.2,
    "verdict": "watch"
   },
   {
    "name": "EURUSD_v116",
-   "week": 3,
+   "week": 2,
    "total": 39,
    "cumR": -3.93,
-   "fwd_rmo": -1.16,
+   "fwd_rmo": -1.15,
    "exp_rmo": 2.36,
    "verdict": "watch"
   }
