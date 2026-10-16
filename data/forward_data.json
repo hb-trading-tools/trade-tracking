@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-10-15T06:10:09.073768+00:00",
+ "generated_utc": "2026-10-16T06:10:06.570862+00:00",
  "deploy_epoch": "2026-07-02",
  "equity": 9613.41,
  "dd": 386.59,
@@ -420,7 +420,7 @@
    "week": 1,
    "total": 12,
    "cumR": -6.93,
-   "fwd_rmo": -2.03,
+   "fwd_rmo": -2.01,
    "exp_rmo": 1.22,
    "verdict": "watch"
   },
@@ -429,13 +429,13 @@
    "week": 0,
    "total": 10,
    "cumR": -1.93,
-   "fwd_rmo": -0.57,
+   "fwd_rmo": -0.56,
    "exp_rmo": 1.69,
    "verdict": "watch"
   },
   {
    "name": "NAS100_Thu_M5",
-   "week": 1,
+   "week": 0,
    "total": 12,
    "cumR": 1.96,
    "fwd_rmo": 0.57,
@@ -447,7 +447,7 @@
    "week": 0,
    "total": 8,
    "cumR": -0.87,
-   "fwd_rmo": -0.26,
+   "fwd_rmo": -0.25,
    "exp_rmo": 1.19,
    "verdict": "in-band"
   },
@@ -456,7 +456,7 @@
    "week": 0,
    "total": 7,
    "cumR": -5.17,
-   "fwd_rmo": -1.51,
+   "fwd_rmo": -1.5,
    "exp_rmo": 0.22,
    "verdict": "watch"
   },
@@ -465,16 +465,16 @@
    "week": 0,
    "total": 13,
    "cumR": -5.93,
-   "fwd_rmo": -1.73,
+   "fwd_rmo": -1.72,
    "exp_rmo": 1.2,
    "verdict": "watch"
   },
   {
    "name": "EURUSD_v116",
-   "week": 2,
+   "week": 1,
    "total": 39,
    "cumR": -3.93,
-   "fwd_rmo": -1.15,
+   "fwd_rmo": -1.14,
    "exp_rmo": 2.36,
    "verdict": "watch"
   }
