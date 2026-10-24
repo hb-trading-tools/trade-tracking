@@ -1,8 +1,8 @@
-# Portfolio-A daily check — 2026-10-23 06:10 UTC
+# Portfolio-A daily check — 2026-10-24 06:10 UTC
 
 - 10679 running: **no** (check skipped; Botond notified)
-- live 10374: running=no; last start 20260923 10:20:36.382 UTC; loaded: none
-- live 14224: running=no; last start 20260923 10:21:11.166 UTC; loaded: none
+- live 10374: running=no; last start —; loaded: none
+- live 14224: running=no; last start —; loaded: none
 - new closed trades: **0**
 
 ## Flags
