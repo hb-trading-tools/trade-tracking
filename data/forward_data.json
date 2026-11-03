@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-11-02T06:10:06.664472+00:00",
+ "generated_utc": "2026-11-03T06:10:07.553060+00:00",
  "deploy_epoch": "2026-07-02",
  "equity": 9613.41,
  "dd": 386.59,
@@ -420,7 +420,7 @@
    "week": 0,
    "total": 12,
    "cumR": -6.93,
-   "fwd_rmo": -1.73,
+   "fwd_rmo": -1.71,
    "exp_rmo": 1.22,
    "verdict": "watch"
   },
@@ -456,16 +456,16 @@
    "week": 0,
    "total": 7,
    "cumR": -5.17,
-   "fwd_rmo": -1.29,
+   "fwd_rmo": -1.28,
    "exp_rmo": 0.22,
-   "verdict": "watch"
+   "verdict": "in-band"
   },
   {
    "name": "NQ_Friday_M15",
    "week": 0,
    "total": 13,
    "cumR": -5.93,
-   "fwd_rmo": -1.48,
+   "fwd_rmo": -1.47,
    "exp_rmo": 1.2,
    "verdict": "watch"
   },
@@ -474,7 +474,7 @@
    "week": 0,
    "total": 39,
    "cumR": -3.93,
-   "fwd_rmo": -0.98,
+   "fwd_rmo": -0.97,
    "exp_rmo": 2.36,
    "verdict": "watch"
   }
