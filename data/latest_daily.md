@@ -1,4 +1,4 @@
-# Portfolio-A daily check — 2026-11-27 06:10 UTC
+# Portfolio-A daily check — 2026-11-28 06:10 UTC
 
 - 10679 running: **no** (check skipped; Botond notified)
 - live 10374: running=yes; last start 20261126 11:22:55.529 UTC; loaded: ActivityKeeper_v101 (EURUSD.gbe), BiasORB_NAS100_M15_v114 (NAS100.gbe), BiasORB_NAS100_M15_v116 (SPX500.gbe), GotobiFade_USDJPY_v100 (USDJPY.gbe), TwinMomentum_NAS100_M1_v114 (NAS100.gbe)
